@@ -4,8 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 let ip = require('ip');
 
 module.exports = {
+    mode: 'development',
     entry: {
-        app: ['babel-polyfill', './preview.js']
+        app: './components/root.js'
     },
     output: {
         filename: '[name].bundle.js',
@@ -67,11 +68,11 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
-    externals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-        'moment': 'moment',
-    },
+    // externals: {
+    //     'react': 'React',
+    //     'react-dom': 'ReactDOM',
+    //     'moment': 'moment',
+    // },
     resolve: {
         alias: {
             Root: path.resolve(__dirname)
