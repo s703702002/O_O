@@ -1,4 +1,5 @@
-const login = {
-  type: 'login',
-};
+export const login = username => ({
+  type: 'LOGIN',
+  username,
+});
 
