@@ -6,7 +6,7 @@ const ip = require('ip');
 module.exports = {
   mode: 'development',
   entry: {
-    app: './components/root.js',
+    app: './index.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -30,11 +30,11 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins () {
-                                return [
-                                    require('autoprefixer')
-                                ];
-                            },
+              plugins() {
+                return [
+                  require('autoprefixer'),
+                ];
+              },
             },
           },
           {

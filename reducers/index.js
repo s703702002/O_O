@@ -1,12 +1,24 @@
 import { combineReducers } from 'redux';
 
-const loginStaus = (state = {}, action) => {
+const login = (state = { status: 'init' }, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case 'LOGIN_REQUEST':
       return {
-        ...state,
+        status: 'loading',
+        username: null,
+        message: null,
+      };
+    case 'LOGIN_SUCCESS':
+      return {
         status: 'logined',
         username: action.username,
+        message: null,
+      };
+    case 'LOGIN_ERROR':
+      return {
+        status: 'loginerr',
+        username: null,
+        message: action.err,
       };
     default:
       return state;
@@ -14,7 +26,8 @@ const loginStaus = (state = {}, action) => {
 };
 
 const AppStore = combineReducers({
-  loginStaus,
+  login,
 });
 
+export { login };
 export default AppStore;
