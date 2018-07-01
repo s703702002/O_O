@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { loginFlow } from '../action';
-
-// const FromRow = ({ id, title, isPassword }) => (
-//   <div className="form-group row">
-//     <label htmlFor={id} className="col-sm-2 col-form-label">{title}</label>
-//     <div className="col-sm-10">
-//       <input type={isPassword ? 'password' : 'text'} className="form-control" id={id} placeholder={`請輸入${title}`} />
-//     </div>
-//   </div>
-// );
 
 class LoginBox extends Component {
   constructor(props) {
@@ -26,20 +16,14 @@ class LoginBox extends Component {
     login(accountInput.value, passwordInput.value);
   }
   render() {
-    const { match } = this.props;
-
     return (
       <div
         className="modal"
         tabIndex="-1"
         role="dialog"
-        style={
-          match.params.filter === 'login' ?
-          { display: 'block' } :
-          null
-        }
+        style={{ display: 'block' }}
       >
-        <div className="modal-dialog" role="document">
+        <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-body">
               <div className="form-group row">
@@ -83,7 +67,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps,
-  { loginFlow }
-)(LoginBox));
+  { loginFlow },
+)(LoginBox);
