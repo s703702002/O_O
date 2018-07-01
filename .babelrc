@@ -12,7 +12,7 @@
     "transform-object-rest-spread",
     ["transform-runtime", {
         "polyfill": false,
-        "regenerator": false
+        "regenerator": true
     }]
   ]
 }

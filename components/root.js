@@ -1,24 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import rootReducer from '../reducers';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import App from './App';
 
-const middlewares = [
-  createLogger(),
-];
-
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware(...middlewares),
-);
-
-ReactDOM.render(
+const Root = ({ store }) => (
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'),
+    <Router>
+      <Route path="/:filter?" component={App} />
+    </Router>
+  </Provider>
 );
+
+export default Root;
