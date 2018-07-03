@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginFlow, closeLoginBox } from '../action';
+import cx from 'classnames';
 
 class LoginBox extends Component {
   constructor(props) {
@@ -22,14 +23,11 @@ class LoginBox extends Component {
     } = this.props;
     return (
       <div
-        className="modal"
+        className={cx('modal login_box', {
+          show: loginBoxOpen,
+        })}
         tabIndex="-1"
         role="dialog"
-        style={
-          loginBoxOpen ?
-          { display: 'block' } :
-          null
-        }
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
@@ -65,6 +63,7 @@ class LoginBox extends Component {
             </div>
           </div>
         </div>
+        <div className="mask" />
       </div>
     );
   }
