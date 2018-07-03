@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { loginFlow } from '../action';
+import { loginFlow, closeLoginBox } from '../action';
 
 class LoginBox extends Component {
   constructor(props) {
@@ -16,12 +16,20 @@ class LoginBox extends Component {
     login(accountInput.value, passwordInput.value);
   }
   render() {
+    const {
+      loginBoxOpen,
+      closeLoginBox: close,
+    } = this.props;
     return (
       <div
         className="modal"
         tabIndex="-1"
         role="dialog"
-        style={{ display: 'block' }}
+        style={
+          loginBoxOpen ?
+          { display: 'block' } :
+          null
+        }
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
@@ -53,7 +61,7 @@ class LoginBox extends Component {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-primary" onClick={this.onClickLogin}>登入</button>
-              <Link className="btn btn-secondary" to="/">取消</Link>
+              <button className="btn btn-secondary" onClick={close}>取消</button>
             </div>
           </div>
         </div>
@@ -63,11 +71,19 @@ class LoginBox extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  const { loginBoxOpen } = state;
+  return {
+    loginBoxOpen,
+  };
 };
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  closeLoginBox: () => { dispatch(closeLoginBox); },
+  loginFlow: (acc, pass) => { dispatch(loginFlow(acc, pass)); },
+});
 
 
 export default connect(
   mapStateToProps,
-  { loginFlow },
+  mapDispatchToProps,
 )(LoginBox);

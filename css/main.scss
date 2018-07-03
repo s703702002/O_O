@@ -1,0 +1,12 @@
+.filter_section{
+  min-width: 200px;
+}
+
+.card_section{
+  display: flex;
+  flex-wrap: wrap;
+  .card{
+    margin: .25rem;
+    margin-top: 0px;
+  }
+}

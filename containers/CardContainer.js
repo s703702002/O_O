@@ -6,12 +6,19 @@ class CardCaontainer extends Component {
     return (
       <div className="container">
         <div className="row">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <div className="filter_section">
+            篩選側
+          </div>
+          <div className="col">
+            <div className="card_section">
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+            </div>
+          </div>
         </div>
       </div>
     );

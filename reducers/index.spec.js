@@ -1,4 +1,5 @@
-import { login } from './index';
+import { login, loginBoxOpen } from './index';
+import {openLoginBox, closeLoginBox} from '../action';
 
 test('登入reducer測試', () => {
   // 假設登入成功發的action
@@ -24,3 +25,10 @@ test('登入reducer測試', () => {
     message: action2.err,
   });
 });
+
+
+test('loginBox測試', () => {
+  expect(loginBoxOpen(undefined, openLoginBox)).toBeTruthy();
+  expect(loginBoxOpen(undefined, closeLoginBox)).toBeFalsy();
+});
+

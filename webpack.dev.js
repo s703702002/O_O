@@ -6,7 +6,7 @@ const ip = require('ip');
 module.exports = {
   mode: 'development',
   entry: {
-    app: ['babel-polyfill', './index.js']
+    app: './index.js',
   },
   output: {
     filename: '[name].bundle.js',

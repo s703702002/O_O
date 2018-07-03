@@ -24,3 +24,11 @@ export const loginFlow = (account, password) => (dispatch, getState) => {
       dispatch(loginError(error));
     });
 };
+
+export const openLoginBox = {
+  type: 'OPEN_LOGIN_BOX',
+};
+
+export const closeLoginBox = {
+  type: 'CLOSE_LOGIN_BOX',
+};
