@@ -63,7 +63,7 @@ class LoginBox extends Component {
             </div>
           </div>
         </div>
-        <div className="mask" />
+        <div className="mask" onClick={close} role="document" />
       </div>
     );
   }
