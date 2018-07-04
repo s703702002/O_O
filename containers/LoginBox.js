@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { loginFlow, closeLoginBox } from '../action';
 import cx from 'classnames';
+import { loginRequest, closeLoginBox } from '../action';
 
 class LoginBox extends Component {
   constructor(props) {
@@ -11,10 +10,14 @@ class LoginBox extends Component {
     this.passwordInput = React.createRef();
   }
   onClickLogin = () => {
-    const { loginFlow: login } = this.props;
+    const { login } = this.props;
     const accountInput = this.accountInput.current;
     const passwordInput = this.passwordInput.current;
-    login(accountInput.value, passwordInput.value);
+    const payload = {
+      username: accountInput.value,
+      password: passwordInput.value,
+    };
+    login(payload);
   }
   render() {
     const {
@@ -78,7 +81,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   closeLoginBox: () => { dispatch(closeLoginBox); },
-  loginFlow: (acc, pass) => { dispatch(loginFlow(acc, pass)); },
+  login: ({ username, password }) => { dispatch(loginRequest({ username, password })); },
 });
 
 

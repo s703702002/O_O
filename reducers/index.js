@@ -11,14 +11,20 @@ const login = (state = { status: 'init' }, action) => {
     case 'LOGIN_SUCCESS':
       return {
         status: 'logined',
-        username: action.username,
+        username: action.response.username,
         message: null,
       };
     case 'LOGIN_ERROR':
       return {
         status: 'loginerr',
         username: null,
-        message: action.err,
+        message: action.error,
+      };
+    case 'LOG_OUT':
+      return {
+        status: 'init',
+        username: null,
+        message: null,
       };
     default:
       return state;

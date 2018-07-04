@@ -1,29 +1,22 @@
-import { loginAPI } from '../api';
-
-const loginRequest = () => ({
+export const loginRequest = ({ username, password }) => ({
   type: 'LOGIN_REQUEST',
-});
-
-const loginSuccess = username => ({
-  type: 'LOGIN_SUCCESS',
   username,
+  password,
 });
 
-const loginError = err => ({
+export const loginSuccess = response => ({
+  type: 'LOGIN_SUCCESS',
+  response,
+});
+
+export const loginError = error => ({
   type: 'LOGIN_ERROR',
-  err,
+  error,
 });
 
-export const loginFlow = (account, password) => (dispatch, getState) => {
-  dispatch(loginRequest());
-  loginAPI(account, password)
-    .then((response) => {
-      dispatch(loginSuccess(response.username));
-    })
-    .catch((error) => {
-      dispatch(loginError(error));
-    });
-};
+export const loginCancel = () => ({
+  type: 'LOGIN_CANCEL',
+});
 
 export const openLoginBox = {
   type: 'OPEN_LOGIN_BOX',
@@ -31,4 +24,8 @@ export const openLoginBox = {
 
 export const closeLoginBox = {
   type: 'CLOSE_LOGIN_BOX',
+};
+
+export const logOut = {
+  type: 'LOG_OUT',
 };
