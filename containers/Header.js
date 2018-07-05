@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { openLoginBox, logOut } from '../action';
 
-const Header = ({ username, dispatch }) => (
+const Header = ({ username, status, dispatch }) => (
   <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 className="my-0 mr-md-auto font-weight-normal">黑皮</h5>
     <span className="mr-2">
@@ -20,7 +20,7 @@ const Header = ({ username, dispatch }) => (
       }}
     >
       {
-        (username) ?
+        (status === 'logined') ?
           '登出' :
           '登入'
       }
@@ -29,10 +29,10 @@ const Header = ({ username, dispatch }) => (
 );
 
 const mapStateToProps = (state, ownProps) => {
-  const { login: { username }, loginBoxOpen } = state;
+  const { login: { username, status } } = state;
   return {
     username,
-    loginBoxOpen,
+    status,
   };
 };
 

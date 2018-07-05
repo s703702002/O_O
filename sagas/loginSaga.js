@@ -1,4 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+import { delay } from '../utilis';
 import { loginAPI } from '../api';
 import {
   loginSuccess,
@@ -14,9 +15,11 @@ export function* loginFlow(action) {
       password: action.password,
     });
     yield put(loginSuccess(response));
+    yield call(delay, 1000);
     yield put(closeLoginBox);
   } catch (error) {
-    yield put(loginError(error));
+    const errorMessage = error.toString();
+    yield put(loginError(errorMessage));
   }
 }
 

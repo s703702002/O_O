@@ -1,5 +1,4 @@
-const delay = ms =>
-  new Promise(resolve => setTimeout(resolve, ms));
+import { delay } from '../utilis';
 
 export const loginAPI = ({ username, password }) => {
   return delay(500).then(() => {

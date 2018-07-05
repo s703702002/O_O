@@ -11,7 +11,7 @@ test('登入reducer測試', () => {
   // 假設登入失敗發的action
   const action2 = {
     type: 'LOGIN_ERROR',
-    err: '帳號或密碼錯誤',
+    error: '帳號或密碼錯誤',
   };
 
   expect(login(undefined, action1)).toEqual({
@@ -22,7 +22,7 @@ test('登入reducer測試', () => {
   expect(login(undefined, action2)).toEqual({
     status: 'loginerr',
     username: null,
-    message: action2.err,
+    message: action2.error,
   });
 });
 
