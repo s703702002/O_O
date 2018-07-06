@@ -7,10 +7,12 @@ import '../css/main.scss';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <div>
-      <App />
-      <LoginBox />
-    </div>
+    <Router>
+      <div>
+        <Route path="/" component={App} />
+        <LoginBox />
+      </div>
+    </Router>
   </Provider>
 );
 

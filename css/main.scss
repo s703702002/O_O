@@ -1,5 +1,20 @@
 .filter_section{
-  min-width: 200px;
+  width: 200px;
+}
+
+.order_box{
+  border-bottom: 1px solid #dee2e6;
+  & .btn{
+    margin-bottom: 10px;
+  }
+}
+
+.filter_box{
+  padding-top: 10px;
+  & + & {
+    border-top: 1px solid #dee2e6;
+    margin-top: 10px;
+  }
 }
 
 .shopping_cart{

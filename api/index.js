@@ -11,4 +11,4 @@ export const loginAPI = ({ username, password }) => delay(500).then(() => {
 });
 
 export const getAllProductsAPI = () =>
-  delay(2000).then(() => ProductsData);
+  delay(1000).then(() => ProductsData);

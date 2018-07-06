@@ -40,5 +40,11 @@
   },
   {
     "id": 14, "title": "薄外套-男", "price": 1199, "inventory": 99, "gender": 1
+  },
+  {
+    "id": 15, "title": "厚外套-男", "price": 3099, "inventory": 20, "gender": 1
+  },
+  {
+    "id": 16, "title": "厚外套-女", "price": 2899, "inventory": 24, "gender": 0
   }
 ]
