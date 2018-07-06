@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Card from '../components/Card';
+import { getProductsRequest } from '../action';
 
 class CardCaontainer extends Component {
+  componentDidMount() {
+    console.log('componentDidMount');
+    const { dispatch } = this.props;
+    dispatch(getProductsRequest());
+  }
   render() {
     return (
       <div className="container">
@@ -25,4 +32,4 @@ class CardCaontainer extends Component {
   }
 }
 
-export default CardCaontainer;
+export default connect()(CardCaontainer);

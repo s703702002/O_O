@@ -1,11 +1,13 @@
-import { login, loginBoxOpen } from './index';
-import {openLoginBox, closeLoginBox} from '../action';
+import { login, loginBoxOpen, products } from './index';
+import { openLoginBox, closeLoginBox } from '../action';
 
 test('登入reducer測試', () => {
   // 假設登入成功發的action
   const action1 = {
     type: 'LOGIN_SUCCESS',
-    username: 'stanley',
+    response: {
+      username: 'stanley',
+    },
   };
 
   // 假設登入失敗發的action
@@ -32,3 +34,34 @@ test('loginBox測試', () => {
   expect(loginBoxOpen(undefined, closeLoginBox)).toBeFalsy();
 });
 
+test('fetch產品測試', () => {
+
+  const response = [{
+    id: 1, title: '長褲-女', price: 500, inventory: 2, gender: 0,
+  },
+  {
+    id: 2, title: '短褲-女', price: 100, inventory: 10, gender: 0,
+  }];
+
+  const successAction = {
+    type: 'RECEIVE_PRODUCTS',
+    response,
+  };
+
+  const errorAction = {
+    type: 'GET_PRODUCTS_ERROR',
+    error: 'api出現異常!',
+  };
+
+  expect(products(undefined, successAction)).toEqual({
+    products: response,
+    message: null,
+  });
+
+  expect(products(undefined, errorAction)).toEqual({
+    products: [],
+    message: 'api出現異常!',
+  });
+
+
+});

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1, "title": "長褲-女", "price": 500, "inventory": 2, "gender": 0
+  },
+  {
+    "id": 2, "title": "短褲-女", "price": 100, "inventory": 10, "gender": 0
+  },
+  {
+    "id": 3, "title": "短T-女", "price": 1299, "inventory": 500, "gender": 0
+  },
+  {
+    "id": 4, "title": "長T-女", "price": 2299, "inventory": 6, "gender": 0
+  },
+  {
+    "id": 5, "title": "涼鞋-女", "price": 299, "inventory": 0, "gender": 0
+  },
+  {
+    "id": 6, "title": "拖鞋-女", "price": 199, "inventory": 10, "gender": 0
+  },
+  {
+    "id": 7, "title": "薄外套-女", "price": 1199, "inventory": 99, "gender": 0
+  },
+  {
+    "id": 8, "title": "長褲-男", "price": 500, "inventory": 200, "gender": 1
+  },
+  {
+    "id": 9, "title": "短褲-男", "price": 100, "inventory": 100, "gender": 1
+  },
+  {
+    "id": 10, "title": "短T-男", "price": 1299, "inventory": 45, "gender": 1
+  },
+  {
+    "id": 11, "title": "長T-男", "price": 2299, "inventory": 0, "gender": 1
+  },
+  {
+    "id": 12, "title": "涼鞋-男", "price": 299, "inventory": 0, "gender": 1
+  },
+  {
+    "id": 13, "title": "拖鞋-男", "price": 199, "inventory": 10, "gender": 1
+  },
+  {
+    "id": 14, "title": "薄外套-男", "price": 1199, "inventory": 99, "gender": 1
+  }
+]

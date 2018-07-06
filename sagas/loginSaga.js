@@ -8,7 +8,7 @@ import {
   closeLoginBox,
 } from '../action';
 
-export function* loginFlow(action) {
+function* loginFlow(action) {
   try {
     const response = yield call(loginAPI, {
       username: action.username,
@@ -23,6 +23,6 @@ export function* loginFlow(action) {
   }
 }
 
-export function* watchRequestLogin() {
+export default function* watchRequestLogin() {
   yield takeEvery('LOGIN_REQUEST', loginFlow);
 }
