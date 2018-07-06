@@ -2,6 +2,11 @@
   min-width: 200px;
 }
 
+.shopping_cart{
+  display: flex;
+  cursor: pointer;
+}
+
 .card_section{
   display: flex;
   flex-wrap: wrap;

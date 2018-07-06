@@ -12,6 +12,9 @@ const Header = ({ username, status, dispatch }) => (
           '請登入'
       }
     </span>
+    <span className="mr-2 shopping_cart">
+      <i className="material-icons md-24">shopping_cart</i>
+    </span>
     <button
       className="btn btn-outline-primary"
       onClick={() => {
