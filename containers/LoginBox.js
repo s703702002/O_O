@@ -13,22 +13,55 @@ const LoginError = props => (
   <p>{props.message}</p>
 );
 
+const LoginSuccess = props => (
+  <p>登入成功!</p>
+);
+
+const LoginForm = props => (
+  <React.Fragment>
+    <div className="form-group row">
+      <label htmlFor="account" className="col-sm-2 col-form-label">帳號</label>
+      <div className="col-sm-10">
+        <input
+          ref={props.accountRef}
+          type="text"
+          className="form-control"
+          id="account"
+          placeholder="請輸入帳號"
+        />
+      </div>
+    </div>
+    <div className="form-group row">
+      <label htmlFor="password" className="col-sm-2 col-form-label">密碼</label>
+      <div className="col-sm-10">
+        <input
+          ref={props.passwordRef}
+          type="password"
+          className="form-control"
+          id="password"
+          placeholder="請輸入帳號"
+        />
+      </div>
+    </div>
+  </React.Fragment>
+);
 
 class LoginBox extends Component {
-  constructor(props) {
-    super(props);
-    this.accountInput = React.createRef();
-    this.passwordInput = React.createRef();
-  }
   onClickLogin = () => {
     const { login } = this.props;
-    const accountInput = this.accountInput.current;
-    const passwordInput = this.passwordInput.current;
+    const { accountInput, passwordInput } = this;
     const payload = {
       username: accountInput.value,
       password: passwordInput.value,
     };
     login(payload);
+  }
+  handleKeyUp = (e) => {
+    const { accountInput, passwordInput } = this;
+    // Enter鍵
+    if (e.keyCode === 13 && accountInput.value !== '' && passwordInput.value !== '') {
+      this.onClickLogin();
+    }
   }
   render() {
     const {
@@ -38,8 +71,6 @@ class LoginBox extends Component {
       message,
     } = this.props;
 
-    console.log('登入狀態', status);
-
     return (
       <div
         className={cx('modal login_box', {
@@ -48,6 +79,7 @@ class LoginBox extends Component {
         })}
         tabIndex="-1"
         role="dialog"
+        onKeyUp={this.handleKeyUp}
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
@@ -58,33 +90,15 @@ class LoginBox extends Component {
               {
                 (status === 'loginerr') ? <LoginError message={message} /> : null
               }
-              <div className="form-group row">
-                <label htmlFor="account" className="col-sm-2 col-form-label">帳號</label>
-                <div className="col-sm-10">
-                  <input
-                    ref={this.accountInput}
-                    type="text"
-                    className="form-control"
-                    id="account"
-                    placeholder="請輸入帳號"
+              {
+                (status === 'logined') ?
+                  <LoginSuccess /> :
+                  <LoginForm
+                    accountRef={(el) => { this.accountInput = el; }}
+                    passwordRef={(el) => { this.passwordInput = el; }}
                   />
-                </div>
-              </div>
-
-              <div className="form-group row">
-                <label htmlFor="password" className="col-sm-2 col-form-label">密碼</label>
-                <div className="col-sm-10">
-                  <input
-                    ref={this.passwordInput}
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="請輸入帳號"
-                  />
-                </div>
-              </div>
+              }
             </div>
-
             <div className="modal-footer">
               <button type="button" className="btn btn-primary" onClick={this.onClickLogin}>登入</button>
               <button className="btn btn-secondary" onClick={close}>取消</button>
