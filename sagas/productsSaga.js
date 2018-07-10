@@ -1,5 +1,4 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { delay } from '../utilis';
 import { getAllProductsAPI } from '../api';
 import {
   receiveProducts,
@@ -9,7 +8,7 @@ import {
 function* productsFlow(action) {
   try {
     const response = yield call(getAllProductsAPI);
-    yield put(receiveProducts(response));
+    yield put(receiveProducts(response.products));
   } catch (error) {
     yield put(getProductsError(error));
   }

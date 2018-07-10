@@ -14,7 +14,7 @@ function* loginFlow(action) {
       username: action.username,
       password: action.password,
     });
-    yield put(loginSuccess(response));
+    yield put(loginSuccess(response.user));
     yield call(delay, 1000);
     yield put(closeLoginBox);
   } catch (error) {
