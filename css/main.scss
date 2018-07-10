@@ -18,8 +18,30 @@
 }
 
 .shopping_cart{
+  position: relative;
   display: flex;
-  cursor: pointer;
+  .material-icons {
+    cursor: pointer;
+  }
+}
+
+.cart_content{
+  position: absolute;
+  width: 20rem;
+  top: calc( 100% + 20px );
+  right: 0;
+  background: #fff;
+  box-shadow: 0px 3px 10px #dee2e6;
+  padding: .5rem;
+  z-index: 1;
+  &::before{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 15px 30px 15px;
+    border-color: transparent transparent #dee2e6 transparent;
+  }
 }
 
 .card_section{

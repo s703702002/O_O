@@ -11,7 +11,7 @@ const usersById = {
   1: {
     id: 1,
     name: 'stanley',
-    shoppings: [8, 10, 11],
+    shoppings: [8, 11],
   },
 };
 
