@@ -1,3 +1,7 @@
+.top_header{
+  background-color: #ececec;
+}
+
 .filter_section{
   width: 200px;
 }
@@ -23,13 +27,19 @@
   .material-icons {
     cursor: pointer;
   }
+  &:hover{
+    .cart_content{
+      display: block;
+    }
+  }
 }
 
 .cart_content{
+  display: none;
   position: absolute;
   width: 20rem;
-  top: calc( 100% + 20px );
-  right: 0;
+  top: calc( 100% + 15px );
+  right: -8px;
   background: #fff;
   box-shadow: 0px 3px 10px #dee2e6;
   padding: .5rem;
@@ -39,8 +49,12 @@
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 15px 30px 15px;
-    border-color: transparent transparent #dee2e6 transparent;
+    border-width: 0 15px 20px 15px;
+    border-color: transparent transparent #fff transparent;
+    position: absolute;
+    top: -15px;
+    right: 5px;
+    z-index: 10;
   }
 }
 

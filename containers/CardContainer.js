@@ -31,7 +31,6 @@ class CardCaontainer extends Component {
   }
   render() {
     const { products } = this.props;
-    console.log('this.props is', this.props);
 
     return (
       <div className="container">
