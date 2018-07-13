@@ -1,6 +1,7 @@
 import { delay } from '../utilis';
 
 const graphqlUri = 'http://10.30.3.75:3000/';
+const loginUri = 'http://10.30.3.75:3000/login';
 const productInfoFragment = `fragment productInfo on Product{
   id
   title
@@ -9,15 +10,10 @@ const productInfoFragment = `fragment productInfo on Product{
   inventory
 }`;
 
-export const loginAPI = ({ username, password }) => delay(500).then(() => {
-  if (username !== 'stanley' || password !== '0000') {
-    throw new Error('登入失敗, 請確認帳號或密碼');
-  }
-
-  const id = 1;
+function getUserInfo(memberId) {
   const query = `
     query{
-      user(id: ${id}){
+      user(id: ${memberId}){
         id
         name
         shoppings {
@@ -27,7 +23,6 @@ export const loginAPI = ({ username, password }) => delay(500).then(() => {
     }
     ${productInfoFragment}
   `;
-
   return fetch(graphqlUri, {
     method: 'POST',
     headers: {
@@ -38,6 +33,24 @@ export const loginAPI = ({ username, password }) => delay(500).then(() => {
     }),
   }).then(r => r.json())
     .then(({ data }) => data);
+}
+
+export const loginAPI = ({ username, password }) => delay(3000).then(() => {
+  return fetch(loginUri, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  }).then(r => r.json())
+    .then((memberId) => {
+      if (!memberId) throw new Error('登入失敗, 請確認帳號或密碼');
+      return memberId;
+    })
+    .then(getUserInfo);
 });
 
 export const getAllProductsAPI = () => {

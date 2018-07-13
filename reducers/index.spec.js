@@ -6,7 +6,8 @@ test('登入reducer測試', () => {
   const action1 = {
     type: 'LOGIN_SUCCESS',
     response: {
-      username: 'stanley',
+      name: 'stanley',
+      shoppings: [1, 2],
     },
   };
 
@@ -20,11 +21,13 @@ test('登入reducer測試', () => {
     status: 'logined',
     username: 'stanley',
     message: null,
+    shoppings: [1, 2],
   });
   expect(login(undefined, action2)).toEqual({
     status: 'loginerr',
     username: null,
     message: action2.error,
+    shoppings: [],
   });
 });
 

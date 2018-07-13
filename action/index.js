@@ -14,9 +14,9 @@ export const loginError = error => ({
   error,
 });
 
-export const loginCancel = () => ({
+export const loginCancel = {
   type: 'LOGIN_CANCEL',
-});
+};
 
 export const getProductsRequest = () => ({
   type: 'GET_PRODUCTS_REQUEST',

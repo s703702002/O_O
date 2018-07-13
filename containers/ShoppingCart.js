@@ -6,7 +6,7 @@ const Product = ({ shoppings }) => (
     <h4>我的購物車:</h4>
     {
       shoppings.map(item => (
-        <div>
+        <div key={item.id}>
           {
             `產品名稱:${item.title}, 售價:${item.price}元`
           }

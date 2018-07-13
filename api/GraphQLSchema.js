@@ -1,21 +1,20 @@
 const products = require('./products.json');
+const users = require('./member.json');
 const { buildSchema } = require('graphql');
 require('babel-core').transform('code', {
   plugins: ['transform-object-rest-spread'],
 });
 
 
-let nextId = 2;
-
-const usersById = {
-  1: {
-    id: 1,
-    name: 'stanley',
-    shoppings: [8, 11, 5],
-  },
-};
-
+let nextId = users.length + 1;
+const usersById = {};
 const productsById = {};
+
+users.map((item) => {
+  const { id } = item;
+  usersById[id] = item;
+  return item;
+});
 
 products.map((item) => {
   const { id } = item;

@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "stanley",
+    "password": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "shoppings": [8, 11, 5]
+  },
+  {
+    "id": 2,
+    "name": "andy",
+    "password": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
+    "shoppings": [3, 6]
+  }
+]
