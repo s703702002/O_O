@@ -1,7 +1,7 @@
 import { delay } from '../utilis';
 
-const graphqlUri = 'http://10.30.3.75:3000/';
-const loginUri = 'http://10.30.3.75:3000/login';
+const graphqlUri = 'http://localhost:3000/';
+const loginUri = 'http://localhost:3000/login';
 const productInfoFragment = `fragment productInfo on Product{
   id
   title
@@ -35,7 +35,7 @@ function getUserInfo(memberId) {
     .then(({ data }) => data);
 }
 
-export const loginAPI = ({ username, password }) => delay(3000).then(() => {
+export const loginAPI = ({ username, password }) => delay(1000).then(() => {
   return fetch(loginUri, {
     method: 'POST',
     headers: {

@@ -75,6 +75,12 @@
     .form-group{
       display: none;
     }
+    .btn{
+      display: none;
+    }
+    .abort-login{
+      display: block;
+    }
   }
   .modal-dialog{
     z-index: 2;
@@ -88,6 +94,9 @@
     background-color: #000;
     opacity: 0.5;
     z-index: 1;
+  }
+  .abort-login{
+    display: none;
   }
 }
 

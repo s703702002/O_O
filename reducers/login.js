@@ -21,6 +21,13 @@ const login = (state = { status: 'init' }, action) => {
         message: action.error,
         shoppings: [],
       };
+    case 'LOGIN_CANCEL':
+      return {
+        state: 'init',
+        username: null,
+        message: null,
+        shoppings: [],
+      };
     case 'LOG_OUT':
       return {
         status: 'init',
