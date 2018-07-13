@@ -8,11 +8,11 @@ import {
   closeLoginBox,
 } from '../action';
 
-function* authorize({ username, password }) {
+function* loginFlow(action) {
   try {
     const response = yield call(loginAPI, {
-      username,
-      password,
+      username: action.username,
+      password: action.password,
     });
     yield put(loginSuccess(response.user));
     yield call(delay, 1000);
@@ -23,9 +23,43 @@ function* authorize({ username, password }) {
   }
 }
 
-function* loginFlow(action) {
-  const task = yield fork(authorize, { username: action.username, password: action.password });
-  yield take(loginCancel);
-  yield cancel(task);
-}
-
+test('login saga測試', () => {
+  const user = {
+    username: 'stanley',
+    password: '0000',
+  };
+  const res = {
+    id: '1',
+    name: 'stanley',
+    shoppings: [
+      {
+        id: '8',
+        price: 500,
+        title: '長褲-男',
+        gender: 1,
+        inventory: 200,
+      },
+      {
+        id: '11',
+        price: 2299,
+        title: '長T-男',
+        gender: 1,
+        inventory: 0,
+      },
+      {
+        id: '5',
+        price: 299,
+        title: '涼鞋-女',
+        gender: 0,
+        inventory: 0,
+      },
+    ],
+  };
+  const getRes = () => res;
+  const gen = loginFlow({
+    type: 'LOGIN_REQUEST',
+    ...user,
+  });
+  expect(call(loginAPI, user)).toEqual(gen.next().value);
+  expect(put(loginSuccess(res))).toEqual(gen.next(getRes()).value);
+});

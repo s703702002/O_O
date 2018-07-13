@@ -8,11 +8,29 @@ import {
   closeLoginBox,
 } from '../action';
 
-function* authorize({ username, password }) {
+// function* authorize({ username, password }) {
+//   try {
+//     const response = yield call(loginAPI, {
+//       username,
+//       password,
+//     });
+//     yield put(loginSuccess(response.user));
+//     yield call(delay, 1000);
+//     yield put(closeLoginBox);
+//   } catch (error) {
+//     const errorMessage = error.toString();
+//     yield put(loginError(errorMessage));
+//   }
+// }
+
+function* loginFlow(action) {
+  // const task = yield fork(authorize, { username: action.username, password: action.password });
+  // yield take(loginCancel);
+  // yield cancel(task);
   try {
     const response = yield call(loginAPI, {
-      username,
-      password,
+      username: action.username,
+      password: action.password,
     });
     yield put(loginSuccess(response.user));
     yield call(delay, 1000);
@@ -21,24 +39,6 @@ function* authorize({ username, password }) {
     const errorMessage = error.toString();
     yield put(loginError(errorMessage));
   }
-}
-
-function* loginFlow(action) {
-  const task = yield fork(authorize, { username: action.username, password: action.password });
-  yield take(loginCancel);
-  yield cancel(task);
-  // try {
-  //   const response = yield call(loginAPI, {
-  //     username: action.username,
-  //     password: action.password,
-  //   });
-  //   yield put(loginSuccess(response.user));
-  //   yield call(delay, 1000);
-  //   yield put(closeLoginBox);
-  // } catch (error) {
-  //   const errorMessage = error.toString();
-  //   yield put(loginError(errorMessage));
-  // }
 }
 
 export default function* watchRequestLogin() {
