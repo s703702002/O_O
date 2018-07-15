@@ -10,6 +10,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // 加密算法
 function passwordEncode(password) {
