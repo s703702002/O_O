@@ -1,9 +1,9 @@
 const cors = require('cors');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
-const members = require('./api/member.json');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
+const members = require('./api/member.json');
 const { schema, rootValue } = require('./api/GraphQLSchema');
 
 const app = express();

@@ -63,4 +63,6 @@ test('login saga測試', () => {
   });
   expect(call(loginAPI, user)).toEqual(gen.next().value);
   expect(put(loginSuccess(res.user))).toEqual(gen.next(res).value);
+  expect(call(delay, 1000)).toEqual(gen.next().value);
+  expect(put(closeLoginBox)).toEqual(gen.next().value);
 });

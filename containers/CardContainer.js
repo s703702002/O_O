@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import Card from '../components/Card';
+import Aside from './Aside';
 import { getProductsRequest } from '../action';
 import { serialize } from '../utilis';
 
@@ -61,7 +61,6 @@ class CardCaontainer extends Component {
   }
   render() {
     const { products } = this.props;
-
     return (
       <div className="container">
         <div className="row">
