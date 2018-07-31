@@ -1,15 +1,16 @@
 const cors = require('cors');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
-const members = require('./api/member.json');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
+const members = require('./api/member.json');
 const { schema, rootValue } = require('./api/GraphQLSchema');
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // 加密算法
 function passwordEncode(password) {

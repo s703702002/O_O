@@ -29,37 +29,40 @@ test('login saga測試', () => {
     password: '0000',
   };
   const res = {
-    id: '1',
-    name: 'stanley',
-    shoppings: [
-      {
-        id: '8',
-        price: 500,
-        title: '長褲-男',
-        gender: 1,
-        inventory: 200,
-      },
-      {
-        id: '11',
-        price: 2299,
-        title: '長T-男',
-        gender: 1,
-        inventory: 0,
-      },
-      {
-        id: '5',
-        price: 299,
-        title: '涼鞋-女',
-        gender: 0,
-        inventory: 0,
-      },
-    ],
+    user: {
+      id: '1',
+      name: 'stanley',
+      shoppings: [
+        {
+          id: '8',
+          price: 500,
+          title: '長褲-男',
+          gender: 1,
+          inventory: 200,
+        },
+        {
+          id: '11',
+          price: 2299,
+          title: '長T-男',
+          gender: 1,
+          inventory: 0,
+        },
+        {
+          id: '5',
+          price: 299,
+          title: '涼鞋-女',
+          gender: 0,
+          inventory: 0,
+        },
+      ],
+    },
   };
-  const getRes = () => res;
   const gen = loginFlow({
     type: 'LOGIN_REQUEST',
     ...user,
   });
   expect(call(loginAPI, user)).toEqual(gen.next().value);
-  expect(put(loginSuccess(res))).toEqual(gen.next(getRes()).value);
+  expect(put(loginSuccess(res.user))).toEqual(gen.next(res).value);
+  expect(call(delay, 1000)).toEqual(gen.next().value);
+  expect(put(closeLoginBox)).toEqual(gen.next().value);
 });

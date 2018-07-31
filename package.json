@@ -30,7 +30,9 @@
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
+    "cors": "^2.8.4",
     "css-loader": "^0.28.11",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.2",
@@ -53,7 +55,6 @@
     "webpack-dev-server": "^3.1.4"
   },
   "devDependencies": {
-    "cors": "^2.8.4",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.7.0",

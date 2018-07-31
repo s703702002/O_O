@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import Card from '../components/Card';
+import Aside from './Aside';
 import { getProductsRequest } from '../action';
+import { serialize } from '../utilis';
 
 
 const LoadingProducts = () => (
@@ -14,12 +15,41 @@ class CardCaontainer extends Component {
     const { dispatch } = this.props;
     dispatch(getProductsRequest());
   }
-  test1 = () => {
-    this.props.history.push('?sort=1,2');
+  pushHistory(key, value) {
+    let {
+      location: { search },
+    } = this.props;
+    if (!search.length) {
+      search = '?sort=desc';
+    }
+    const queryObject = JSON.parse('{"' + decodeURI(search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+    queryObject[key] = value;
+    const newQuery = `?${serialize(queryObject)}`;
+    this.props.history.push(newQuery);
   }
   renderProducts() {
-    const { products } = this.props;
-    return products.map((item, index) => (
+    const {
+      products,
+    } = this.props;
+
+    let {
+      location: { search },
+    } = this.props;
+
+    // 若沒有sort參數, 預設唯降冪排列
+    if (!search.length) {
+      search = '?sort=desc';
+    }
+    const queryObject = JSON.parse('{"' + decodeURI(search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+    const renderArray = JSON.parse(JSON.stringify(products));
+
+    // 價格排序
+    if (queryObject.sort === 'desc') {
+      renderArray.sort((a, b) => b.price - a.price);
+    } else if (queryObject.sort === 'asc') {
+      renderArray.sort((a, b) => a.price - b.price);
+    }
+    return renderArray.map(item => (
       <Card
         key={item.id}
         title={item.title}
@@ -31,7 +61,6 @@ class CardCaontainer extends Component {
   }
   render() {
     const { products } = this.props;
-
     return (
       <div className="container">
         <div className="row">
@@ -39,10 +68,12 @@ class CardCaontainer extends Component {
             <section className="order_box">
               <header className="mb-2">排序</header>
               <section>
-                <button className="btn btn-outline-primary" onClick={this.test1}>
+                <button className="btn btn-outline-primary" onClick={() => { this.pushHistory('sort', 'desc'); }}>
                   價格: 高至低
                 </button>
-                <button className="btn btn-outline-primary">價格: 低至高</button>
+                <button className="btn btn-outline-primary" onClick={() => { this.pushHistory('sort', 'asc'); }}>
+                  價格: 低至高
+                </button>
               </section>
             </section>
             <section className="filter_box">
