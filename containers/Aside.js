@@ -2,41 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import cx from 'classnames';
-
-function parseQueyString(query) {
-  if (query === '') return;
-
-  const vars = query.split('&');
-  const query_string = {};
-  for (let i = 0; i < vars.length; i++) {
-    const pair = vars[i].split('=');
-    const key = decodeURIComponent(pair[0]);
-    const value = decodeURIComponent(pair[1]);
-    // If first entry with this name
-    if (typeof query_string[key] === 'undefined') {
-      query_string[key] = decodeURIComponent(value);
-      // If second entry with this name
-    } else if (typeof query_string[key] === 'string') {
-      const arr = [query_string[key], decodeURIComponent(value)];
-      query_string[key] = arr;
-      // If third or later entry with this name
-    } else {
-      query_string[key].push(decodeURIComponent(value));
-    }
-  }
-  return query_string;
-}
+import { serialize, queryToObj } from '../utilis';
 
 class Aside extends Component {
-  onPriceClick(order) {
-    const { history } = this.props;
-    history.push(`?order=${order}`);
+  pushHistory(key, value) {
+    let {
+      location: { search },
+    } = this.props;
+    if (!search.length) {
+      search = '?sort=desc';
+    }
+    const queryObject = queryToObj(search);
+    queryObject[key] = value;
+    const newQuery = `?${serialize(queryObject)}`;
+    this.props.history.push(newQuery);
   }
   render() {
-    let { search } = this.props.location;
-    search = search.slice(1); // 去掉問號
-    const obj = parseQueyString(search);
-    console.log('123', obj);
+    let {
+      location: { search },
+    } = this.props;
+    if (!search.length) {
+      search = '?sort=desc';
+    }
+    const queryObject = queryToObj(search);
+
     return (
       <aside className="filter_section">
         <section className="order_box">
@@ -44,17 +33,17 @@ class Aside extends Component {
           <section>
             <button
               className={cx('btn btn-outline-primary', {
-                active: obj && obj.order === 'desc',
+                active: queryObject.sort === 'desc',
               })}
-              onClick={() => { this.onPriceClick('desc'); }}
+              onClick={() => { this.pushHistory('sort', 'desc'); }}
             >
               價格: 高至低
             </button>
             <button
               className={cx('btn btn-outline-primary', {
-                active: obj && obj.order === 'asc',
+                active: queryObject.sort === 'asc',
               })}
-              onClick={() => { this.onPriceClick('asc'); }}
+              onClick={() => { this.pushHistory('sort', 'asc'); }}
             >
               價格: 低至高
             </button>
@@ -63,11 +52,27 @@ class Aside extends Component {
         <section className="filter_box">
           <header className="title mb-2">性別</header>
           <div className="custom-control custom-radio">
-            <input type="radio" id="maleRadio" name="gender" className="custom-control-input" value="male" />
+            <input
+              type="radio"
+              id="maleRadio"
+              name="gender"
+              className="custom-control-input"
+              value="male"
+              checked={queryObject.gender === 'male'}
+              onChange={(e) => { this.pushHistory('gender', e.target.value); }}
+            />
             <label className="custom-control-label" htmlFor="maleRadio">男裝</label>
           </div>
           <div className="custom-control custom-radio">
-            <input type="radio" id="femaleRadio" name="gender" className="custom-control-input" value="female" />
+            <input
+              type="radio"
+              id="femaleRadio"
+              name="gender"
+              className="custom-control-input"
+              value="female"
+              checked={queryObject.gender === 'female'}
+              onChange={(e) => { this.pushHistory('gender', e.target.value); }}
+            />
             <label className="custom-control-label" htmlFor="femaleRadio">女裝</label>
           </div>
         </section>
@@ -75,24 +80,24 @@ class Aside extends Component {
           <header className="title mb-2">價格區間</header>
           <div className="custom-control custom-checkbox">
             <input type="checkbox" id="priceFilter1" name="priceFilter" className="custom-control-input" />
-            <label className="custom-control-label" htmlFor="priceFilter1">0 ~ 500</label>
+            <label className="custom-control-label" htmlFor="priceFilter1">0 ~ 1000</label>
           </div>
           <div className="custom-control custom-checkbox">
             <input type="checkbox" id="priceFilter2" name="priceFilter" className="custom-control-input" />
-            <label className="custom-control-label" htmlFor="priceFilter2">500 ~ 1000</label>
+            <label className="custom-control-label" htmlFor="priceFilter2">1000 ~ 2000</label>
           </div>
           <div className="custom-control custom-checkbox">
             <input type="checkbox" id="priceFilter3" name="priceFilter" className="custom-control-input" />
-            <label className="custom-control-label" htmlFor="priceFilter3">1000 ~ 1500</label>
+            <label className="custom-control-label" htmlFor="priceFilter3">2000以上</label>
           </div>
-          <div className="custom-control custom-checkbox">
-            <input type="checkbox" id="priceFilter4" name="priceFilter" className="custom-control-input" />
-            <label className="custom-control-label" htmlFor="priceFilter4">1500 ~ 2000</label>
-          </div>
-          <div className="custom-control custom-checkbox">
-            <input type="checkbox" id="priceFilter5" name="priceFilter" className="custom-control-input" />
-            <label className="custom-control-label" htmlFor="priceFilter5">2000以上</label>
-          </div>
+        </section>
+        <section className="filter_box">
+          <button
+            className="btn btn-outline-danger"
+            onClick={() => { this.props.history.push(''); }}
+          >
+            清除全部
+          </button>
         </section>
       </aside>
     );
