@@ -44,6 +44,14 @@ class CardCaontainer extends Component {
       renderArray = renderArray.filter(item => item.gender === 0);
     }
 
+    // 價格區間
+    if (queryObject.minPrice) {
+      renderArray = renderArray.filter(item => item.price > Number(queryObject.minPrice));
+    }
+    if (queryObject.maxPrice) {
+      renderArray = renderArray.filter(item => item.price < Number(queryObject.maxPrice));
+    }
+
     return renderArray.map(item => (
       <Card
         key={item.id}
