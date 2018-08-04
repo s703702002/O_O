@@ -67,7 +67,7 @@ class LoginBox extends Component {
     const {
       loginBoxOpen,
       closeLoginBox: close,
-      loginCancel,
+      loginCancelEvent,
       status,
       message,
     } = this.props;
@@ -101,7 +101,7 @@ class LoginBox extends Component {
               }
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-danger abort-login" onClick={loginCancel}>取消登入</button>
+              <button type="button" className="btn btn-danger abort-login" onClick={loginCancelEvent}>取消登入</button>
               <button type="button" className="btn btn-primary" onClick={this.onClickLogin}>登入</button>
               <button className="btn btn-secondary" onClick={close}>取消</button>
             </div>
@@ -125,7 +125,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   closeLoginBox: () => { dispatch(closeLoginBox); },
   login: ({ username, password }) => { dispatch(loginRequest({ username, password })); },
-  loginCancel: () => { dispatch(loginCancel); },
+  loginCancelEvent: () => { dispatch(loginCancel); },
 });
 
 
