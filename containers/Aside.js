@@ -9,8 +9,8 @@ class Aside extends Component {
   maxPrice = null;
   pushHistory(queryObj) {
     let {
-      location: { search },
-    } = this.props;
+      search,
+    } = this.props.location;
     if (!search.length) {
       search = '?sort=desc';
     }
@@ -46,14 +46,16 @@ class Aside extends Component {
       gender: e.target.value,
     });
   }
+  clearAll = () => {
+    this.minPrice.value = '';
+    this.maxPrice.value = '';
+    this.props.history.push('');
+  }
   render() {
-    let {
-      location: { search },
-    } = this.props;
-    if (!search.length) {
-      search = '?sort=desc';
-    }
-    const queryObject = queryToObj(search);
+    const {
+      search,
+    } = this.props.location;
+    const queryObject = search.length > 0 && queryToObj(search);
 
     return (
       <aside className="filter_section">
@@ -140,7 +142,7 @@ class Aside extends Component {
         <section className="filter_box">
           <button
             className="btn btn-outline-danger"
-            onClick={() => { this.props.history.push(''); }}
+            onClick={this.clearAll}
           >
             清除全部
           </button>

@@ -1,4 +1,7 @@
+import { clone } from '../utilis';
+
 const login = (state = { status: 'init' }, action) => {
+  const newShoppings = !state.shoppings ? null : clone(state.shoppings);
   switch (action.type) {
     case 'LOGIN_REQUEST':
       return {
@@ -34,6 +37,12 @@ const login = (state = { status: 'init' }, action) => {
         username: null,
         message: null,
         shoppings: [],
+      };
+    case 'ADD_TO_CART':
+      newShoppings.push(action.product);
+      return {
+        ...state,
+        shoppings: newShoppings,
       };
     default:
       return state;

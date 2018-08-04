@@ -6,9 +6,12 @@ const Product = ({ shoppings }) => (
     <h4>我的購物車:</h4>
     {
       shoppings.map(item => (
-        <div key={item.id}>
+        <div
+          className="in_shopping_cart"
+          key={item.id}
+        >
           {
-            `產品名稱:${item.title}, 售價:${item.price}元`
+            `${item.title}, 售價:${item.price}元`
           }
         </div>
       ))
@@ -22,7 +25,7 @@ const SoppingCart = ({ status, shoppings }) => (
     <div className="cart_content box-shadow">
       {
         (status === 'init' || status === 'loginerr') ?
-          '請先登入唷 :)' :
+          '請先登入!' :
           <Product shoppings={shoppings} />
       }
     </div>

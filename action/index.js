@@ -43,3 +43,8 @@ export const closeLoginBox = {
 export const logOut = {
   type: 'LOG_OUT',
 };
+
+export const addToCart = product => ({
+  type: 'ADD_TO_CART',
+  product,
+});

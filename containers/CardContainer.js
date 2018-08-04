@@ -17,11 +17,12 @@ class CardCaontainer extends Component {
   renderProducts() {
     const {
       products,
+      dispatch,
     } = this.props;
 
     let {
-      location: { search },
-    } = this.props;
+      search,
+    } = this.props.location;
 
     // 若沒有sort參數, 預設唯降冪排列
     if (!search.length) {
@@ -55,10 +56,8 @@ class CardCaontainer extends Component {
     return renderArray.map(item => (
       <Card
         key={item.id}
-        title={item.title}
-        price={item.price}
-        inventory={item.inventory}
-        gender={item.gender}
+        item={item}
+        dispatch={dispatch}
       />
     ));
   }

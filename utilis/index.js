@@ -10,4 +10,6 @@ function queryToObj(queryString) {
   return JSON.parse('{"' + decodeURI(queryString.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
 }
 
-export { serialize, queryToObj };
+const clone = target => JSON.parse(JSON.stringify(target));
+
+export { serialize, queryToObj, clone };
