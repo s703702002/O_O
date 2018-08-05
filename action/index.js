@@ -44,6 +44,11 @@ export const logOut = {
   type: 'LOG_OUT',
 };
 
+export const addToCartRequest = product => ({
+  type: 'ADD_TO_CART_REQUEST',
+  product,
+});
+
 export const addToCart = product => ({
   type: 'ADD_TO_CART',
   product,
