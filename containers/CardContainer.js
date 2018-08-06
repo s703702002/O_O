@@ -66,9 +66,9 @@ class CardCaontainer extends Component {
     return (
       <div className="container">
         <div className="row">
-          <Aside />
-          <div className="col">
-            <div className="card_section">
+          <Aside className="col-2" />
+          <div className="col-10">
+            <div className="row">
               {
                 (!products.length) ?
                   <LoadingProducts /> :

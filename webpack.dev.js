@@ -60,6 +60,7 @@ module.exports = {
     compress: true,
     port: 9000,
     host: ip.address(),
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

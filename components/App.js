@@ -5,11 +5,11 @@ import LoginBox from '../containers/LoginBox';
 
 
 const App = () => (
-  <div>
+  <React.Fragment>
     <Header />
     <CardCaontainer />
     <LoginBox />
-  </div>
+  </React.Fragment>
 );
 
 export default App;
