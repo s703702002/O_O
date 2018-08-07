@@ -1,14 +1,11 @@
 import React from 'react';
 import Header from '../containers/Header';
-import CardCaontainer from '../containers/CardContainer';
-import LoginBox from '../containers/LoginBox';
-
+import CardContainer from '../containers/CardContainer';
 
 const App = () => (
   <React.Fragment>
     <Header />
-    <CardCaontainer />
-    <LoginBox />
+    <CardContainer />
   </React.Fragment>
 );
 

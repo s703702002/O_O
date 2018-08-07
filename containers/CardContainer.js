@@ -9,7 +9,7 @@ import { queryToObj } from '../utilis';
 const LoadingProducts = () => (
   <p>正在載入產品 請稍後!</p>
 );
-class CardCaontainer extends Component {
+class CardContainer extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(getProductsRequest());
@@ -89,4 +89,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(CardCaontainer));
+export default withRouter(connect(mapStateToProps)(CardContainer));
