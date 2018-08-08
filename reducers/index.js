@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import login from './login';
 import products from './products';
+import productPage from './product_page';
 import shoppingCart from './shopping_cart';
 
 const loginBoxOpen = (state = false, action) => {
@@ -19,7 +20,8 @@ const AppStore = combineReducers({
   loginBoxOpen,
   products,
   shoppingCart,
+  productPage,
 });
 
-export { login, loginBoxOpen, products };
+export { login, loginBoxOpen, products, productPage };
 export default AppStore;

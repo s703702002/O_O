@@ -51,6 +51,7 @@ const querys = {
   users: () => Object.keys(usersById).map(id => new GraphQLUser(usersById[id])),
   user: ({ id }) => (usersById[id] ? new GraphQLUser(usersById[id]) : null),
   products: () => Object.keys(productsById).map(id => new GraphQLProduct(productsById[id])),
+  product: ({ id }) => (productsById[id] ? new GraphQLProduct(productsById[id]) : null),
 };
 
 const mutations = {
@@ -101,6 +102,7 @@ exports.schema = buildSchema(`
     users: [User!]!
     products: [Product!]!
     user(id: ID!): User
+    product(id: ID!): Product
   }
 `);
 

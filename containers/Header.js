@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { openLoginBox, logOut } from '../action';
 import LoginBox from './LoginBox';
 import SoppingCart from './ShoppingCart';
@@ -7,7 +8,9 @@ import SoppingCart from './ShoppingCart';
 const Header = ({ username, status, dispatch }) => (
   <React.Fragment>
     <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom top_header">
-      <h5 className="my-0 mr-md-auto font-weight-normal">黑皮</h5>
+      <Link to="/" className="mr-md-auto font-weight-normal">
+        <h5 className="my-0">黑皮</h5>
+      </Link>
       <span className="mr-2">
         {
           (username) ?

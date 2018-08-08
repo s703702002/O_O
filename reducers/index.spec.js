@@ -1,4 +1,4 @@
-import { login, loginBoxOpen, products } from './index';
+import { login, loginBoxOpen, products, productPage } from './index';
 import { openLoginBox, closeLoginBox } from '../action';
 
 test('登入reducer測試', () => {
@@ -21,13 +21,11 @@ test('登入reducer測試', () => {
     status: 'logined',
     username: 'stanley',
     message: null,
-    shoppings: [1, 2],
   });
   expect(login(undefined, action2)).toEqual({
     status: 'loginerr',
     username: null,
     message: action2.error,
-    shoppings: [],
   });
 });
 
@@ -65,6 +63,29 @@ test('fetch產品測試', () => {
     products: [],
     message: 'api出現異常!',
   });
+});
 
 
+test('fetch 單一產品測試', () => {
+  const response = {
+    id: 1, title: '長褲-女', price: 500, inventory: 2, gender: 0,
+  };
+  const successAction = {
+    type: 'RECEIVE_PRODUCT',
+    response,
+  };
+
+  const errorAction = {
+    type: 'GET_PRODUCT_ERROR',
+    error: 'api出現異常!',
+  };
+  expect(productPage(undefined, successAction)).toEqual({
+    message: null,
+    product: response,
+  });
+
+  expect(productPage(undefined, errorAction)).toEqual({
+    product: {},
+    message: errorAction.error,
+  });
 });

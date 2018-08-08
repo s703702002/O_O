@@ -1,6 +1,6 @@
 import { delay } from '../utilis';
 
-const graphqlUri = 'http://localhost:3000/';
+const graphqlUri = 'http://localhost:3000/graphql/';
 const loginUri = 'http://localhost:3000/login';
 const productInfoFragment = `fragment productInfo on Product{
   id
@@ -57,6 +57,25 @@ export const getAllProductsAPI = () => {
   const query = `
     query {
       products{
+        ...productInfo
+      }
+    }
+    ${productInfoFragment}
+  `;
+  return fetch(graphqlUri, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query }),
+  }).then(r => r.json())
+    .then(({ data }) => data);
+};
+
+export const getProductAPI = ({ productId }) => {
+  const query = `
+    query {
+      product(id: ${productId}){
         ...productInfo
       }
     }

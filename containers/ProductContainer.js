@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import cx from 'classnames';
+import { getProductRequset } from '../action'; 
 
 class ProductContainer extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const { productId } = this.props.match.params;
+    dispatch(getProductRequset(productId));
+  }
   render() {
     return (
       <div className="container">
@@ -17,4 +23,11 @@ class ProductContainer extends Component {
   }
 }
 
-export default withRouter(ProductContainer);
+const mapStateToProps = (state, ownProps) => {
+  const { product } = state.productPage;
+  return {
+    product,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(ProductContainer));

@@ -18,8 +18,18 @@ export const loginCancel = {
   type: 'LOGIN_CANCEL',
 };
 
+export const getProductRequset = productId => ({
+  type: 'GET_PRODUCT_REQUEST',
+  productId,
+});
+
 export const getProductsRequest = () => ({
   type: 'GET_PRODUCTS_REQUEST',
+});
+
+export const receiveProduct = response => ({
+  type: 'RECEIVE_PRODUCT',
+  response,
 });
 
 export const receiveProducts = response => ({
