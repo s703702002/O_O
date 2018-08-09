@@ -11,8 +11,12 @@ const LoadingProducts = () => (
 );
 class CardContainer extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(getProductsRequest());
+    const {
+      dispatch,
+      products,
+    } = this.props;
+    // 若沒有產品, 發request
+    if (!products.length) dispatch(getProductsRequest());
   }
   renderProducts() {
     const {
