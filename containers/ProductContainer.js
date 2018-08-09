@@ -13,13 +13,37 @@ class ProductContainer extends Component {
     const { productId } = this.props.match.params;
     dispatch(getProductRequset(productId));
   }
+  renderProduct() {
+    const {
+      title,
+      price,
+    } = this.props.product;
+    return (
+      <div>
+        <h3>{title}</h3>
+        <strong>{`$${price}`}</strong>
+        <div>
+          商品描述商品描述商品描述商品描述商品描述商品描述
+        </div>
+      </div>
+    );
+  }
   render() {
-    console.log(this.props.product);
+    const {
+      id,
+    } = this.props.product;
     return (
       <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-10">
-            <LoadProduct />
+        <div className="row">
+          <div className="col-3">
+            側邊攔
+          </div>
+          <div className="col-9">
+            {
+              !id ?
+                <LoadProduct /> :
+                this.renderProduct()
+            }
           </div>
         </div>
       </div>
