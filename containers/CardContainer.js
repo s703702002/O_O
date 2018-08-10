@@ -21,7 +21,6 @@ class CardContainer extends Component {
   renderProducts() {
     const {
       products,
-      dispatch,
     } = this.props;
 
     let {
@@ -61,7 +60,7 @@ class CardContainer extends Component {
       <Card
         key={item.id}
         item={item}
-        dispatch={dispatch}
+        col={4}
       />
     ));
   }
