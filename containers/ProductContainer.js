@@ -109,7 +109,7 @@ class ProductContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { products } = state;
+  const { products } = state.products;
   const { product } = state.productPage;
   return {
     product,
