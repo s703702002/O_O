@@ -1,9 +1,12 @@
 import React from 'react';
 import cx from 'classnames';
+import { connect } from 'react-redux';
 
-const Addfinished = () => (
+const Addfinished = ({ showAddFinished }) => (
   <div
-    className={cx('modal add_finished show')}
+    className={cx('modal add_finished', {
+      show: showAddFinished,
+    })}
     tabIndex="-1"
     role="dialog"
   >
@@ -17,4 +20,11 @@ const Addfinished = () => (
   </div>
 );
 
-export default Addfinished;
+const mapStateToProps = (state) => {
+  const { showAddFinished } = state;
+  return {
+    showAddFinished,
+  };
+};
+
+export default connect(mapStateToProps)(Addfinished);

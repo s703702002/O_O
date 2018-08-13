@@ -13,8 +13,9 @@ const Product = ({ shoppingCart }) => (
           key={item.id}
         >
           {
-            `${item.title}, 售價:${item.price}元`
+            `${item.title}，售價:${item.price}元`
           }
+          <small className="ml-2 remove">移除</small>
         </div>
       ))
     }

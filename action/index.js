@@ -63,3 +63,11 @@ export const addToCart = product => ({
   type: 'ADD_TO_CART',
   product,
 });
+
+export const showAddFinished = {
+  type: 'SHOW_ADD_FINISHED',
+};
+
+export const hiddenAddFinished = {
+  type: 'HIDDEN_ADD_FINISHED',
+};

@@ -17,12 +17,24 @@ const loginBoxOpen = (state = false, action) => {
   }
 };
 
+const showAddFinished = (state = false, action) => {
+  switch (action.type) {
+    case 'SHOW_ADD_FINISHED':
+      return true;
+    case 'HIDDEN_ADD_FINISHED':
+      return false;
+    default:
+      return state;
+  }
+};
+
 const AppStore = combineReducers({
   login,
   loginBoxOpen,
   products,
   shoppingCart,
   productPage,
+  showAddFinished,
 });
 
 export { login, loginBoxOpen, products, productPage };
