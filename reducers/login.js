@@ -20,7 +20,7 @@ const login = (state = { status: 'init' }, action) => {
       };
     case 'LOGIN_CANCEL':
       return {
-        state: 'init',
+        status: 'init',
         username: null,
         message: null,
       };

@@ -8,7 +8,7 @@ function* addToCartFlow(action) {
     const loginStatus = yield select(getLoginStatus);
     const { product } = action;
     // if haven't login
-    if (loginStatus === 'init') {
+    if (loginStatus === 'init' || loginStatus === 'loginerr') {
       yield put(openLoginBox);
     } else {
       yield put(addToCart(product));

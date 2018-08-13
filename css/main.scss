@@ -2,7 +2,8 @@
   min-width: 1024px;
 }
 
-html,body{
+html,
+body {
   height: 100%;
 }
 
@@ -10,6 +11,10 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 .top_header{
@@ -101,6 +106,9 @@ a.card{
       opacity: 1;
       margin-top: 0;
     }
+    .mask {
+      display: block;
+    }
   }
   &.loading{
     .form-group{
@@ -121,19 +129,48 @@ a.card{
     opacity: 0;
     margin-top: -10em;
   }
-  .mask{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #000;
-    opacity: 0.5;
-    z-index: 1;
-  }
   .abort-login{
     display: none;
   }
+}
+
+.add_finished{
+  &.show{
+    display: block;
+    .mask{
+      display: block;
+      top: 30%;
+      left: 30%;
+      bottom: 30%;
+      right: 30%;
+      opacity: 1;
+    }
+  }
+  .modal-dialog{
+    z-index: 2;
+  }
+  .content{
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  .material-icons{
+    margin-top: 30px;
+    font-size: 60px;
+  }
+}
+
+.mask{
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.7;
+  z-index: 1;
 }
 
 .loader-outer{

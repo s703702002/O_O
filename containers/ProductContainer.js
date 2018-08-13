@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import cx from 'classnames';
 import {
   getProductsRequest,
+  addToCartRequest,
 } from '../action';
 import { getRandomItem } from '../utilis';
 import Card from '../components/Card';
@@ -35,7 +36,18 @@ class ProductContainer extends Component {
       </div>
     );
   }
-  static renderAside(product) {
+  componentDidMount() {
+    const {
+      dispatch,
+      products,
+    } = this.props;
+    if (!products.length) dispatch(getProductsRequest());
+  }
+  renderAside(product) {
+    const {
+      dispatch,
+      history: { push },
+    } = this.props;
     const {
       price,
       inventory,
@@ -48,23 +60,18 @@ class ProductContainer extends Component {
         </p>
         <button
           className="btn btn-outline-primary w-100 mb-2"
+          onClick={() => { dispatch(addToCartRequest(product)); }}
         >
           加入購物車
         </button>
         <button
           className="btn btn-outline-secondary  w-100"
+          onClick={() => { push('/'); }}
         >
           繼續選購
         </button>
       </aside>
     );
-  }
-  componentDidMount() {
-    const {
-      dispatch,
-      products,
-    } = this.props;
-    if (!products.length) dispatch(getProductsRequest());
   }
   renderOther(product) {
     const { products } = this.props;
@@ -95,7 +102,7 @@ class ProductContainer extends Component {
           ProductContainer.renderProduct(product)
         }
         {
-          ProductContainer.renderAside(product)
+          this.renderAside(product)
         }
         {
           this.renderOther(product)
