@@ -14,12 +14,13 @@ function getRandomItem(arr, amount) {
   if (!arr.length) return;
   const copy = arr.slice();
   const result = [];
-  for (let i = 0; i < copy.length; i++) {
-    if (result.length === amount) break;
-    if (Math.random() > 0.4) {
-      result.push(copy[i]);
-    }
+  for (let i = 0; i < amount; i++) {
+    const initLenght = copy.length;
+    const random = Math.floor(Math.random() * initLenght);
+    const takeItem = copy.splice(random, 1);
+    result.push(...takeItem);
   }
+
   return result;
 }
 

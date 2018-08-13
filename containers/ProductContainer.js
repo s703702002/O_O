@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import cx from 'classnames';
 import {
-  getProductRequset,
   getProductsRequest,
 } from '../action';
 import { getRandomItem } from '../utilis';
@@ -15,19 +14,10 @@ const LoadProduct = () => (
   <p>正在載入產品</p>
 );
 class ProductContainer extends Component {
-  componentDidMount() {
-    const {
-      dispatch,
-      products,
-    } = this.props;
-    const { productId } = this.props.match.params;
-    dispatch(getProductRequset(productId));
-    if (!products.length) dispatch(getProductsRequest());
-  }
-  renderProduct() {
+  static renderProduct(product) {
     const {
       title,
-    } = this.props.product;
+    } = product;
     return (
       <div className="col-8">
         <h3>{title}</h3>
@@ -45,11 +35,11 @@ class ProductContainer extends Component {
       </div>
     );
   }
-  renderAside() {
+  static renderAside(product) {
     const {
       price,
       inventory,
-    } = this.props.product;
+    } = product;
     return (
       <aside className="col-4">
         <h3><strong>{`$${price}`}</strong></h3>
@@ -69,9 +59,16 @@ class ProductContainer extends Component {
       </aside>
     );
   }
-  renderOther() {
+  componentDidMount() {
+    const {
+      dispatch,
+      products,
+    } = this.props;
+    if (!products.length) dispatch(getProductsRequest());
+  }
+  renderOther(product) {
     const { products } = this.props;
-    const { id } = this.props.product;
+    const { id } = product;
     const otherProducts = products.filter(item => item.id !== id);
     const renderList = getRandomItem(otherProducts, 6);
     if (!renderList) return null;
@@ -91,32 +88,34 @@ class ProductContainer extends Component {
       </section>
     );
   }
-  renderContent() {
+  renderContent(product) {
     return (
       <React.Fragment>
         {
-          this.renderProduct()
+          ProductContainer.renderProduct(product)
         }
         {
-          this.renderAside()
+          ProductContainer.renderAside(product)
         }
         {
-          this.renderOther()
+          this.renderOther(product)
         }
       </React.Fragment>
     );
   }
   render() {
     const {
-      id,
-    } = this.props.product;
+      products,
+      match: { params: { productId } },
+    } = this.props;
+    const product = products.filter(item => item.id === productId)[0];
     return (
       <div className="container">
         <div className="row">
           {
-            !id
+            !products.length
             ? <LoadProduct />
-            : this.renderContent()
+            : this.renderContent(product)
           }
         </div>
       </div>
@@ -126,9 +125,7 @@ class ProductContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { products } = state.products;
-  const { product } = state.productPage;
   return {
-    product,
     products,
   };
 };
