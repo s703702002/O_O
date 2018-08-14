@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { openLoginBox, logOut } from '../action';
+import {
+  openLoginBox,
+  logOut,
+} from '../action';
 import LoginBox from './LoginBox';
 import SoppingCart from './ShoppingCart';
 
@@ -43,10 +46,6 @@ const mapStateToProps = (state, ownProps) => {
     username,
     status,
   };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-
 };
 
 export default connect(mapStateToProps)(Header);

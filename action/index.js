@@ -18,6 +18,10 @@ export const loginCancel = {
   type: 'LOGIN_CANCEL',
 };
 
+export const logOut = {
+  type: 'LOG_OUT',
+};
+
 export const getProductRequset = productId => ({
   type: 'GET_PRODUCT_REQUEST',
   productId,
@@ -50,10 +54,6 @@ export const closeLoginBox = {
   type: 'CLOSE_LOGIN_BOX',
 };
 
-export const logOut = {
-  type: 'LOG_OUT',
-};
-
 export const addToCartRequest = product => ({
   type: 'ADD_TO_CART_REQUEST',
   product,
@@ -62,6 +62,11 @@ export const addToCartRequest = product => ({
 export const addToCart = product => ({
   type: 'ADD_TO_CART',
   product,
+});
+
+export const removeShoppingCardItem = productId => ({
+  type: 'REMOVE_SHOPPING_CART_ITEM',
+  productId,
 });
 
 export const showAddFinished = {

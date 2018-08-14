@@ -25,6 +25,7 @@ const login = (state = { status: 'init' }, action) => {
         message: null,
       };
     case 'LOG_OUT':
+      localStorage.removeItem('loginStatus');
       return {
         status: 'init',
         username: null,

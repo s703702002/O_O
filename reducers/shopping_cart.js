@@ -6,6 +6,8 @@ const shoppingsCarts = (state = [], action) => {
       return [];
     case 'ADD_TO_CART':
       return [...state, action.product];
+    case 'REMOVE_SHOPPING_CART_ITEM':
+      return state.filter(item => item.id !== action.productId);
     default:
       return state;
   }
