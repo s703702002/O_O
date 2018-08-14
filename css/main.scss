@@ -45,7 +45,7 @@ input::-webkit-inner-spin-button {
   }
   &:hover{
     .cart_content{
-      display: block;
+      visibility: visible;
     }
   }
   .remove{
@@ -54,7 +54,8 @@ input::-webkit-inner-spin-button {
 }
 
 .cart_content{
-  display: none;
+  visibility: hidden;
+  transition: visibility 0.2s;
   position: absolute;
   width: 20rem;
   top: calc( 100% + 15px );
@@ -91,11 +92,17 @@ input::-webkit-inner-spin-button {
   }
 }
 
-a.card{
+a.card {
   color: inherit;
   &:hover{
     text-decoration: none;
   }
+}
+
+.sub-title {
+  color: #6f6e6e;
+  font-size: 1.2rem;
+  margin-right: .5rem;
 }
 
 .login_box{
@@ -190,6 +197,21 @@ a.card{
   height: 80px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
+}
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  .count {
+    text-align: center;
+    min-width: 3em;
+  }
+  .btn{
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
 }
 
 /* Safari */
