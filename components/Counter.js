@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Counter extends Component {
-  static propTypes  = {
+  static propTypes = {
     max: PropTypes.number,
     min: PropTypes.number,
   }
@@ -11,7 +11,7 @@ class Counter extends Component {
     min: 0,
   };
   state = {
-    count: 0
+    count: 0,
   }
   minus = () => {
     let { count } = this.state;
@@ -28,12 +28,10 @@ class Counter extends Component {
     this.setState({ count });
   }
   render() {
-    let { count } = this.state;
-    console.log('count', count);
     return (
       <div className="counter">
         <button className="btn btn-light material-icons" onClick={this.minus}>remove</button>
-        <span className="count">{count}</span>
+        <span className="count">{this.state.count}</span>
         <button className="btn btn-light material-icons" onClick={this.add}>add</button>
       </div>
     );

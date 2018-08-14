@@ -37,6 +37,10 @@ class ProductContainer extends Component {
       </div>
     );
   }
+  constructor(props) {
+    super(props);
+    this.counter = null;
+  }
   componentDidMount() {
     const {
       dispatch,
@@ -44,9 +48,16 @@ class ProductContainer extends Component {
     } = this.props;
     if (!products.length) dispatch(getProductsRequest());
   }
+  // 加入購物車
+  addToCart = (product) => {
+    const { dispatch } = this.props;
+    const { count } = this.counter.state;
+    // 若選購數量為0
+    if (count === 0) return;
+    dispatch(addToCartRequest(product));
+  }
   renderAside(product) {
     const {
-      dispatch,
       history: { push },
     } = this.props;
     const {
@@ -54,7 +65,7 @@ class ProductContainer extends Component {
       inventory,
     } = product;
 
-    const CounterWithMax = () => <Counter max={inventory} />;
+    const CounterWithMax = ({ innerRef }) => <Counter max={inventory} ref={innerRef} />;
 
     return (
       <aside className="col-4">
@@ -70,11 +81,11 @@ class ProductContainer extends Component {
         </div>
         <div className="d-flex align-items-center mb-2">
           <span className="sub-title">選購數量:</span>
-          <CounterWithMax />
+          <CounterWithMax innerRef={(e) => { this.counter = e; }} />
         </div>
         <button
           className="btn btn-outline-primary w-100 mb-2"
-          onClick={() => { dispatch(addToCartRequest(product)); }}
+          onClick={() => { this.addToCart(product); }}
         >
           加入購物車
         </button>

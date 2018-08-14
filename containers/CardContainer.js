@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Card from '../components/Card';
+import NoMatchCard from '../components/NoMatchCard';
 import Aside from './Aside';
 import { getProductsRequest } from '../action';
 import { queryToObj } from '../utilis';
@@ -55,6 +56,8 @@ class CardContainer extends Component {
     if (queryObject.maxPrice) {
       renderArray = renderArray.filter(item => item.price < Number(queryObject.maxPrice));
     }
+
+    if (!renderArray.length) return <NoMatchCard />;
 
     return renderArray.map(item => (
       <Card

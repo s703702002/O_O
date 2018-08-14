@@ -36,6 +36,7 @@ input::-webkit-inner-spin-button {
   }
 }
 
+// 購物車
 .shopping_cart{
   position: relative;
   display: flex;
@@ -96,6 +97,21 @@ a.card {
   color: inherit;
   &:hover{
     text-decoration: none;
+  }
+}
+
+.no_match{
+  display: flex;
+  align-items: wrap;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 5rem;
+  .material-icons{
+    font-size: 20rem;
+  }
+  .no_match_txt{
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -199,6 +215,7 @@ a.card {
   animation: spin 2s linear infinite;
 }
 
+// 計數器
 .counter {
   display: inline-flex;
   align-items: center;
