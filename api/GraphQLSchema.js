@@ -35,7 +35,9 @@ class GraphQLProduct {
 }
 
 class GraphQLUser {
-  constructor({ id, name, shoppings }) {
+  constructor({
+    id, name, shoppings,
+  }) {
     this.id = id;
     this.name = name;
     this.shoppingList = shoppings;
@@ -43,7 +45,17 @@ class GraphQLUser {
   }
   getShoppings() {
     const shoppingList = [...this.shoppingList];
-    return shoppingList.map(productId => new GraphQLProduct(productsById[productId]));
+    const userShoppingInfo = [];
+
+    for (let i = 0; i < shoppingList.length; i++) {
+      const { productId, count } = shoppingList[i];
+      const infoObj = {};
+      infoObj.product = new GraphQLProduct(productsById[productId]);
+      infoObj.count = count;
+      userShoppingInfo.push(infoObj);
+    }
+    console.log('userShoppingInfo', userShoppingInfo);
+    return userShoppingInfo;
   }
 }
 
