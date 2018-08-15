@@ -46,7 +46,6 @@ class GraphQLUser {
   getShoppings() {
     const shoppingList = [...this.shoppingList];
     const userShoppingInfo = [];
-
     for (let i = 0; i < shoppingList.length; i++) {
       const { productId, count } = shoppingList[i];
       const infoObj = {};
@@ -54,7 +53,6 @@ class GraphQLUser {
       infoObj.count = count;
       userShoppingInfo.push(infoObj);
     }
-    console.log('userShoppingInfo', userShoppingInfo);
     return userShoppingInfo;
   }
 }
@@ -93,7 +91,7 @@ exports.schema = buildSchema(`
   type User {
       id: ID!
       name: String!
-      shoppings: [Product!]!
+      shoppings: [Order!]!
   }
   type Product {
       id: ID!
@@ -101,6 +99,10 @@ exports.schema = buildSchema(`
       title: String!
       inventory: Int!
       gender: Int!
+  }
+  type Order {
+    product: Product!
+    count: Int!
   }
   type RemoveUserPayload {
     deletedUserId: Int!

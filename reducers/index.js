@@ -37,5 +37,5 @@ const AppStore = combineReducers({
   showAddFinished,
 });
 
-export { login, loginBoxOpen, products, productPage };
+export { login, loginBoxOpen, products, productPage, shoppingCart };
 export default AppStore;

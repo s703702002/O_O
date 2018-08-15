@@ -17,9 +17,11 @@ function getUserInfo(memberId) {
         id
         name
         shoppings {
-          ...productInfo
+          product {
+            ...productInfo
+          }
+          count
         }
-        count
       }
     }
     ${productInfoFragment}

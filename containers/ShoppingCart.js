@@ -11,16 +11,16 @@ const Product = ({ shoppingCart, dispatch }) => (
       shoppingCart.map(item => (
         <div
           className="in_shopping_cart"
-          key={item.id}
+          key={item.product.id}
         >
           {
-            `${item.title}，售價:${item.price}元`
+            `${item.product.title}，售價:${item.product.price}元 x ${item.count}件`
           }
           <small
             role="button"
             tabIndex="-1"
             className="ml-2 remove"
-            onClick={() => { dispatch(removeShoppingCardItem(item.id)); }}
+            onClick={() => { dispatch(removeShoppingCardItem(item.product.id)); }}
           >
             移除
           </small>

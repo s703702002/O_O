@@ -1,5 +1,17 @@
-import { login, loginBoxOpen, products, productPage } from './index';
-import { openLoginBox, closeLoginBox } from '../action';
+import {
+  login,
+  loginBoxOpen,
+  products,
+  productPage,
+  shoppingCart,
+} from './index';
+import {
+  openLoginBox,
+  closeLoginBox,
+  loginSuccess,
+  addToCartRequest,
+  addToCart,
+} from '../action';
 
 test('登入reducer測試', () => {
   // 假設登入成功發的action
@@ -36,7 +48,6 @@ test('loginBox測試', () => {
 });
 
 test('fetch產品測試', () => {
-
   const response = [{
     id: 1, title: '長褲-女', price: 500, inventory: 2, gender: 0,
   },
@@ -88,4 +99,35 @@ test('fetch 單一產品測試', () => {
     product: {},
     message: errorAction.error,
   });
+});
+
+test('購物車reducer測試', () => {
+  const response = {
+    id: '1',
+    name: 'stanley',
+    shoppings: [
+      {
+        product: {
+          id: '8',
+          title: '長褲-男',
+          price: 500,
+          gender: 1,
+          inventory: 200,
+        },
+        count: 2,
+      },
+      {
+        product: {
+          id: '6',
+          title: '拖鞋-女',
+          price: 199,
+          gender: 0,
+          inventory: 10,
+        },
+        count: 1,
+      },
+    ],
+  };
+
+  expect(shoppingCart(undefined, loginSuccess(response))).toEqual(response.shoppings);
 });
