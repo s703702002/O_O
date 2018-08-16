@@ -12,12 +12,12 @@ const getLoginStatus = state => state.login.status;
 function* addToCartFlow(action) {
   try {
     const loginStatus = yield select(getLoginStatus);
-    const { product } = action;
+    const { product, count } = action;
     // if haven't login
     if (loginStatus === 'init' || loginStatus === 'loginerr') {
       yield put(openLoginBox);
     } else {
-      yield put(addToCart(product));
+      yield put(addToCart(product, count));
       yield put(showAddFinished);
       yield call(delay, 2500);
       yield put(hiddenAddFinished);

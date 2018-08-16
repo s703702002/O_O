@@ -1,3 +1,23 @@
+const isNewItem = (state, productId) =>
+  !state.some(item => item.product.id === productId);
+
+const handleAddToCart = (state, action) => {
+  const { product, count } = action;
+  const productId = product.id;
+  // 若是不在購物車的產品 就新增一筆資料
+  if (isNewItem(state, productId)) {
+    return [...state, {
+      product,
+      count,
+    }];
+  }
+  return state.map((item) => {
+    const order = { ...item };
+    if (order.product.id === productId) order.count += count;
+    return order;
+  });
+};
+
 const shoppingsCarts = (state = [], action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
@@ -5,7 +25,7 @@ const shoppingsCarts = (state = [], action) => {
     case 'LOG_OUT':
       return [];
     case 'ADD_TO_CART':
-      return [...state, action.product];
+      return handleAddToCart(state, action);
     case 'REMOVE_SHOPPING_CART_ITEM':
       return state.filter(item => item.product.id !== action.productId);
     default:

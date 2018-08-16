@@ -54,7 +54,7 @@ class ProductContainer extends Component {
     const { count } = this.counter.state;
     // 若選購數量為0
     if (count === 0) return;
-    dispatch(addToCartRequest(product));
+    dispatch(addToCartRequest(product, count));
   }
   renderAside(product) {
     const {
@@ -90,7 +90,7 @@ class ProductContainer extends Component {
           加入購物車
         </button>
         <button
-          className="btn btn-outline-secondary  w-100"
+          className="btn btn-outline-info w-100 mb-2"
           onClick={() => { push('/'); }}
         >
           繼續選購
@@ -155,7 +155,7 @@ class ProductContainer extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const { products } = state.products;
   return {
     products,

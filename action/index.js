@@ -54,14 +54,16 @@ export const closeLoginBox = {
   type: 'CLOSE_LOGIN_BOX',
 };
 
-export const addToCartRequest = product => ({
+export const addToCartRequest = (product, count) => ({
   type: 'ADD_TO_CART_REQUEST',
   product,
+  count,
 });
 
-export const addToCart = product => ({
+export const addToCart = (product, count) => ({
   type: 'ADD_TO_CART',
   product,
+  count,
 });
 
 export const removeShoppingCardItem = productId => ({
