@@ -10,7 +10,11 @@ import { queryToObj } from '../utilis';
 const LoadingProducts = () => (
   <p>正在載入產品 請稍後!</p>
 );
+
 class CardContainer extends Component {
+  state = {
+    page: 0,
+  }
   componentDidMount() {
     const {
       dispatch,
@@ -57,15 +61,34 @@ class CardContainer extends Component {
       renderArray = renderArray.filter(item => item.price < Number(queryObject.maxPrice));
     }
 
+    // 若篩選後無符合的產品
     if (!renderArray.length) return <NoMatchCard />;
 
-    return renderArray.map(item => (
-      <Card
-        key={item.id}
-        item={item}
-        col={4}
-      />
-    ));
+    return this.renderContent(renderArray);
+  }
+  renderContent(renderArray) {
+    const { page } = this.state;
+    return (
+      <React.Fragment>
+        {
+          renderArray.map(item => (
+            <Card
+              key={item.id}
+              item={item}
+              col={4}
+            />
+          ))
+        }
+        {
+          <div className="col-12 page_controller">
+            <button className="material-icons">keyboard_arrow_left</button>
+            <button className="page_num active">1</button>
+            <button className="page_num">2</button>
+            <button className="material-icons">keyboard_arrow_right</button>
+          </div>
+        }
+      </React.Fragment>
+    );
   }
   render() {
     const { products } = this.props;
@@ -88,7 +111,7 @@ class CardContainer extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const { products } = state.products;
   return {
     products,

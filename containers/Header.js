@@ -11,8 +11,8 @@ import SoppingCart from './ShoppingCart';
 const Header = ({ username, status, dispatch }) => (
   <React.Fragment>
     <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom top_header">
-      <Link to="/" className="mr-md-auto font-weight-normal">
-        <h5 className="my-0">黑皮</h5>
+      <Link to="/" className="mr-md-auto logo">
+        <h3 className="my-0">Happy Shop</h3>
       </Link>
       <span className="mr-2">
         {

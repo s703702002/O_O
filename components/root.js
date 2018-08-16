@@ -10,7 +10,7 @@ import '../css/main.scss';
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
-      <div>
+      <div className="mb-5">
         <Header />
         <Route exact path="/" component={App} />
         <Route path="/:productId" component={ProductPage} />

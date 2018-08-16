@@ -7,6 +7,14 @@ body {
   height: 100%;
 }
 
+.logo {
+  font-family: 'Abril Fatface', cursive;
+  color: #000;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none; 
@@ -102,6 +110,40 @@ a.card {
 
 .card-body {
   background-color: #f5f1f1;
+}
+
+// 頁數控制
+.page_controller {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-top: 3rem;
+  .material-icons {
+    font-size: 32px;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    min-width: 3rem;
+    cursor: pointer;
+    margin: 0 .5rem;
+    &:first-child {
+      margin-right: 0;
+    }
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+  .page_num {
+    &:hover,
+    &.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+  }
 }
 
 .no_match{
