@@ -167,7 +167,7 @@ a.card {
   margin-right: .5rem;
 }
 
-.login_box{
+.login_box {
   display: block;
   position: absolute;
   z-index: -1;
@@ -206,6 +206,17 @@ a.card {
     display: none;
   }
 }
+
+.light_box {
+  display: block;
+  .mask {
+    display: block;
+  }
+  .modal-dialog{
+    z-index: 2;
+  }
+}
+
 
 .add_finished{
   &.show{
