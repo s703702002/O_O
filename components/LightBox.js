@@ -25,6 +25,7 @@ class LightBox extends Component {
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-body">
+              <i className="material-icons text-warning">error_outline</i>
               <p className="text-warning font-weight-bold message">{message}</p>
               <button className="btn btn-outline-info" onClick={removeLightBox}>知道了</button>
             </div>

@@ -56,7 +56,7 @@ const SoppingCart = ({ status, shoppingCart, dispatch }) => (
   </div>
 );
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const {
     shoppingCart,
     login: { status },

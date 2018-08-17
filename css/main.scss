@@ -231,9 +231,12 @@ a.card {
   .message{
     font-size: 2rem;
   }
+  .material-icons{
+    font-size: 5rem;
+  }
 }
 
-
+// 成功加入購物車後顯示
 .add_finished{
   &.show{
     display: block;
