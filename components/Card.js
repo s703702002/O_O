@@ -13,7 +13,7 @@ const Card = ({ item, col }) => (
       <img className="card-img-top" src={`${imgUrl}${item.id}.jpg`} alt={item.title} />
       <div className="card-body">
         <h5 className="card-title">{item.title}</h5>
-        <p className="card-text">{`價格: ${item.price} 元`}</p>
+        <p className="card-text">{`售價: ${item.price} 元`}</p>
         <p className="card-text">
           <small className="text-muted">
             {`庫存: ${item.inventory}`}

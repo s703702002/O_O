@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { addLightBoxMessage } from '../action';
 
 class Counter extends Component {
   static propTypes = {
@@ -15,17 +16,22 @@ class Counter extends Component {
   }
   minus = () => {
     let { count } = this.state;
-    const { min } = this.props;
+    const {
+      min,
+    } = this.props;
     count -= 1;
     if (count < min) return;
     this.setState({ count });
   }
   add = () => {
     let { count } = this.state;
-    const { max } = this.props;
+    const {
+      max,
+      dispatch,
+    } = this.props;
     count += 1;
-    if (count > max) return;
-    this.setState({ count });
+    if (count > max) return dispatch(addLightBoxMessage('此商品庫存不足'));
+    return this.setState({ count });
   }
   render() {
     return (

@@ -28,6 +28,17 @@ const showAddFinished = (state = false, action) => {
   }
 };
 
+const lightBoxMessage = (state = '', action) => {
+  switch (action.type) {
+    case 'ADD_LIGHT_BOX_MESSAGE':
+      return action.message;
+    case 'REMOVE_LIGHT_BOX_MESSAGE':
+      return '';
+    default:
+      return state;
+  }
+};
+
 const AppStore = combineReducers({
   login,
   loginBoxOpen,
@@ -35,6 +46,7 @@ const AppStore = combineReducers({
   shoppingCart,
   productPage,
   showAddFinished,
+  lightBoxMessage,
 });
 
 export { login, loginBoxOpen, products, productPage, shoppingCart };

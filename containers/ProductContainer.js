@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import cx from 'classnames';
 import {
   getProductsRequest,
   addToCartRequest,
+  addLightBoxMessage,
 } from '../action';
 import { getRandomItem } from '../utilis';
 import Card from '../components/Card';
 import Counter from '../components/Counter';
-import LightBox from '../components/LightBox';
 
 const dataImg = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22980%22%20height%3D%22270%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20980%20270%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1651ec9a4f5%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A49pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1651ec9a4f5%22%3E%3Crect%20width%3D%22980%22%20height%3D%22270%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22364.671875%22%20y%3D%22156.9%22%3E980x270%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E';
 
@@ -41,9 +40,6 @@ class ProductContainer extends Component {
   }
   constructor(props) {
     super(props);
-    this.state = {
-      lightBoxMessage: '',
-    };
     this.counter = null;
   }
   componentDidMount() {
@@ -58,24 +54,22 @@ class ProductContainer extends Component {
     const { dispatch } = this.props;
     const { count } = this.counter.state;
     // 若選購數量為0
-    if (count === 0) {
-      this.setState({
-        lightBoxMessage: '請選擇數量',
-      });
-      return;
-    }
-    dispatch(addToCartRequest(product, count));
+    if (count === 0) return dispatch(addLightBoxMessage('請選擇選購數量'));
+    return dispatch(addToCartRequest(product, count));
   }
   renderAside(product) {
     const {
       history: { push },
+      dispatch,
     } = this.props;
     const {
       price,
       inventory,
     } = product;
 
-    const CounterWithMax = ({ innerRef }) => <Counter max={inventory} ref={innerRef} />;
+    const CounterWithMax = ({ innerRef }) => (
+      <Counter max={inventory} ref={innerRef} dispatch={dispatch} />
+    );
 
     return (
       <aside className="col-4">
@@ -146,7 +140,6 @@ class ProductContainer extends Component {
     );
   }
   render() {
-    const { lightBoxMessage } = this.state;
     const {
       products,
       match: { params: { productId } },
@@ -159,16 +152,6 @@ class ProductContainer extends Component {
             !products.length
             ? <LoadProduct />
             : this.renderContent(product)
-          }
-          {
-            lightBoxMessage.length > 0 ?
-            ReactDOM.createPortal(
-              <LightBox clickMask={() => { this.setState({ lightBoxMessage: '' }); }}>
-                <div>{lightBoxMessage}</div>
-              </LightBox>,
-              document.getElementById('root'),
-            ) :
-            null
           }
         </div>
       </div>

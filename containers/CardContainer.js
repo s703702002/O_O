@@ -75,7 +75,7 @@ class CardContainer extends Component {
             <Card
               key={item.id}
               item={item}
-              col={4}
+              col={3}
             />
           ))
         }

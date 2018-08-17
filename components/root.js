@@ -5,6 +5,7 @@ import Header from '../containers/Header';
 import App from './App';
 import ProductPage from './ProductPage';
 import Addfinished from '../containers/AddFinish';
+import LightBoxWithConnect from '../containers/LightBoxContainer';
 import '../css/main.scss';
 
 const Root = ({ store }) => (
@@ -15,6 +16,7 @@ const Root = ({ store }) => (
         <Route exact path="/" component={App} />
         <Route path="/:productId" component={ProductPage} />
         <Addfinished />
+        <LightBoxWithConnect />
       </div>
     </Router>
   </Provider>

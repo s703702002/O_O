@@ -78,3 +78,12 @@ export const showAddFinished = {
 export const hiddenAddFinished = {
   type: 'HIDDEN_ADD_FINISHED',
 };
+
+export const addLightBoxMessage = message => ({
+  type: 'ADD_LIGHT_BOX_MESSAGE',
+  message,
+});
+
+export const removeLightBoxMessage = () => ({
+  type: 'REMOVE_LIGHT_BOX_MESSAGE',
+});

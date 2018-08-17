@@ -5,6 +5,7 @@
 html,
 body {
   height: 100%;
+  font-family: "微軟正黑體";
 }
 
 .logo {
@@ -110,6 +111,17 @@ a.card {
 
 .card-body {
   background-color: #f5f1f1;
+  padding: .7rem;
+}
+
+.card-title {
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  text-align: right;
+  line-height: 1;
+  margin-bottom: 0.25rem;
 }
 
 // 頁數控制
@@ -214,6 +226,10 @@ a.card {
   }
   .modal-dialog{
     z-index: 2;
+    text-align: center;
+  }
+  .message{
+    font-size: 2rem;
   }
 }
 

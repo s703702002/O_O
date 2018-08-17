@@ -5,21 +5,16 @@ import PropTypes from 'prop-types';
 class LightBox extends Component {
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.element,
-    ]).isRequired,
-    clickMask: PropTypes.func,
+    message: PropTypes.string.isRequired,
   }
   static defaultProps = {
     className: null,
-    clickMask: () => { console.log('clickMask'); },
   };
   render() {
     const {
       className,
-      children,
-      clickMask,
+      message,
+      removeLightBox,
     } = this.props;
     return (
       <div
@@ -30,11 +25,12 @@ class LightBox extends Component {
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-body">
-              {children}
+              <p className="text-warning font-weight-bold message">{message}</p>
+              <button className="btn btn-outline-info" onClick={removeLightBox}>知道了</button>
             </div>
           </div>
         </div>
-        <div className="mask" role="document" onClick={clickMask} />
+        <div className="mask" role="document" onClick={removeLightBox} />
       </div>
     );
   }
