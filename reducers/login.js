@@ -20,11 +20,12 @@ const login = (state = { status: 'init' }, action) => {
       };
     case 'LOGIN_CANCEL':
       return {
-        state: 'init',
+        status: 'init',
         username: null,
         message: null,
       };
     case 'LOG_OUT':
+      localStorage.removeItem('loginStatus');
       return {
         status: 'init',
         username: null,

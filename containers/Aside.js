@@ -55,10 +55,11 @@ class Aside extends Component {
     const {
       search,
     } = this.props.location;
+    const { className } = this.props;
     const queryObject = search.length > 0 && queryToObj(search);
 
     return (
-      <aside className="filter_section">
+      <aside className={cx('filter_section', className)}>
         <section className="order_box">
           <header className="mb-2">排序</header>
           <section>

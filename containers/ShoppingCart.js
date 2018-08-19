@@ -1,40 +1,74 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { removeShoppingCardItem } from '../action';
 
-const Product = ({ shoppingCart }) => (
+const CartItem = ({ order, dispatch }) => (
+  <div className="cart_item">
+    <Link to={`/${order.product.id}`}>
+      <h6 className="product_title">
+        {`${order.product.title}，`}
+        <span className="text-danger">{`$${order.product.price}`}</span>
+      </h6>
+    </Link>
+    <span className="text-muted">{` x ${order.count}件`}</span>
+    <small
+      role="button"
+      tabIndex="-1"
+      className="ml-2 remove text-danger"
+      onClick={() => { dispatch(removeShoppingCardItem(order.product.id)); }}
+    >
+      移除
+    </small>
+  </div>
+);
+
+const CartContent = ({ shoppingCart, dispatch }) => (
+  <React.Fragment>
+    {
+    shoppingCart.map(order => <CartItem order={order} dispatch={dispatch} key={order.product.id} />)
+    }
+    <div className="goCheckout">
+      <Link to="/checkout" className="font-weight-bold btn btn-success">
+        立刻結帳
+      </Link>
+    </div>
+  </React.Fragment>
+);
+
+const Product = ({ shoppingCart, dispatch }) => (
   <div>
-    <h4>我的購物車:</h4>
+    <h4>我的購物車</h4>
     {
       !shoppingCart.length ?
-      '購物車裡面沒東西唷' :
-      shoppingCart.map(item => (
-        <div
-          className="in_shopping_cart"
-          key={item.id}
-        >
-          {
-            `${item.title}, 售價:${item.price}元`
-          }
-        </div>
-      ))
+        <div className="empty_cart">
+          <i className="material-icons">add_shopping_cart</i>
+          <p>尚無商品</p>
+        </div> :
+        <CartContent shoppingCart={shoppingCart} dispatch={dispatch} />
     }
   </div>
 );
 
-const SoppingCart = ({ status, shoppingCart }) => (
-  <div className="shopping_cart mr-2">
+const SoppingCart = ({ status, shoppingCart, dispatch }) => (
+  <div className="shopping_cart mr-3">
     <i className="material-icons md-24">shopping_cart</i>
     <div className="cart_content box-shadow">
       {
-        (status === 'init' || status === 'loginerr') ?
-          '請先登入!' :
-          <Product shoppingCart={shoppingCart} />
+        (status === 'logined') ?
+          <Product shoppingCart={shoppingCart} dispatch={dispatch} /> :
+          '請先登入!'
       }
     </div>
+    {
+      (status === 'logined' && shoppingCart.length > 0) ?
+        <span className="count">{shoppingCart.length}</span>
+        : null
+    }
   </div>
 );
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const {
     shoppingCart,
     login: { status },
@@ -43,10 +77,6 @@ const mapStateToProps = (state, ownProps) => {
     status,
     shoppingCart,
   };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-
 };
 
 export default connect(mapStateToProps)(SoppingCart);

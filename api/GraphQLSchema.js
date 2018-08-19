@@ -35,7 +35,9 @@ class GraphQLProduct {
 }
 
 class GraphQLUser {
-  constructor({ id, name, shoppings }) {
+  constructor({
+    id, name, shoppings,
+  }) {
     this.id = id;
     this.name = name;
     this.shoppingList = shoppings;
@@ -43,7 +45,15 @@ class GraphQLUser {
   }
   getShoppings() {
     const shoppingList = [...this.shoppingList];
-    return shoppingList.map(productId => new GraphQLProduct(productsById[productId]));
+    const userShoppingInfo = [];
+    for (let i = 0; i < shoppingList.length; i++) {
+      const { productId, count } = shoppingList[i];
+      const infoObj = {};
+      infoObj.product = new GraphQLProduct(productsById[productId]);
+      infoObj.count = count;
+      userShoppingInfo.push(infoObj);
+    }
+    return userShoppingInfo;
   }
 }
 
@@ -51,6 +61,7 @@ const querys = {
   users: () => Object.keys(usersById).map(id => new GraphQLUser(usersById[id])),
   user: ({ id }) => (usersById[id] ? new GraphQLUser(usersById[id]) : null),
   products: () => Object.keys(productsById).map(id => new GraphQLProduct(productsById[id])),
+  product: ({ id }) => (productsById[id] ? new GraphQLProduct(productsById[id]) : null),
 };
 
 const mutations = {
@@ -80,7 +91,7 @@ exports.schema = buildSchema(`
   type User {
       id: ID!
       name: String!
-      shoppings: [Product!]!
+      shoppings: [Order!]!
   }
   type Product {
       id: ID!
@@ -88,6 +99,10 @@ exports.schema = buildSchema(`
       title: String!
       inventory: Int!
       gender: Int!
+  }
+  type Order {
+    product: Product!
+    count: Int!
   }
   type RemoveUserPayload {
     deletedUserId: Int!
@@ -101,6 +116,7 @@ exports.schema = buildSchema(`
     users: [User!]!
     products: [Product!]!
     user(id: ID!): User
+    product(id: ID!): Product
   }
 `);
 

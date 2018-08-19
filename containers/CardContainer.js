@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import Card from '../components/Card';
+import NoMatchCard from '../components/NoMatchCard';
 import Aside from './Aside';
 import { getProductsRequest } from '../action';
 import { queryToObj } from '../utilis';
@@ -9,15 +12,32 @@ import { queryToObj } from '../utilis';
 const LoadingProducts = () => (
   <p>正在載入產品 請稍後!</p>
 );
-class CardCaontainer extends Component {
+
+class CardContainer extends Component {
+  static propTypes = {
+    limit: PropTypes.Number,
+  };
+  static defaultProps = {
+    limit: 8,
+  };
+  state = {
+    page: 0,
+  }
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(getProductsRequest());
+    const {
+      dispatch,
+      products,
+    } = this.props;
+    // 若沒有產品, 發request
+    if (!products.length) dispatch(getProductsRequest());
+  }
+  goPage(page) {
+    this.setState({ page });
   }
   renderProducts() {
+    // 負責處理render的邏輯
     const {
       products,
-      dispatch,
     } = this.props;
 
     let {
@@ -29,7 +49,7 @@ class CardCaontainer extends Component {
       search = '?sort=desc';
     }
     const queryObject = queryToObj(search);
-    let renderArray = JSON.parse(JSON.stringify(products));
+    let renderArray = products.slice();
 
     // 價格排序
     if (queryObject.sort === 'desc') {
@@ -53,22 +73,68 @@ class CardCaontainer extends Component {
       renderArray = renderArray.filter(item => item.price < Number(queryObject.maxPrice));
     }
 
-    return renderArray.map(item => (
-      <Card
-        key={item.id}
-        item={item}
-        dispatch={dispatch}
-      />
-    ));
+    // 若篩選後無符合的產品
+    if (!renderArray.length) return <NoMatchCard />;
+
+    return this.renderContent(renderArray);
+  }
+  renderContent(renderArray) {
+    const {
+      limit,
+    } = this.props;
+
+    const {
+      page,
+    } = this.state;
+
+    // 一頁限制最多幾筆
+    const limitRender = renderArray.filter((item, idx) => {
+      const startIndex = page * limit;
+      const overIndex = startIndex + limit;
+      return idx >= startIndex && idx < overIndex;
+    });
+
+    // 算出總共需要幾頁
+    const pageLength = Math.ceil(renderArray.length / limit);
+    const renderButton = [...new Array(pageLength)];
+    return (
+      <React.Fragment>
+        {
+          limitRender.map(item => (
+            <Card
+              key={item.id}
+              item={item}
+              col={3}
+            />
+          ))
+        }
+        {
+          <div className="col-12 page_controller">
+            <button className="material-icons">keyboard_arrow_left</button>
+            {
+              renderButton.map((v, i) => (
+                <button
+                  className={cx('page_num', { active: i === page })}
+                  onClick={() => { this.goPage(i); }}
+                >
+                  {i + 1}
+                </button>
+              ))
+            }
+            <button className="material-icons">keyboard_arrow_right</button>
+          </div>
+        }
+      </React.Fragment>
+    );
   }
   render() {
     const { products } = this.props;
     return (
       <div className="container">
         <div className="row">
-          <Aside />
-          <div className="col">
-            <div className="card_section">
+          <Aside className="col-2" />
+          <div className="col-10">
+            <div className="row">
               {
                 (!products.length) ?
                   <LoadingProducts /> :
@@ -82,11 +148,11 @@ class CardCaontainer extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const { products } = state.products;
   return {
     products,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(CardCaontainer));
+export default withRouter(connect(mapStateToProps)(CardContainer));

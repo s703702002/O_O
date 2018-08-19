@@ -1,5 +1,17 @@
-import { login, loginBoxOpen, products } from './index';
-import { openLoginBox, closeLoginBox } from '../action';
+import {
+  login,
+  loginBoxOpen,
+  products,
+  productPage,
+  shoppingCart,
+} from './index';
+import {
+  openLoginBox,
+  closeLoginBox,
+  loginSuccess,
+  addToCartRequest,
+  addToCart,
+} from '../action';
 
 test('登入reducer測試', () => {
   // 假設登入成功發的action
@@ -21,13 +33,11 @@ test('登入reducer測試', () => {
     status: 'logined',
     username: 'stanley',
     message: null,
-    shoppings: [1, 2],
   });
   expect(login(undefined, action2)).toEqual({
     status: 'loginerr',
     username: null,
     message: action2.error,
-    shoppings: [],
   });
 });
 
@@ -38,7 +48,6 @@ test('loginBox測試', () => {
 });
 
 test('fetch產品測試', () => {
-
   const response = [{
     id: 1, title: '長褲-女', price: 500, inventory: 2, gender: 0,
   },
@@ -65,6 +74,60 @@ test('fetch產品測試', () => {
     products: [],
     message: 'api出現異常!',
   });
+});
 
 
+test('fetch 單一產品測試', () => {
+  const response = {
+    id: 1, title: '長褲-女', price: 500, inventory: 2, gender: 0,
+  };
+  const successAction = {
+    type: 'RECEIVE_PRODUCT',
+    response,
+  };
+
+  const errorAction = {
+    type: 'GET_PRODUCT_ERROR',
+    error: 'api出現異常!',
+  };
+  expect(productPage(undefined, successAction)).toEqual({
+    message: null,
+    product: response,
+  });
+
+  expect(productPage(undefined, errorAction)).toEqual({
+    product: {},
+    message: errorAction.error,
+  });
+});
+
+test('購物車reducer測試', () => {
+  const response = {
+    id: '1',
+    name: 'stanley',
+    shoppings: [
+      {
+        product: {
+          id: '8',
+          title: '長褲-男',
+          price: 500,
+          gender: 1,
+          inventory: 200,
+        },
+        count: 2,
+      },
+      {
+        product: {
+          id: '6',
+          title: '拖鞋-女',
+          price: 199,
+          gender: 0,
+          inventory: 10,
+        },
+        count: 1,
+      },
+    ],
+  };
+
+  expect(shoppingCart(undefined, loginSuccess(response))).toEqual(response.shoppings);
 });

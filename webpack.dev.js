@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ip = require('ip');
+const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: 'development',
@@ -18,22 +20,16 @@ module.exports = {
         test: /\.css$|\.scss$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[local]',
-            },
           },
           {
             loader: 'postcss-loader',
             options: {
               plugins() {
-                return [
-                  require('autoprefixer'),
-                ];
+                return [autoprefixer];
               },
             },
           },
@@ -60,6 +56,8 @@ module.exports = {
     compress: true,
     port: 9000,
     host: ip.address(),
+    historyApiFallback: true,
+    open: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -67,10 +65,13 @@ module.exports = {
       template: './index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
-  // externals: {
-  //     'react': 'React',
-  //     'react-dom': 'ReactDOM',
-  //     'moment': 'moment',
-  // },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
 };

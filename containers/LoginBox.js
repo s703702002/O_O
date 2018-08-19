@@ -28,6 +28,7 @@ const LoginForm = props => (
           className="form-control"
           id="account"
           placeholder="請輸入帳號"
+          autoComplete="off"
         />
       </div>
     </div>

@@ -39,7 +39,7 @@ app.post('/login', (req, res) => {
   res.send(JSON.stringify(memberId));
 });
 
-app.use('/', graphqlHTTP({
+app.use('/graphql/', graphqlHTTP({
   schema,
   rootValue,
   graphiql: true,

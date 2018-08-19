@@ -15,8 +15,23 @@ const middlewares = [
   sagaMiddleware,
 ];
 
+const preloadedState = () => {
+  const loginStatus = JSON.parse(localStorage.getItem('loginStatus'));
+  if (!loginStatus) return {};
+  const { response } = loginStatus;
+  return {
+    login: {
+      status: 'logined',
+      username: response.name,
+    },
+    shoppingCart: response.shoppings,
+  };
+};
+
+
 const store = createStore(
   rootReducer,
+  preloadedState(),
   applyMiddleware(...middlewares),
 );
 

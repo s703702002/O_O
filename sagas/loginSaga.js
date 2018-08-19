@@ -13,7 +13,9 @@ function* authorize({ username, password }) {
       username,
       password,
     });
-    yield put(loginSuccess(response.user));
+    const successResponse = yield put(loginSuccess(response.user));
+    // 如果登入成功 把response存在localStorage 方便下次可以直接取用
+    localStorage.setItem('loginStatus', JSON.stringify(successResponse));
     yield call(delay, 1000);
     yield put(closeLoginBox);
   } catch (error) {

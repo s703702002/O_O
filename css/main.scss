@@ -1,9 +1,33 @@
-.top_header{
-  background-color: #ececec;
+.container{
+  min-width: 1024px;
 }
 
-.filter_section{
-  width: 200px;
+html,
+body {
+  height: 100%;
+  font-family: "微軟正黑體";
+}
+
+.logo {
+  font-family: 'Abril Fatface', cursive;
+  color: #000;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.top_header{
+  background-color: #ececec;
 }
 
 .order_box{
@@ -21,21 +45,73 @@
   }
 }
 
+// 購物車
 .shopping_cart{
   position: relative;
   display: flex;
-  .material-icons {
+  .material-icons{
+    font-size: 2rem;
+  }
+  .material-icons,
+  .remove {
     cursor: pointer;
   }
   &:hover{
     .cart_content{
-      display: block;
+      visibility: visible;
     }
+  }
+  .remove{
+    text-decoration: underline;
+  }
+  .product_title {
+    margin-bottom: 0;
+  }
+  .count {
+    position: absolute;
+    right: -10px;
+    top: -6px;
+    width: 15px;
+    line-height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    text-align: center;
+    color: #ffff;
+    font-size: 0.6rem;
   }
 }
 
+// 空的購物車
+.empty_cart {
+  text-align: center;
+  .material-icons {
+    cursor: initial;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.cart_item{
+  border-bottom: 1px dashed #dee2e6;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  > a ,
+  > a:hover {
+    margin-right: 1rem;
+    color: #000;
+  }
+}
+
+// 立刻結帳
+.goCheckout {
+  text-align: right;
+}
+
 .cart_content{
-  display: none;
+  visibility: hidden;
+  transition: visibility 0.2s;
   position: absolute;
   width: 20rem;
   top: calc( 100% + 15px );
@@ -53,28 +129,112 @@
     border-color: transparent transparent #fff transparent;
     position: absolute;
     top: -15px;
-    right: 5px;
+    right: 10px;
     z-index: 10;
   }
-  .in_shopping_cart{
-    border-bottom: 1px dashed #dee2e6;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+}
+
+.product_card{
+  margin-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  &:hover{
+    transform: translateY(-5px);
   }
 }
 
-.card_section{
+a.card {
+  color: inherit;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+.card-body {
+  background-color: #f5f1f1;
+  padding: .7rem;
+}
+
+.card-title {
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  text-align: right;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+// 頁數控制
+.page_controller {
   display: flex;
-  flex-wrap: wrap;
-  .card{
-    margin: .25rem;
-    margin-top: 0px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-top: 3rem;
+  .material-icons {
+    font-size: 32px;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    min-width: 3rem;
+    cursor: pointer;
+    margin: 0 .5rem;
+    &:first-child {
+      margin-right: 0;
+    }
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+  .page_num {
+    &:hover,
+    &.active {
+      background-color: #007bff;
+      color: #fff;
+    }
   }
 }
 
-.login_box{
+.no_match{
+  display: flex;
+  align-items: wrap;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 5rem;
+  .material-icons{
+    font-size: 20rem;
+  }
+  .no_match_txt{
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.sub-title {
+  color: #6f6e6e;
+  font-size: 1.2rem;
+  margin-right: .5rem;
+}
+
+.login_box {
+  display: block;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
   &.show{
-    display: block;
+    z-index: 1;
+    opacity: 1;
+    .modal-content{
+      opacity: 1;
+      margin-top: 0;
+    }
+    .mask {
+      display: block;
+    }
   }
   &.loading{
     .form-group{
@@ -90,19 +250,71 @@
   .modal-dialog{
     z-index: 2;
   }
-  .mask{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #000;
-    opacity: 0.5;
-    z-index: 1;
+  .modal-content{
+    transition: opacity 0.5s, margin-top 0.5s;
+    opacity: 0;
+    margin-top: -10em;
   }
   .abort-login{
     display: none;
   }
+}
+
+.light_box {
+  display: block;
+  .mask {
+    display: block;
+  }
+  .modal-dialog{
+    z-index: 2;
+    text-align: center;
+  }
+  .message{
+    font-size: 2rem;
+  }
+  .material-icons{
+    font-size: 5rem;
+  }
+}
+
+// 成功加入購物車後顯示
+.add_finished{
+  &.show{
+    display: block;
+    .mask{
+      display: block;
+      top: 30%;
+      left: 30%;
+      bottom: 30%;
+      right: 30%;
+      opacity: .8;
+    }
+  }
+  .modal-dialog{
+    z-index: 2;
+  }
+  .content{
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  .material-icons{
+    margin-top: 30px;
+    font-size: 60px;
+  }
+}
+
+.mask{
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.7;
+  z-index: 1;
 }
 
 .loader-outer{
@@ -120,6 +332,41 @@
   animation: spin 2s linear infinite;
 }
 
+// 計數器
+.counter {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  .count {
+    text-align: center;
+    min-width: 3em;
+  }
+  .btn{
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
+}
+
+.not_found {
+  text-align: center;
+  .material-icons {
+    font-size: 15rem;
+  }
+}
+
+.goIndex {
+  background-color: #ffc107;
+  border: none;
+  border-radius: 50%;
+  min-height: 4rem;
+  min-width: 4rem;
+  cursor: pointer;
+  outline: none;
+  animation: top_down_move 2s linear infinite;
+  box-shadow: 0 3px 10px #808080;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -129,4 +376,12 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes top_down_move {
+  0% { transform: translateY(0px); }
+  25% { transform: translateY(-5px); }
+  50% { transform: translateY(0px); }
+  75% { transform: translateY(5px); }
+  100% { transform: translateY(0px); }
 }
