@@ -49,6 +49,9 @@ input::-webkit-inner-spin-button {
 .shopping_cart{
   position: relative;
   display: flex;
+  .material-icons{
+    font-size: 2rem;
+  }
   .material-icons,
   .remove {
     cursor: pointer;
@@ -61,6 +64,49 @@ input::-webkit-inner-spin-button {
   .remove{
     text-decoration: underline;
   }
+  .product_title {
+    margin-bottom: 0;
+  }
+  .count {
+    position: absolute;
+    right: -10px;
+    top: -6px;
+    width: 15px;
+    line-height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    text-align: center;
+    color: #ffff;
+    font-size: 0.6rem;
+  }
+}
+
+// 空的購物車
+.empty_cart {
+  text-align: center;
+  .material-icons {
+    cursor: initial;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.cart_item{
+  border-bottom: 1px dashed #dee2e6;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  > a ,
+  > a:hover {
+    margin-right: 1rem;
+    color: #000;
+  }
+}
+
+// 立刻結帳
+.goCheckout {
+  text-align: right;
 }
 
 .cart_content{
@@ -83,13 +129,8 @@ input::-webkit-inner-spin-button {
     border-color: transparent transparent #fff transparent;
     position: absolute;
     top: -15px;
-    right: 5px;
+    right: 10px;
     z-index: 10;
-  }
-  .in_shopping_cart{
-    border-bottom: 1px dashed #dee2e6;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
   }
 }
 
@@ -246,7 +287,7 @@ a.card {
       left: 30%;
       bottom: 30%;
       right: 30%;
-      opacity: 1;
+      opacity: .8;
     }
   }
   .modal-dialog{
@@ -307,6 +348,25 @@ a.card {
   }
 }
 
+.not_found {
+  text-align: center;
+  .material-icons {
+    font-size: 15rem;
+  }
+}
+
+.goIndex {
+  background-color: #ffc107;
+  border: none;
+  border-radius: 50%;
+  min-height: 4rem;
+  min-width: 4rem;
+  cursor: pointer;
+  outline: none;
+  animation: top_down_move 2s linear infinite;
+  box-shadow: 0 3px 10px #808080;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -316,4 +376,12 @@ a.card {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes top_down_move {
+  0% { transform: translateY(0px); }
+  25% { transform: translateY(-5px); }
+  50% { transform: translateY(0px); }
+  75% { transform: translateY(5px); }
+  100% { transform: translateY(0px); }
 }

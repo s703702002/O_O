@@ -11,6 +11,7 @@ import ProductPage from './ProductPage';
 import NotFound from './404';
 import Addfinished from '../containers/AddFinish';
 import LightBoxWithConnect from '../containers/LightBoxContainer';
+import CheckOutContainer from '../containers/CheckoutContainer';
 import '../css/main.scss';
 
 const Root = ({ store }) => (
@@ -20,6 +21,7 @@ const Root = ({ store }) => (
         <Header />
         <Switch>
           <Route exact path="/" component={App} />
+          <Route path="/checkout" component={CheckOutContainer} />
           <Route path="/:productId" component={ProductPage} />
           <Route component={NotFound} />
         </Switch>
