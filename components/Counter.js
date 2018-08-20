@@ -1,37 +1,43 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addLightBoxMessage } from '../action';
 
 class Counter extends Component {
   static propTypes = {
     max: PropTypes.number,
     min: PropTypes.number,
+    maxClick: PropTypes.func,
+    minClick: PropTypes.func,
+    defaultValue: PropTypes.number,
   }
   static defaultProps = {
     max: null,
     min: 0,
+    maxClick: () => {},
+    minClick: () => {},
+    defaultValue: 0,
   };
   state = {
-    count: 0,
+    count: this.props.defaultValue,
   }
   minus = () => {
     let { count } = this.state;
     const {
       min,
+      minClick,
     } = this.props;
     count -= 1;
-    if (count < min) return;
+    if (count < min) return minClick();
     this.setState({ count });
   }
   add = () => {
     let { count } = this.state;
     const {
       max,
-      dispatch,
+      maxClick,
     } = this.props;
     count += 1;
-    if (count > max) return dispatch(addLightBoxMessage('此商品庫存不足'));
-    return this.setState({ count });
+    if (count > max) return maxClick();
+    this.setState({ count });
   }
   render() {
     return (

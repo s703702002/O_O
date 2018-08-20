@@ -1,5 +1,5 @@
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-export { default } from './click_outside';
+export { default } from './ClickOutside';
 
 function serialize(obj) {
   const str = Object.entries(obj).map(item => `${encodeURIComponent(item[0])}=${encodeURIComponent(item[1])}`);
@@ -24,6 +24,39 @@ function getRandomItem(arr, amount) {
   return result;
 }
 
+function pushHistory(
+  history,
+  queryObj,
+) {
+  let { search } = history.location;
+  const { page } = queryObj;
+  if (!search.length) {
+    search = '?sort=desc';
+  }
+  const queryObject = queryToObj(search);
+  const newQueryObj = {
+    ...queryObject,
+    ...queryObj,
+  };
+  if (newQueryObj.minPrice === '') delete newQueryObj.minPrice;
+  if (newQueryObj.maxPrice === '') delete newQueryObj.maxPrice;
+  if (page !== undefined) {
+    // 如果有變更page就不reset
+    newQueryObj.page = page;
+  } else {
+    // 每次變更條件都reset頁數回0
+    newQueryObj.page = 0;
+  }
+  const newQuery = `?${serialize(newQueryObj)}`;
+  history.push(newQuery);
+}
+
 const clone = target => JSON.parse(JSON.stringify(target));
 
-export { serialize, queryToObj, clone, getRandomItem };
+export {
+  serialize,
+  queryToObj,
+  clone,
+  getRandomItem,
+  pushHistory,
+};

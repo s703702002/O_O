@@ -26,16 +26,15 @@ const OrderList = ({ order }) => {
         <p>單價:<span className="text-danger">{price}</span>元</p>
       </div>
       <div className="col-4">
-        <Counter />
+        <Counter max={10} defaultValue={2} />
         <p>總計:<strong className="text-danger">123</strong>元</p>
       </div>
     </div>
   );
-}
+};
 
 class CheckOutContainer extends Component {
   render() {
-    console.log('this.props', this.props);
     return (
       <div className="container">
         <div className="row">

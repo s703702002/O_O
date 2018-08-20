@@ -47,14 +47,18 @@ class ProductContainer extends Component {
     } = product;
 
     const CounterWithMax = ({ innerRef }) => (
-      <Counter max={inventory} ref={innerRef} dispatch={dispatch} />
+      <Counter
+        max={inventory}
+        ref={innerRef}
+        maxClick={() => { dispatch(addLightBoxMessage('此商品庫存不足')); }}
+      />
     );
 
     return (
       <aside className="col-4">
         <h3>
           <span className="sub-title">售價:</span>
-          <strong>{`$${price}`}</strong>
+          <strong className="text-danger">{`$${price}`}</strong>
         </h3>
         <div className="mb-2">
           <span className="sub-title">庫存:</span>

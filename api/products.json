@@ -30,10 +30,10 @@
     "id": 10, "title": "短T-男", "price": 1299, "inventory": 45, "gender": 1
   },
   {
-    "id": 11, "title": "長T-男", "price": 2299, "inventory": 0, "gender": 1
+    "id": 11, "title": "長T-男", "price": 2299, "inventory": 100, "gender": 1
   },
   {
-    "id": 12, "title": "涼鞋-男", "price": 299, "inventory": 0, "gender": 1
+    "id": 12, "title": "涼鞋-男", "price": 299, "inventory": 35, "gender": 1
   },
   {
     "id": 13, "title": "拖鞋-男", "price": 199, "inventory": 10, "gender": 1

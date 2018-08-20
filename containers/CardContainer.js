@@ -7,7 +7,10 @@ import Card from '../components/Card';
 import NoMatchCard from '../components/NoMatchCard';
 import Aside from './Aside';
 import { getProductsRequest } from '../action';
-import { queryToObj } from '../utilis';
+import {
+  queryToObj,
+  pushHistory,
+} from '../utilis';
 
 const LoadingProducts = () => (
   <p>正在載入產品 請稍後!</p>
@@ -20,9 +23,6 @@ class CardContainer extends Component {
   static defaultProps = {
     limit: 8,
   };
-  state = {
-    page: 0,
-  }
   componentDidMount() {
     const {
       dispatch,
@@ -31,8 +31,15 @@ class CardContainer extends Component {
     // 若沒有產品, 發request
     if (!products.length) dispatch(getProductsRequest());
   }
-  goPage(page) {
-    this.setState({ page });
+  goPage(pageNum) {
+
+    const {
+      history,
+    } = this.props;
+    const queryObj = {
+      page: pageNum,
+    };
+    pushHistory(history, queryObj);
   }
   renderProducts() {
     // 負責處理render的邏輯
@@ -44,13 +51,12 @@ class CardContainer extends Component {
       search,
     } = this.props.location;
 
-    // 若沒有sort參數, 預設唯降冪排列
+    // 若沒有sort參數, 預設降冪排列
     if (!search.length) {
-      search = '?sort=desc';
+      search = '?sort=desc&page=0';
     }
     const queryObject = queryToObj(search);
     let renderArray = products.slice();
-
     // 價格排序
     if (queryObject.sort === 'desc') {
       renderArray.sort((a, b) => b.price - a.price);
@@ -76,18 +82,20 @@ class CardContainer extends Component {
     // 若篩選後無符合的產品
     if (!renderArray.length) return <NoMatchCard />;
 
-    return this.renderContent(renderArray);
+    return this.renderContent(renderArray, queryObject);
   }
-  renderContent(renderArray) {
+  renderContent(renderArray, queryObject) {
     const {
       limit,
     } = this.props;
 
-    const {
+    let {
       page,
-    } = this.state;
+    } = queryObject;
+    // 字串轉數字
+    page = Number(page);
 
-    // 一頁限制最多幾筆
+    // 計算該頁需要redner的產品
     const limitRender = renderArray.filter((item, idx) => {
       const startIndex = page * limit;
       const overIndex = startIndex + limit;
@@ -110,7 +118,15 @@ class CardContainer extends Component {
         }
         {
           <div className="col-12 page_controller">
-            <button className="material-icons">keyboard_arrow_left</button>
+            <button
+              className="material-icons"
+              onClick={() => {
+                if (page === 0) return;
+                this.goPage(page - 1);
+              }}
+            >
+              keyboard_arrow_left
+            </button>
             {
               renderButton.map((v, i) => (
                 <button
@@ -121,7 +137,15 @@ class CardContainer extends Component {
                 </button>
               ))
             }
-            <button className="material-icons">keyboard_arrow_right</button>
+            <button
+              className="material-icons"
+              onClick={() => {
+                if (page === (pageLength - 1)) return;
+                this.goPage(page + 1);
+              }}
+            >
+              keyboard_arrow_right
+            </button>
           </div>
         }
       </React.Fragment>

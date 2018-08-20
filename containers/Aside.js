@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import cx from 'classnames';
-import { serialize, queryToObj } from '../utilis';
+import {
+  queryToObj,
+  pushHistory,
+} from '../utilis';
 
 class Aside extends Component {
   minPrice = null;
   maxPrice = null;
   pushHistory(queryObj) {
-    let {
-      search,
-    } = this.props.location;
-    if (!search.length) {
-      search = '?sort=desc';
-    }
-    const queryObject = queryToObj(search);
-    const newQueryObj = {
-      ...queryObject,
-      ...queryObj,
-    };
-    if (newQueryObj.minPrice === '') delete newQueryObj.minPrice;
-    if (newQueryObj.maxPrice === '') delete newQueryObj.maxPrice;
-    const newQuery = `?${serialize(newQueryObj)}`;
-    this.props.history.push(newQuery);
+    const {
+      history,
+    } = this.props;
+    pushHistory(history, queryObj);
   }
   // 價格排序change event
   sortOnChange(value) {
@@ -32,11 +23,9 @@ class Aside extends Component {
   }
   // 價格區間篩選
   filterPrice = () => {
-    const minPrice = this.minPrice.value;
-    const maxPrice = this.maxPrice.value;
     const obj = {
-      minPrice,
-      maxPrice,
+      minPrice: this.minPrice.value,
+      maxPrice: this.maxPrice.value,
     };
     this.pushHistory(obj);
   }
