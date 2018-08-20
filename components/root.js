@@ -4,24 +4,29 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
 } from 'react-router-dom';
-import Header from '../containers/Header';
 import App from './App';
 import ProductPage from './ProductPage';
+import CheckoutPage from './CheckoutPage';
 import NotFound from './404';
 import Addfinished from '../containers/AddFinish';
 import LightBoxWithConnect from '../containers/LightBoxContainer';
-import CheckOutContainer from '../containers/CheckoutContainer';
 import '../css/main.scss';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <div className="mb-5">
-        <Header />
         <Switch>
           <Route exact path="/" component={App} />
-          <Route path="/checkout" component={CheckOutContainer} />
+          <Route
+            path="/checkout"
+            render={() => {
+              if (store.getState().login.status === 'init') return <Redirect to="/" />;
+              return <CheckoutPage />;
+            }}
+          />
           <Route path="/:productId" component={ProductPage} />
           <Route component={NotFound} />
         </Switch>

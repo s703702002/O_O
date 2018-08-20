@@ -1,14 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import {
-  getProductsRequest,
-} from '../action';
+import { Link } from 'react-router-dom';
+import Counter from '../components/Counter';
+
+const OrderList = ({ order }) => {
+  const {
+    product,
+    count,
+  } = order;
+  const {
+    id,
+    title,
+    price,
+  } = product;
+  return (
+    <div className="row">
+      <div className="col-3">
+        <img className="mw-100" src={`/static/img/${id}.jpg`} alt="test" />
+      </div>
+      <div className="col-5">
+        <div>
+          <Link to={`/${id}`}>{title}</Link>
+        </div>
+        <p>單價:<span className="text-danger">{price}</span>元</p>
+      </div>
+      <div className="col-4">
+        <Counter />
+        <p>總計:<strong className="text-danger">123</strong>元</p>
+      </div>
+    </div>
+  );
+}
 
 class CheckOutContainer extends Component {
   render() {
+    console.log('this.props', this.props);
     return (
-      <div>hello world</div>
+      <div className="container">
+        <div className="row">
+          <div className="col-8">
+            <OrderList order={this.props.shoppingCart[0]} />
+          </div>
+          <div className="col-4">
+          123
+          </div>
+        </div>
+      </div>
     );
   }
 }

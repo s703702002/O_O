@@ -8,16 +8,29 @@ import {
 import LoginBox from './LoginBox';
 import SoppingCart from './ShoppingCart';
 
+const Person = ({ username }) => (
+  <span style={{ display: 'flex', alignItems: 'center' }}>
+    <i className="material-icons">person</i>
+    {username}
+  </span>
+);
+
+const SimpleHeader = ({ children }) => (
+  <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom top_header">
+    <Link to="/" className="mr-md-auto logo">
+      <h3 className="my-0">Happy Shop</h3>
+    </Link>
+    {children}
+  </div>
+);
+
 const Header = ({ username, status, dispatch }) => (
   <React.Fragment>
-    <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom top_header">
-      <Link to="/" className="mr-md-auto logo">
-        <h3 className="my-0">Happy Shop</h3>
-      </Link>
-      <span className="mr-2">
+    <SimpleHeader>
+      <span className="mr-2 ">
         {
           (username) ?
-            `${username} 歡迎回來!` :
+            <Person username={username} /> :
             '請登入'
         }
       </span>
@@ -35,12 +48,12 @@ const Header = ({ username, status, dispatch }) => (
             '登入'
         }
       </button>
-    </div>
+    </SimpleHeader>
     <LoginBox />
   </React.Fragment>
 );
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const { login: { username, status } } = state;
   return {
     username,
@@ -48,4 +61,5 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+export { SimpleHeader };
 export default connect(mapStateToProps)(Header);

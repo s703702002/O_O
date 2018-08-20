@@ -8,7 +8,7 @@ const NotFound = () => (
       <i className="material-icons text-danger">report</i>
     </div>
     <Link to="/">
-      <button className="goIndex text-danger">回首頁</button>
+      <button className="goIndex">回首頁</button>
     </Link>
   </div>
 );

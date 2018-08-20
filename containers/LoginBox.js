@@ -14,7 +14,7 @@ const LoginError = props => (
 );
 
 const LoginSuccess = props => (
-  <p>登入成功!</p>
+  <p>登入成功，歡迎回來</p>
 );
 
 const LoginForm = props => (
@@ -72,6 +72,8 @@ class LoginBox extends Component {
       status,
       message,
     } = this.props;
+    const { accountInput } = this;
+    if (loginBoxOpen) accountInput.focus();
 
     return (
       <div
@@ -114,7 +116,7 @@ class LoginBox extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const { loginBoxOpen, login: { status, message } } = state;
   return {
     loginBoxOpen,
@@ -123,7 +125,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   closeLoginBox: () => { dispatch(closeLoginBox); },
   login: ({ username, password }) => { dispatch(loginRequest({ username, password })); },
   loginCancelEvent: () => { dispatch(loginCancel); },

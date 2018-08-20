@@ -11,7 +11,7 @@ function queryToObj(queryString) {
 }
 
 function getRandomItem(arr, amount) {
-  if (!arr.length) return;
+  if (!arr.length) return null;
   const copy = arr.slice();
   const result = [];
   for (let i = 0; i < amount; i++) {
