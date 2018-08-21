@@ -1,0 +1,63 @@
+// 購物車
+.shopping_cart{
+  position: relative;
+  display: flex;
+  .material-icons{
+    font-size: 2rem;
+  }
+  .material-icons,
+  .remove {
+    cursor: pointer;
+  }
+  &:hover{
+    .cart_content{
+      visibility: visible;
+    }
+  }
+  .remove{
+    text-decoration: underline;
+  }
+  .product_title {
+    margin-bottom: 0;
+  }
+  .count {
+    position: absolute;
+    right: -10px;
+    top: -6px;
+    width: 15px;
+    line-height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    text-align: center;
+    color: #ffff;
+    font-size: 0.6rem;
+  }
+}
+
+// 空的購物車
+.empty_cart {
+  text-align: center;
+  .material-icons {
+    cursor: initial;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.cart_item{
+  border-bottom: 1px dashed #dee2e6;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  > a ,
+  > a:hover {
+    margin-right: 1rem;
+    color: #000;
+  }
+}
+
+// 立刻結帳
+.goCheckout {
+  text-align: right;
+}

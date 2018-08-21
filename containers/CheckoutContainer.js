@@ -3,31 +3,56 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import Counter from '../components/Counter';
+import {
+  removeShoppingCardItem,
+} from '../action';
 
-const OrderList = ({ order }) => {
+const Order = ({
+  order,
+  dispatch,
+}) => {
   const {
     product,
     count,
   } = order;
+
   const {
     id,
     title,
     price,
+    inventory,
   } = product;
+
+  const total = price * count;
+
   return (
-    <div className="row">
+    <div className="row order">
       <div className="col-3">
-        <img className="mw-100" src={`/static/img/${id}.jpg`} alt="test" />
+        <Link to={`/${id}`}>
+          <img className="mw-100" src={`/static/img/${id}.jpg`} alt="test" />
+        </Link>
       </div>
-      <div className="col-5">
-        <div>
+      <div className="col-3">
+        <h3>
           <Link to={`/${id}`}>{title}</Link>
-        </div>
-        <p>單價:<span className="text-danger">{price}</span>元</p>
+        </h3>
+        <p>單價:<span className="text-danger mx-1">{price}</span>元</p>
       </div>
-      <div className="col-4">
-        <Counter max={10} defaultValue={2} />
-        <p>總計:<strong className="text-danger">123</strong>元</p>
+      <div className="col-3">
+        <Counter max={inventory} defaultValue={count} />
+        <div className="mt-2">
+          <small
+            role="button"
+            tabIndex="-1"
+            className="remove text-secondary cursor-pointer"
+            onClick={() => { dispatch(removeShoppingCardItem(id)); }}
+          >
+            移除此商品
+          </small>
+        </div>
+      </div>
+      <div className="col-3">
+        <p className="font-weight-bold">總計:<span className="text-danger mx-1">{total}</span>元</p>
       </div>
     </div>
   );
@@ -35,13 +60,24 @@ const OrderList = ({ order }) => {
 
 class CheckOutContainer extends Component {
   render() {
+    const {
+      shoppingCart,
+      dispatch,
+    } = this.props;
     return (
       <div className="container">
         <div className="row">
-          <div className="col-8">
-            <OrderList order={this.props.shoppingCart[0]} />
+          <div className="col-9">
+            {
+              shoppingCart.map(item =>
+                (<Order
+                  order={item}
+                  key={item.product.id}
+                  dispatch={dispatch}
+                />))
+            }
           </div>
-          <div className="col-4">
+          <div className="col-3">
           123
           </div>
         </div>

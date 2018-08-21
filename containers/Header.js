@@ -24,7 +24,12 @@ const SimpleHeader = ({ children }) => (
   </div>
 );
 
-const Header = ({ username, status, dispatch }) => (
+const Header = ({
+  username,
+  status,
+  clickLogin,
+  clickLogout,
+}) => (
   <React.Fragment>
     <SimpleHeader>
       <span className="mr-2 ">
@@ -38,8 +43,8 @@ const Header = ({ username, status, dispatch }) => (
       <button
         className="btn btn-outline-primary"
         onClick={() => {
-          const dispathTarget = username ? logOut : openLoginBox;
-          dispatch(dispathTarget);
+          if (username) clickLogout();
+          else clickLogin();
         }}
       >
         {
@@ -61,5 +66,10 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  clickLogin: () => { dispatch(openLoginBox); },
+  clickLogout: () => { dispatch(logOut); },
+});
+
 export { SimpleHeader };
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

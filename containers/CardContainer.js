@@ -32,7 +32,6 @@ class CardContainer extends Component {
     if (!products.length) dispatch(getProductsRequest());
   }
   goPage(pageNum) {
-
     const {
       history,
     } = this.props;

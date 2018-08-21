@@ -1,3 +1,8 @@
+@import 'utilits';
+@import 'shoppingCart';
+@import 'loginBox';
+@import 'checkoutPage';
+
 .container{
   min-width: 1024px;
 }
@@ -22,10 +27,6 @@ input::-webkit-inner-spin-button {
   margin: 0; 
 }
 
-.no-scroll {
-  overflow: hidden;
-}
-
 .top_header{
   background-color: #ececec;
 }
@@ -43,70 +44,6 @@ input::-webkit-inner-spin-button {
     border-top: 1px solid #dee2e6;
     margin-top: 10px;
   }
-}
-
-// 購物車
-.shopping_cart{
-  position: relative;
-  display: flex;
-  .material-icons{
-    font-size: 2rem;
-  }
-  .material-icons,
-  .remove {
-    cursor: pointer;
-  }
-  &:hover{
-    .cart_content{
-      visibility: visible;
-    }
-  }
-  .remove{
-    text-decoration: underline;
-  }
-  .product_title {
-    margin-bottom: 0;
-  }
-  .count {
-    position: absolute;
-    right: -10px;
-    top: -6px;
-    width: 15px;
-    line-height: 15px;
-    background-color: red;
-    border-radius: 50%;
-    text-align: center;
-    color: #ffff;
-    font-size: 0.6rem;
-  }
-}
-
-// 空的購物車
-.empty_cart {
-  text-align: center;
-  .material-icons {
-    cursor: initial;
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-}
-
-.cart_item{
-  border-bottom: 1px dashed #dee2e6;
-  padding-bottom: 5px;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  > a ,
-  > a:hover {
-    margin-right: 1rem;
-    color: #000;
-  }
-}
-
-// 立刻結帳
-.goCheckout {
-  text-align: right;
 }
 
 .cart_content{
@@ -199,6 +136,7 @@ a.card {
   }
 }
 
+// 匹配不到搜尋條件
 .no_match{
   display: flex;
   align-items: wrap;
@@ -218,46 +156,6 @@ a.card {
   color: #6f6e6e;
   font-size: 1.2rem;
   margin-right: .5rem;
-}
-
-.login_box {
-  display: block;
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-  &.show{
-    z-index: 1;
-    opacity: 1;
-    .modal-content{
-      opacity: 1;
-      margin-top: 0;
-    }
-    .mask {
-      display: block;
-    }
-  }
-  &.loading{
-    .form-group{
-      display: none;
-    }
-    .btn{
-      display: none;
-    }
-    .abort-login{
-      display: block;
-    }
-  }
-  .modal-dialog{
-    z-index: 2;
-  }
-  .modal-content{
-    transition: opacity 0.5s, margin-top 0.5s;
-    opacity: 0;
-    margin-top: -10em;
-  }
-  .abort-login{
-    display: none;
-  }
 }
 
 .light_box {
@@ -317,21 +215,6 @@ a.card {
   z-index: 1;
 }
 
-.loader-outer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.loader {
-  border: 10px solid #f3f3f3;
-  border-radius: 50%;
-  border-top-color: #3498db;
-  width: 80px;
-  height: 80px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-}
-
 // 計數器
 .counter {
   display: inline-flex;
@@ -365,17 +248,6 @@ a.card {
   outline: none;
   animation: top_down_move 2s linear infinite;
   box-shadow: 0 3px 10px #808080;
-}
-
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 @keyframes top_down_move {
