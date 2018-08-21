@@ -16,6 +16,13 @@ const LoadingProducts = () => (
   <p>正在載入產品 請稍後!</p>
 );
 
+const goPage = (pageNum) => {
+  const queryObj = {
+    page: pageNum,
+  };
+  pushHistory(queryObj);
+};
+
 class CardContainer extends Component {
   static propTypes = {
     limit: PropTypes.Number,
@@ -30,15 +37,6 @@ class CardContainer extends Component {
     } = this.props;
     // 若沒有產品, 發request
     if (!products.length) dispatch(getProductsRequest());
-  }
-  goPage(pageNum) {
-    const {
-      history,
-    } = this.props;
-    const queryObj = {
-      page: pageNum,
-    };
-    pushHistory(history, queryObj);
   }
   renderProducts() {
     // 負責處理render的邏輯
@@ -121,7 +119,7 @@ class CardContainer extends Component {
               className="material-icons"
               onClick={() => {
                 if (page === 0) return;
-                this.goPage(page - 1);
+                goPage(page - 1);
               }}
             >
               keyboard_arrow_left
@@ -130,7 +128,7 @@ class CardContainer extends Component {
               renderButton.map((v, i) => (
                 <button
                   className={cx('page_num', { active: i === page })}
-                  onClick={() => { this.goPage(i); }}
+                  onClick={() => { goPage(i); }}
                 >
                   {i + 1}
                 </button>
@@ -140,7 +138,7 @@ class CardContainer extends Component {
               className="material-icons"
               onClick={() => {
                 if (page === (pageLength - 1)) return;
-                this.goPage(page + 1);
+                goPage(page + 1);
               }}
             >
               keyboard_arrow_right

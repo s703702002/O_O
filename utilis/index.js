@@ -1,5 +1,8 @@
-export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-export { default } from './ClickOutside';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const clone = target => JSON.parse(JSON.stringify(target));
+
+const history = createBrowserHistory();
 
 function serialize(obj) {
   const str = Object.entries(obj).map(item => `${encodeURIComponent(item[0])}=${encodeURIComponent(item[1])}`);
@@ -25,7 +28,7 @@ function getRandomItem(arr, amount) {
 }
 
 function pushHistory(
-  history,
+  // history,
   queryObj,
 ) {
   let { search } = history.location;
@@ -51,12 +54,13 @@ function pushHistory(
   history.push(newQuery);
 }
 
-const clone = target => JSON.parse(JSON.stringify(target));
-
+export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+export { default } from './ClickOutside';
 export {
   serialize,
   queryToObj,
   clone,
   getRandomItem,
   pushHistory,
+  history,
 };

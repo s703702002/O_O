@@ -1,7 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
+  Router,
   Route,
   Switch,
   Redirect,
@@ -13,10 +14,12 @@ import NotFound from './404';
 import Addfinished from '../containers/AddFinish';
 import LightBoxWithConnect from '../containers/LightBoxContainer';
 import '../css/main.scss';
+import { history } from '../utilis';
+
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <div className="mb-5">
         <Switch>
           <Route exact path="/" component={App} />

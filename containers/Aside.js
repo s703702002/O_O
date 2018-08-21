@@ -6,32 +6,26 @@ import {
   pushHistory,
 } from '../utilis';
 
+const sortOnChange = (value) => {
+  pushHistory({
+    sort: value,
+  });
+};
+
 class Aside extends Component {
   minPrice = null;
   maxPrice = null;
-  pushHistory(queryObj) {
-    const {
-      history,
-    } = this.props;
-    pushHistory(history, queryObj);
-  }
-  // 價格排序change event
-  sortOnChange(value) {
-    this.pushHistory({
-      sort: value,
-    });
-  }
   // 價格區間篩選
   filterPrice = () => {
     const obj = {
       minPrice: this.minPrice.value,
       maxPrice: this.maxPrice.value,
     };
-    this.pushHistory(obj);
+    pushHistory(obj);
   }
   // 性別radio change event
   genderOnChange = (e) => {
-    this.pushHistory({
+    pushHistory({
       gender: e.target.value,
     });
   }
@@ -56,7 +50,7 @@ class Aside extends Component {
               className={cx('btn btn-outline-primary', {
                 active: queryObject.sort === 'desc',
               })}
-              onClick={() => { this.sortOnChange('desc'); }}
+              onClick={() => { sortOnChange('desc'); }}
             >
               價格: 高至低
             </button>
@@ -64,7 +58,7 @@ class Aside extends Component {
               className={cx('btn btn-outline-primary', {
                 active: queryObject.sort === 'asc',
               })}
-              onClick={() => { this.sortOnChange('asc'); }}
+              onClick={() => { sortOnChange('asc'); }}
             >
               價格: 低至高
             </button>
