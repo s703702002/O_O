@@ -102,6 +102,9 @@ class CardContainer extends Component {
     // 算出總共需要幾頁
     const pageLength = Math.ceil(renderArray.length / limit);
     const renderButton = [...new Array(pageLength)];
+
+    if (!limitRender.length) return <NoMatchCard />;
+
     return (
       <React.Fragment>
         {

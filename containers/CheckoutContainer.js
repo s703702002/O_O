@@ -39,7 +39,13 @@ const Order = ({
         <p>單價:<span className="text-danger mx-1">{price}</span>元</p>
       </div>
       <div className="col-3">
-        <Counter max={inventory} defaultValue={count} />
+        <Counter
+          min={1}
+          max={inventory}
+          defaultValue={count}
+          addClick={() => { console.log('addddd'); }}
+          minusClick={() => { console.log('minussss'); }}
+        />
         <div className="mt-2">
           <small
             role="button"

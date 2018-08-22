@@ -7,13 +7,17 @@ class Counter extends Component {
     min: PropTypes.number,
     maxClick: PropTypes.func,
     minClick: PropTypes.func,
+    addClick: PropTypes.func,
+    minusClick: PropTypes.func,
     defaultValue: PropTypes.number,
   }
   static defaultProps = {
     max: null,
     min: 0,
-    maxClick: () => {},
-    minClick: () => {},
+    maxClick: () => {}, // 超出最大值的click
+    minClick: () => {}, // 超出最小值的click
+    addClick: () => {},
+    minusClick: () => {},
     defaultValue: 0,
   };
   state = {
@@ -24,20 +28,24 @@ class Counter extends Component {
     const {
       min,
       minClick,
+      minusClick,
     } = this.props;
     count -= 1;
     if (count < min) return minClick();
     this.setState({ count });
+    return minusClick();
   }
   add = () => {
     let { count } = this.state;
     const {
       max,
       maxClick,
+      addClick,
     } = this.props;
     count += 1;
     if (count > max) return maxClick();
     this.setState({ count });
+    return addClick();
   }
   render() {
     return (
