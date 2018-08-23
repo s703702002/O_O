@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import Counter from '../components/Counter';
 import {
   removeShoppingCardItem,
+  addToCart,
+  reduceCartItem,
+  addLightBoxMessage,
 } from '../action';
 
 const Order = ({
@@ -43,8 +46,10 @@ const Order = ({
           min={1}
           max={inventory}
           defaultValue={count}
-          addClick={() => { console.log('addddd'); }}
-          minusClick={() => { console.log('minussss'); }}
+          addClick={() => { dispatch(addToCart(product, 1)); }}
+          minusClick={() => { dispatch(reduceCartItem(id)); }}
+          maxClick={() => { dispatch(addLightBoxMessage('此商品庫存不足')); }}
+          minClick={() => { dispatch(addLightBoxMessage('最少數量為1')); }}
         />
         <div className="mt-2">
           <small
