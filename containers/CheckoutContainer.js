@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import Counter from '../components/Counter';
+import PushButton from '../components/PushButton';
+import OrderInfo from './OrderInfo';
 import {
   removeShoppingCardItem,
   addToCart,
@@ -75,6 +77,7 @@ class CheckOutContainer extends Component {
       shoppingCart,
       dispatch,
     } = this.props;
+
     return (
       <div className="container">
         <div className="row">
@@ -89,7 +92,17 @@ class CheckOutContainer extends Component {
             }
           </div>
           <div className="col-3">
-          123
+            <OrderInfo />
+            <PushButton
+              text="繼續結帳"
+              className="btn btn-outline-primary w-100 my-2"
+              path="/customerinfo"
+            />
+            <PushButton
+              text="繼續選購"
+              className="btn btn-outline-info w-100"
+              path="/"
+            />
           </div>
         </div>
       </div>

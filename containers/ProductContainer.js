@@ -6,11 +6,14 @@ import {
   addToCartRequest,
   addLightBoxMessage,
 } from '../action';
-import { getRandomItem } from '../utilis';
+import {
+  getRandomItem,
+} from '../utilis';
 import ProductInfo from '../components/ProductInfo';
 import Card from '../components/Card';
 import Counter from '../components/Counter';
 import NotFound from '../components/404';
+import PushButton from '../components/PushButton';
 
 const LoadProduct = () => (
   <p>正在載入產品</p>
@@ -38,7 +41,6 @@ class ProductContainer extends Component {
   }
   renderAside(product) {
     const {
-      history: { push },
       dispatch,
     } = this.props;
     const {
@@ -76,12 +78,11 @@ class ProductContainer extends Component {
         >
           加入購物車
         </button>
-        <button
+        <PushButton
           className="btn btn-outline-info w-100 mb-2"
-          onClick={() => { push('/'); }}
-        >
-          繼續選購
-        </button>
+          path="/"
+          text="繼續選購"
+        />
       </aside>
     );
   }

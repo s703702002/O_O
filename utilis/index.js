@@ -4,6 +4,8 @@ const clone = target => JSON.parse(JSON.stringify(target));
 
 const history = createBrowserHistory();
 
+const { push } = history;
+
 function serialize(obj) {
   const str = Object.entries(obj).map(item => `${encodeURIComponent(item[0])}=${encodeURIComponent(item[1])}`);
   return str.join('&');
@@ -27,10 +29,7 @@ function getRandomItem(arr, amount) {
   return result;
 }
 
-function pushHistory(
-  // history,
-  queryObj,
-) {
+function pushHistory(queryObj) {
   let { search } = history.location;
   const { page } = queryObj;
   if (!search.length) {
@@ -63,4 +62,5 @@ export {
   getRandomItem,
   pushHistory,
   history,
+  push,
 };

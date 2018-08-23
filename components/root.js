@@ -11,6 +11,7 @@ import App from './App';
 import ProductPage from './ProductPage';
 import CheckoutPage from './CheckoutPage';
 import NotFound from './404';
+import CustomerInfoPage from './CustomerInfoPage';
 import Addfinished from '../containers/AddFinish';
 import LightBoxWithConnect from '../containers/LightBoxContainer';
 import '../css/main.scss';
@@ -28,6 +29,13 @@ const Root = ({ store }) => (
             render={() => {
               if (store.getState().login.status === 'init') return <Redirect to="/" />;
               return <CheckoutPage />;
+            }}
+          />
+          <Route
+            path="/customerinfo"
+            render={() => {
+              if (store.getState().login.status === 'init') return <Redirect to="/" />;
+              return <CustomerInfoPage />;
             }}
           />
           <Route path="/:productId" component={ProductPage} />

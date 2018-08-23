@@ -7,3 +7,36 @@
     border-bottom: none;
   }
 }
+
+.order_info {
+  border: 1px solid #dee2e6;
+  border-radius: .25rem;
+}
+
+.order_info_header {
+  background-color: #ececec;
+  padding: .5rem;
+}
+
+.order_info_body {
+  background-color: #f8f9fa;
+  padding: .5rem;
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .25rem;
+  }
+  .info_section:last-child {
+    .title {
+
+    }
+    .item {
+      margin-bottom: 0;
+    }
+    .text-danger, 
+    .title{
+      font-size: 1.4rem;
+    }
+  }
+}
