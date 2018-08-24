@@ -25,7 +25,7 @@ const goPage = (pageNum) => {
 
 class CardContainer extends Component {
   static propTypes = {
-    limit: PropTypes.Number,
+    limit: PropTypes.number,
   };
   static defaultProps = {
     limit: 8,
@@ -130,6 +130,7 @@ class CardContainer extends Component {
             {
               renderButton.map((v, i) => (
                 <button
+                  key={i}
                   className={cx('page_num', { active: i === page })}
                   onClick={() => { goPage(i); }}
                 >

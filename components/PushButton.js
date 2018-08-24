@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   push,
 } from '../utilis';
@@ -17,5 +17,13 @@ const PushButton = ({
     {text}
   </button>
 );
+
+export function withPush(WrappedComponent) {
+  return class extends Component {
+    render() {
+      return <WrappedComponent push={push} {...this.props} />;
+    }
+  };
+}
 
 export default PushButton;
