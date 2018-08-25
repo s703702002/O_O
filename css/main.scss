@@ -250,6 +250,12 @@ a.card {
   box-shadow: 0 3px 10px #808080;
 }
 
+.customer_info_form {
+  .form-grop {
+    margin-bottom: .5rem;
+  }
+}
+
 @keyframes top_down_move {
   0% { transform: translateY(0px); }
   25% { transform: translateY(-5px); }
