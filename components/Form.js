@@ -58,10 +58,6 @@ const FormGroup = ({
 
 class Form extends Component {
   static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-    ]).isRequired,
     className: PropTypes.string,
   };
   static defaultProps = {
@@ -70,14 +66,134 @@ class Form extends Component {
   static Row = FormRow;
   static Group = FormGroup;
   static Control = FormControl;
+  state = {
+    name: {
+      value: '',
+      error: '',
+    },
+    cellphone: {
+      value: '',
+      error: '',
+    },
+    address: {
+      value: '',
+      error: '',
+    },
+    remark: {
+      value: '',
+      error: '',
+    },
+    isValid: false,
+  };
+  getValid() {
+    return this.state.isValid;
+  }
+  formChange = (e) => {
+    const {
+      id,
+      value,
+    } = e.target;
+    this.setState({
+      [id]: {
+        value,
+        error: '',
+      },
+    });
+  }
+  valueCheck = (e) => {
+    const {
+      id,
+      value,
+    } = e.target;
+    if (!value.length) {
+      this.setState({
+        [id]: {
+          value,
+          error: '此欄位是必填欄位唷',
+        },
+        isValid: false,
+      });
+    }
+  }
   render() {
     const {
-      children,
       className,
     } = this.props;
+    const {
+      name,
+      cellphone,
+      address,
+      remark,
+    } = this.state;
     return (
       <form className={className}>
-        {children}
+        <Form.Row>
+          <Form.Group md={6}>
+            <Form.Control
+              label="姓名"
+              id="name"
+              placeholder="陳阿三"
+              value={name.value}
+              isInvalid={name.error}
+              onChange={this.formChange}
+              onBlur={this.valueCheck}
+            />
+          </Form.Group>
+          <Form.Group md={6}>
+            <Form.Control
+              id="cellphone"
+              label="手機"
+              placeholder="0912345678"
+              value={cellphone.value}
+              isInvalid={cellphone.error}
+              onChange={this.formChange}
+              onBlur={this.valueCheck}
+            />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group md={6}>
+            <label htmlFor="inputCity">城市</label>
+            <select id="inputCity" className="form-control" defaultValue="1">
+              <option value="1">台北市</option>
+              <option value="2">新北市</option>
+            </select>
+          </Form.Group>
+          <Form.Group md={4}>
+            <label htmlFor="inputState">鄉鎮區</label>
+            <select id="inputState" className="form-control" defaultValue="1">
+              <option value="1">內湖區</option>
+              <option value="2">大安區</option>
+            </select>
+          </Form.Group>
+          <Form.Group md={2}>
+            <Form.Control
+              id="inputZip"
+              label="郵遞區號"
+              defaultValue="114"
+            />
+          </Form.Group>
+        </Form.Row>
+        <Form.Group>
+          <Form.Control
+            id="address"
+            label="地址"
+            value={address.value}
+            isInvalid={address.error}
+            onChange={this.formChange}
+            onBlur={this.valueCheck}
+          />
+        </Form.Group>
+        <Form.Group>
+          <label htmlFor="remark">備註</label>
+          <textarea
+            className="form-control"
+            id="remark"
+            rows="3"
+            value={remark.value}
+            onChange={this.formChange}
+          />
+        </Form.Group>
       </form>
     );
   }
