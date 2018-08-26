@@ -101,8 +101,7 @@ class CardContainer extends Component {
 
     // 算出總共需要幾頁
     const pageLength = Math.ceil(renderArray.length / limit);
-    const renderButton = [...new Array(pageLength)];
-
+    const renderButton = (pageLength > 10) ? [0, 0, 0, 0, 0, '...'] : [...new Array(pageLength)];
     if (!limitRender.length) return <NoMatchCard />;
 
     return (
@@ -128,15 +127,18 @@ class CardContainer extends Component {
               keyboard_arrow_left
             </button>
             {
-              renderButton.map((v, i) => (
-                <button
-                  key={i}
-                  className={cx('page_num', { active: i === page })}
-                  onClick={() => { goPage(i); }}
-                >
-                  {i + 1}
-                </button>
-              ))
+              renderButton.map((v, i) => {
+                if (v === '...') return <span key={v}>{v}</span>;
+                return (
+                  <button
+                    key={i}
+                    className={cx('page_num', { active: i === page })}
+                    onClick={() => { goPage(i); }}
+                  >
+                    {i + 1}
+                  </button>
+                );
+              })
             }
             <button
               className="material-icons"
