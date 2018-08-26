@@ -29,7 +29,10 @@ class CustomerInfoContainer extends Component {
             />
             <button
               className="btn btn-danger w-100 my-2 text-lg"
-              onClick={() => { console.log('123213', this.customerForm.getValid()); }}
+              onClick={() => {
+                console.log(this.customerForm.getValid());
+                console.log(this.customerForm.state);
+              }}
             >
               確認結帳
             </button>

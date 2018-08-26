@@ -1,6 +1,24 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import cityData from '../static/taiwan.json';
+import { clone } from '../utilis';
+
+function formCheck(id, value) {
+  switch (id) {
+    case 'name':
+    case 'address':
+      return (/[a-zA-Z\u4e00-\u9fa5]/g.test(value)) ?
+        '' :
+        '至少輸入一個中文或英文字';
+    case 'cellphone':
+      return (/^09\d{8}/g.test(value)) ?
+        '' :
+        '請輸入正確的手機格式';
+    default:
+      return '';
+  }
+}
 
 const FormControl = ({
   id = null,
@@ -83,48 +101,98 @@ class Form extends Component {
       value: '',
       error: '',
     },
+    cityValue: 0,
+    regionValue: 0,
     isValid: false,
   };
   getValid() {
-    return this.state.isValid;
+    return this.valueCheckAll();
+  }
+  valueCheckAll = () => {
+    const copy = clone(this.state);
+    const keys = Object.keys(copy);
+    let isValid = true;
+    keys.forEach((id) => {
+      const { value } = copy[id];
+
+      // 代表是不需驗證的欄位
+      if (typeof value === 'undefined') return;
+
+      copy[id] = {
+        value,
+        error: formCheck(id, value),
+      };
+
+      if (copy[id].error.length > 0) isValid = false;
+    });
+    this.setState(() => ({
+      ...copy,
+      isValid,
+    }));
+    return isValid;
   }
   formChange = (e) => {
     const {
       id,
       value,
     } = e.target;
-    this.setState({
+
+    this.setState(prevState => ({
+      ...prevState,
       [id]: {
         value,
         error: '',
       },
-    });
+    }));
   }
   valueCheck = (e) => {
     const {
       id,
       value,
     } = e.target;
-    if (!value.length) {
-      this.setState({
+
+    const error = formCheck(id, value);
+
+    if (error.length) {
+      this.setState(prevState => ({
+        ...prevState,
         [id]: {
           value,
-          error: '此欄位是必填欄位唷',
+          error,
         },
         isValid: false,
-      });
+      }));
     }
+  }
+  selectChange = (e) => {
+    const {
+      id,
+      value,
+    } = e.target;
+    this.setState(prevState => ({
+      ...prevState,
+      regionValue: 0,
+      [id]: value,
+    }));
   }
   render() {
     const {
       className,
     } = this.props;
+
     const {
       name,
       cellphone,
       address,
       remark,
+      cityValue,
+      regionValue,
     } = this.state;
+
+    const region = cityData.region[cityValue]; // 鄉鎮地區
+
+    console.log('formmmm render');
+
     return (
       <form className={className}>
         <Form.Row>
@@ -153,17 +221,19 @@ class Form extends Component {
         </Form.Row>
         <Form.Row>
           <Form.Group md={6}>
-            <label htmlFor="inputCity">城市</label>
-            <select id="inputCity" className="form-control" defaultValue="1">
-              <option value="1">台北市</option>
-              <option value="2">新北市</option>
+            <label htmlFor="cityValue">縣市</label>
+            <select id="cityValue" className="form-control" defaultValue={cityValue} onChange={this.selectChange}>
+              {
+                cityData.city.map((c, i) => <option value={i} key={c}>{c}</option>)
+              }
             </select>
           </Form.Group>
           <Form.Group md={4}>
-            <label htmlFor="inputState">鄉鎮區</label>
-            <select id="inputState" className="form-control" defaultValue="1">
-              <option value="1">內湖區</option>
-              <option value="2">大安區</option>
+            <label htmlFor="regionValue">鄉鎮地區</label>
+            <select id="regionValue" className="form-control" value={regionValue} onChange={this.selectChange}>
+              {
+                region.map((r, i) => <option value={i} key={r}>{r}</option>)
+              }
             </select>
           </Form.Group>
           <Form.Group md={2}>

@@ -32,8 +32,9 @@ class Counter extends Component {
     } = this.props;
     count -= 1;
     if (count < min) return minClick();
-    this.setState({ count });
-    return minusClick();
+    return this.setState(() => ({
+      count,
+    }), minusClick);
   }
   add = () => {
     let { count } = this.state;
@@ -44,8 +45,9 @@ class Counter extends Component {
     } = this.props;
     count += 1;
     if (count > max) return maxClick();
-    this.setState({ count });
-    return addClick();
+    return this.setState(() => ({
+      count,
+    }), addClick);
   }
   render() {
     return (
