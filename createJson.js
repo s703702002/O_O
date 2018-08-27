@@ -5,7 +5,7 @@ const json = [];
 for (let i = 0; i < 1000; i++) {
   const product = {
     id: i,
-    title: '商品名稱',
+    title: `商品${i}`,
     price: Math.floor(Math.random() * 5000),
     inventory: Math.floor(Math.random() * 100),
     gender: (Math.random() > 0.5) ? 0 : 1,

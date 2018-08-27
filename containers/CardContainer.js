@@ -12,23 +12,78 @@ import {
   pushHistory,
 } from '../utilis';
 
-const LoadingProducts = () => (
-  <p>正在載入產品 請稍後!</p>
-);
-
-const goPage = (pageNum) => {
+function goPage(pageNum) {
   const queryObj = {
     page: pageNum,
   };
   pushHistory(queryObj);
-};
+}
+
+// 計算pageController 需要的陣列
+function calcRenderButton(nowpage, limit, totalLength) {
+  const startPageNum = Math.floor(nowpage / limit);
+  const last = totalLength % limit;
+  if ((nowpage + limit) >= totalLength) {
+    return [...new Array(last)].map((v, i) => totalLength - i).reverse();
+  }
+  const arr = [...new Array(limit)].map((v, i) => (startPageNum * limit) + i + 1);
+  arr.push('...');
+  return arr;
+}
+
+const LoadingProducts = () => (
+  <p>正在載入產品 請稍後!</p>
+);
+
+const PageController = ({
+  activePage,
+  maxPage,
+  renderButton,
+}) => (
+  <div className="col-12 page_controller">
+    <button
+      className="material-icons"
+      onClick={() => {
+        if (activePage === 0) return;
+        goPage(activePage - 1);
+      }}
+    >
+      keyboard_arrow_left
+    </button>
+    {
+      renderButton.map((v) => {
+        if (v === '...') return <span key={v}>{v}</span>;
+        return (
+          <button
+            key={v}
+            className={cx('page_num', { active: (v - 1) === activePage })}
+            onClick={() => { goPage(v - 1); }}
+          >
+            {v}
+          </button>
+        );
+      })
+    }
+    <button
+      className="material-icons"
+      onClick={() => {
+        if (activePage === maxPage) return;
+        goPage(activePage + 1);
+      }}
+    >
+      keyboard_arrow_right
+    </button>
+  </div>
+);
 
 class CardContainer extends Component {
   static propTypes = {
     limit: PropTypes.number,
+    pageController: PropTypes.number,
   };
   static defaultProps = {
-    limit: 20,
+    limit: 20, // 一頁要顯示幾筆資料
+    pageController: 7,
   };
   componentDidMount() {
     const {
@@ -84,6 +139,7 @@ class CardContainer extends Component {
   renderContent(renderArray, queryObject) {
     const {
       limit,
+      pageController,
     } = this.props;
 
     let {
@@ -99,10 +155,10 @@ class CardContainer extends Component {
 
     // 算出總共需要幾頁
     const pageLength = Math.ceil(renderArray.length / limit);
+    // 計算pageController需要的陣列
+    const renderButton = calcRenderButton(page, pageController, pageLength);
     console.log('pageLength', pageLength);
-    // 是否還不需要換分頁
-    // const pageStart = (page + 1 < 7 ) ? 1 :
-    const renderButton = (pageLength > 7) ? [0, 0, 0, 0, 0, 0, 0, '...'] : [...new Array(pageLength)];
+    console.log('renderButton', renderButton);
     if (!limitRender.length) return <NoMatchCard />;
 
     return (
@@ -116,42 +172,11 @@ class CardContainer extends Component {
             />
           ))
         }
-        {
-          <div className="col-12 page_controller">
-            <button
-              className="material-icons"
-              onClick={() => {
-                if (page === 0) return;
-                goPage(page - 1);
-              }}
-            >
-              keyboard_arrow_left
-            </button>
-            {
-              renderButton.map((v, i) => {
-                if (v === '...') return <span key={v}>{v}</span>;
-                return (
-                  <button
-                    key={i}
-                    className={cx('page_num', { active: i === page })}
-                    onClick={() => { goPage(i); }}
-                  >
-                    {i + 1}
-                  </button>
-                );
-              })
-            }
-            <button
-              className="material-icons"
-              onClick={() => {
-                if (page === (pageLength - 1)) return;
-                goPage(page + 1);
-              }}
-            >
-              keyboard_arrow_right
-            </button>
-          </div>
-        }
+        <PageController
+          activePage={page}
+          maxPage={pageLength - 1}
+          renderButton={renderButton}
+        />
       </React.Fragment>
     );
   }
