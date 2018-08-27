@@ -28,7 +28,7 @@ class CardContainer extends Component {
     limit: PropTypes.number,
   };
   static defaultProps = {
-    limit: 8,
+    limit: 20,
   };
   componentDidMount() {
     const {
@@ -99,7 +99,10 @@ class CardContainer extends Component {
 
     // 算出總共需要幾頁
     const pageLength = Math.ceil(renderArray.length / limit);
-    const renderButton = (pageLength > 10) ? [0, 0, 0, 0, 0, '...'] : [...new Array(pageLength)];
+    console.log('pageLength', pageLength);
+    // 是否還不需要換分頁
+    // const pageStart = (page + 1 < 7 ) ? 1 :
+    const renderButton = (pageLength > 7) ? [0, 0, 0, 0, 0, 0, 0, '...'] : [...new Array(pageLength)];
     if (!limitRender.length) return <NoMatchCard />;
 
     return (
