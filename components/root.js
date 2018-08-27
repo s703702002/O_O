@@ -7,11 +7,12 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import App from './App';
+import Home from './Home';
 import ProductPage from './ProductPage';
 import CheckoutPage from './CheckoutPage';
 import NotFound from './404';
 import CustomerInfoPage from './CustomerInfoPage';
+import CheckoutFinishPage from './CheckoutFinishPage';
 import Addfinished from '../containers/AddFinish';
 import LightBoxWithConnect from '../containers/LightBoxContainer';
 import '../css/main.scss';
@@ -23,7 +24,7 @@ const Root = ({ store }) => (
     <Router history={history}>
       <div className="mb-5">
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route exact path="/" component={Home} />
           <Route
             path="/checkout"
             render={() => {
@@ -38,6 +39,7 @@ const Root = ({ store }) => (
               return <CustomerInfoPage />;
             }}
           />
+          <Route path="/checkoutfinish" component={CheckoutFinishPage} />
           <Route path="/:productId" component={ProductPage} />
           <Route component={NotFound} />
         </Switch>

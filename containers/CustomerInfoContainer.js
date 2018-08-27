@@ -4,9 +4,15 @@ import { withRouter } from 'react-router';
 import PushButton from '../components/PushButton';
 import Form from '../components/Form';
 import OrderInfo from './OrderInfo';
+import { push } from '../utilis';
 
 class CustomerInfoContainer extends Component {
   customerForm = null;
+  confirmHandler = () => {
+    const { customerForm } = this;
+    if (!customerForm.getValid()) return;
+    push('/checkoutfinish');
+  }
   render() {
     return (
       <div className="container">
@@ -29,10 +35,7 @@ class CustomerInfoContainer extends Component {
             />
             <button
               className="btn btn-danger w-100 my-2 text-lg"
-              onClick={() => {
-                console.log(this.customerForm.getValid());
-                console.log(this.customerForm.state);
-              }}
+              onClick={this.confirmHandler}
             >
               確認結帳
             </button>

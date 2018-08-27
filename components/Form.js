@@ -191,8 +191,6 @@ class Form extends Component {
 
     const region = cityData.region[cityValue]; // 鄉鎮地區
 
-    console.log('formmmm render');
-
     return (
       <form className={className}>
         <Form.Row>

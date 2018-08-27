@@ -90,7 +90,7 @@ class ProductContainer extends Component {
     const { products } = this.props;
     const { id } = product;
     const otherProducts = products.filter(item => item.id !== id);
-    const renderList = getRandomItem(otherProducts, 6);
+    const renderList = getRandomItem(otherProducts, 12);
     if (!renderList) return null;
     return (
       <section className="col-12">

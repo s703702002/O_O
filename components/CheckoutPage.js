@@ -2,11 +2,11 @@ import React from 'react';
 import { SimpleHeader } from '../containers/Header';
 import CheckOutContainer from '../containers/CheckoutContainer';
 
-const ProductPage = () => (
+const CheckoutPage = () => (
   <React.Fragment>
     <SimpleHeader />
     <CheckOutContainer />
   </React.Fragment>
 );
 
-export default ProductPage;
+export default CheckoutPage;
