@@ -93,11 +93,9 @@ class CardContainer extends Component {
     page = Number(page);
 
     // 計算該頁需要redner的產品
-    const limitRender = renderArray.filter((item, idx) => {
-      const startIndex = page * limit;
-      const overIndex = startIndex + limit;
-      return idx >= startIndex && idx < overIndex;
-    });
+    const startIndex = page * limit;
+    const overIndex = startIndex + limit;
+    const limitRender = renderArray.slice(startIndex, overIndex);
 
     // 算出總共需要幾頁
     const pageLength = Math.ceil(renderArray.length / limit);
