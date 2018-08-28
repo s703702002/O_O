@@ -18,6 +18,16 @@ const handleAddToCart = (state, action) => {
   });
 };
 
+const handleReduceCartItem = (state, action) => {
+  const { productId } = action;
+
+  return state.map((item) => {
+    const order = { ...item };
+    if (order.product.id === productId) order.count -= 1;
+    return order;
+  });
+};
+
 const shoppingsCarts = (state = [], action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
@@ -28,6 +38,8 @@ const shoppingsCarts = (state = [], action) => {
       return handleAddToCart(state, action);
     case 'REMOVE_SHOPPING_CART_ITEM':
       return state.filter(item => item.product.id !== action.productId);
+    case 'REDUCE_CART_ITEM':
+      return handleReduceCartItem(state, action);
     default:
       return state;
   }

@@ -71,6 +71,12 @@ export const removeShoppingCardItem = productId => ({
   productId,
 });
 
+// 減少購物車內已購商品數量一個
+export const reduceCartItem = productId => ({
+  type: 'REDUCE_CART_ITEM',
+  productId,
+});
+
 export const showAddFinished = {
   type: 'SHOW_ADD_FINISHED',
 };

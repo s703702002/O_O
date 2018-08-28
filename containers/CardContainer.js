@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import Card from '../components/Card';
 import NoMatchCard from '../components/NoMatchCard';
+import PageController from '../components/PageController';
 import Aside from './Aside';
 import { getProductsRequest } from '../action';
-import { queryToObj } from '../utilis';
+import {
+  queryToObj,
+} from '../utilis';
+
+// 計算pageController 需要的陣列
+function calcRenderButton(nowpage, limit, totalLength) {
+  const startPageNum = Math.floor(nowpage / limit);
+  // 最後一組page要render幾個
+  const last = totalLength % limit;
+  // 當nowpage大於last代表已經到最後幾頁
+  const lastIndex = totalLength - last;
+  if ((nowpage + 1) > lastIndex) {
+    return [...new Array(last)].map((v, i) => totalLength - i).reverse();
+  }
+  const arr = [...new Array(limit)].map((v, i) => (startPageNum * limit) + i + 1);
+  arr.push('...');
+  return arr;
+}
 
 const LoadingProducts = () => (
   <p>正在載入產品 請稍後!</p>
@@ -15,14 +32,13 @@ const LoadingProducts = () => (
 
 class CardContainer extends Component {
   static propTypes = {
-    limit: PropTypes.Number,
+    limit: PropTypes.number,
+    pageController: PropTypes.number,
   };
   static defaultProps = {
-    limit: 8,
+    limit: 20, // 一頁要顯示幾筆資料
+    pageController: 7,
   };
-  state = {
-    page: 0,
-  }
   componentDidMount() {
     const {
       dispatch,
@@ -30,9 +46,6 @@ class CardContainer extends Component {
     } = this.props;
     // 若沒有產品, 發request
     if (!products.length) dispatch(getProductsRequest());
-  }
-  goPage(page) {
-    this.setState({ page });
   }
   renderProducts() {
     // 負責處理render的邏輯
@@ -44,13 +57,12 @@ class CardContainer extends Component {
       search,
     } = this.props.location;
 
-    // 若沒有sort參數, 預設唯降冪排列
+    // 若沒有sort參數, 預設降冪排列
     if (!search.length) {
-      search = '?sort=desc';
+      search = '?sort=desc&page=0';
     }
     const queryObject = queryToObj(search);
     let renderArray = products.slice();
-
     // 價格排序
     if (queryObject.sort === 'desc') {
       renderArray.sort((a, b) => b.price - a.price);
@@ -76,27 +88,32 @@ class CardContainer extends Component {
     // 若篩選後無符合的產品
     if (!renderArray.length) return <NoMatchCard />;
 
-    return this.renderContent(renderArray);
+    return this.renderContent(renderArray, queryObject);
   }
-  renderContent(renderArray) {
+  renderContent(renderArray, queryObject) {
     const {
       limit,
+      pageController,
     } = this.props;
 
-    const {
+    let {
       page,
-    } = this.state;
+    } = queryObject;
+    // 字串轉數字
+    page = Number(page);
 
-    // 一頁限制最多幾筆
-    const limitRender = renderArray.filter((item, idx) => {
-      const startIndex = page * limit;
-      const overIndex = startIndex + limit;
-      return idx >= startIndex && idx < overIndex;
-    });
+    // 計算該頁需要redner的產品
+    const startIndex = page * limit;
+    const overIndex = startIndex + limit;
+    const limitRender = renderArray.slice(startIndex, overIndex);
 
     // 算出總共需要幾頁
     const pageLength = Math.ceil(renderArray.length / limit);
-    const renderButton = [...new Array(pageLength)];
+    // 計算pageController需要的陣列
+    const renderButton = calcRenderButton(page, pageController, pageLength);
+
+    if (!limitRender.length) return <NoMatchCard />;
+
     return (
       <React.Fragment>
         {
@@ -108,22 +125,11 @@ class CardContainer extends Component {
             />
           ))
         }
-        {
-          <div className="col-12 page_controller">
-            <button className="material-icons">keyboard_arrow_left</button>
-            {
-              renderButton.map((v, i) => (
-                <button
-                  className={cx('page_num', { active: i === page })}
-                  onClick={() => { this.goPage(i); }}
-                >
-                  {i + 1}
-                </button>
-              ))
-            }
-            <button className="material-icons">keyboard_arrow_right</button>
-          </div>
-        }
+        <PageController
+          activePage={page}
+          maxPage={pageLength - 1}
+          renderButton={renderButton}
+        />
       </React.Fragment>
     );
   }

@@ -9,8 +9,8 @@ import {
   openLoginBox,
   closeLoginBox,
   loginSuccess,
-  addToCartRequest,
   addToCart,
+  reduceCartItem,
 } from '../action';
 
 test('登入reducer測試', () => {
@@ -130,4 +130,56 @@ test('購物車reducer測試', () => {
   };
 
   expect(shoppingCart(undefined, loginSuccess(response))).toEqual(response.shoppings);
+  expect(shoppingCart(response.shoppings, addToCart({
+    id: '8',
+    title: '長褲-男',
+    price: 500,
+    gender: 1,
+    inventory: 200,
+  }, 2))).toEqual([
+    {
+      product: {
+        id: '8',
+        title: '長褲-男',
+        price: 500,
+        gender: 1,
+        inventory: 200,
+      },
+      count: 4,
+    },
+    {
+      product: {
+        id: '6',
+        title: '拖鞋-女',
+        price: 199,
+        gender: 0,
+        inventory: 10,
+      },
+      count: 1,
+    },
+  ]);
+
+  expect(shoppingCart(response.shoppings, reduceCartItem('8'))).toEqual([
+    {
+      product: {
+        id: '8',
+        title: '長褲-男',
+        price: 500,
+        gender: 1,
+        inventory: 200,
+      },
+      count: 1,
+    },
+    {
+      product: {
+        id: '6',
+        title: '拖鞋-女',
+        price: 199,
+        gender: 0,
+        inventory: 10,
+      },
+      count: 1,
+    },
+  ]);
+
 });

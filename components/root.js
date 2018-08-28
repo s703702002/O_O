@@ -1,27 +1,45 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
+  Router,
   Route,
   Switch,
+  Redirect,
 } from 'react-router-dom';
-import Header from '../containers/Header';
-import App from './App';
+import Home from './Home';
 import ProductPage from './ProductPage';
+import CheckoutPage from './CheckoutPage';
 import NotFound from './404';
+import CustomerInfoPage from './CustomerInfoPage';
+import CheckoutFinishPage from './CheckoutFinishPage';
 import Addfinished from '../containers/AddFinish';
 import LightBoxWithConnect from '../containers/LightBoxContainer';
-import CheckOutContainer from '../containers/CheckoutContainer';
 import '../css/main.scss';
+import { history } from '../utilis';
+
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <div className="mb-5">
-        <Header />
         <Switch>
-          <Route exact path="/" component={App} />
-          <Route path="/checkout" component={CheckOutContainer} />
+          <Route exact path="/" component={Home} />
+          <Route
+            path="/checkout"
+            render={() => {
+              if (store.getState().login.status === 'init') return <Redirect to="/" />;
+              return <CheckoutPage />;
+            }}
+          />
+          <Route
+            path="/customerinfo"
+            render={() => {
+              if (store.getState().login.status === 'init') return <Redirect to="/" />;
+              return <CustomerInfoPage />;
+            }}
+          />
+          <Route path="/checkoutfinish" component={CheckoutFinishPage} />
           <Route path="/:productId" component={ProductPage} />
           <Route component={NotFound} />
         </Switch>

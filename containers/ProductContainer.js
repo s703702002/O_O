@@ -6,11 +6,14 @@ import {
   addToCartRequest,
   addLightBoxMessage,
 } from '../action';
-import { getRandomItem } from '../utilis';
+import {
+  getRandomItem,
+} from '../utilis';
 import ProductInfo from '../components/ProductInfo';
 import Card from '../components/Card';
 import Counter from '../components/Counter';
 import NotFound from '../components/404';
+import PushButton from '../components/PushButton';
 
 const LoadProduct = () => (
   <p>正在載入產品</p>
@@ -38,7 +41,6 @@ class ProductContainer extends Component {
   }
   renderAside(product) {
     const {
-      history: { push },
       dispatch,
     } = this.props;
     const {
@@ -47,14 +49,18 @@ class ProductContainer extends Component {
     } = product;
 
     const CounterWithMax = ({ innerRef }) => (
-      <Counter max={inventory} ref={innerRef} dispatch={dispatch} />
+      <Counter
+        max={inventory}
+        ref={innerRef}
+        maxClick={() => { dispatch(addLightBoxMessage('此商品庫存不足')); }}
+      />
     );
 
     return (
       <aside className="col-4">
         <h3>
           <span className="sub-title">售價:</span>
-          <strong>{`$${price}`}</strong>
+          <strong className="text-danger">{`$${price}`}</strong>
         </h3>
         <div className="mb-2">
           <span className="sub-title">庫存:</span>
@@ -72,12 +78,11 @@ class ProductContainer extends Component {
         >
           加入購物車
         </button>
-        <button
+        <PushButton
           className="btn btn-outline-info w-100 mb-2"
-          onClick={() => { push('/'); }}
-        >
-          繼續選購
-        </button>
+          path="/"
+          text="繼續選購"
+        />
       </aside>
     );
   }
@@ -85,7 +90,7 @@ class ProductContainer extends Component {
     const { products } = this.props;
     const { id } = product;
     const otherProducts = products.filter(item => item.id !== id);
-    const renderList = getRandomItem(otherProducts, 6);
+    const renderList = getRandomItem(otherProducts, 12);
     if (!renderList) return null;
     return (
       <section className="col-12">

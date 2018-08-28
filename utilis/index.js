@@ -1,5 +1,10 @@
-export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-export { default } from './click_outside';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const clone = target => JSON.parse(JSON.stringify(target));
+
+const history = createBrowserHistory();
+
+const { push } = history;
 
 function serialize(obj) {
   const str = Object.entries(obj).map(item => `${encodeURIComponent(item[0])}=${encodeURIComponent(item[1])}`);
@@ -11,7 +16,7 @@ function queryToObj(queryString) {
 }
 
 function getRandomItem(arr, amount) {
-  if (!arr.length) return;
+  if (!arr.length) return null;
   const copy = arr.slice();
   const result = [];
   for (let i = 0; i < amount; i++) {
@@ -24,6 +29,38 @@ function getRandomItem(arr, amount) {
   return result;
 }
 
-const clone = target => JSON.parse(JSON.stringify(target));
+function pushHistory(queryObj) {
+  let { search } = history.location;
+  const { page } = queryObj;
+  if (!search.length) {
+    search = '?sort=desc';
+  }
+  const queryObject = queryToObj(search);
+  const newQueryObj = {
+    ...queryObject,
+    ...queryObj,
+  };
+  if (newQueryObj.minPrice === '') delete newQueryObj.minPrice;
+  if (newQueryObj.maxPrice === '') delete newQueryObj.maxPrice;
+  if (page !== undefined) {
+    // 如果有變更page就不reset
+    newQueryObj.page = page;
+  } else {
+    // 每次變更條件都reset頁數回0
+    newQueryObj.page = 0;
+  }
+  const newQuery = `?${serialize(newQueryObj)}`;
+  history.push(newQuery);
+}
 
-export { serialize, queryToObj, clone, getRandomItem };
+export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+export { default } from './ClickOutside';
+export {
+  serialize,
+  queryToObj,
+  clone,
+  getRandomItem,
+  pushHistory,
+  history,
+  push,
+};

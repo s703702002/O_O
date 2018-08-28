@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { getAllProductsAPI } from '../api';
 import {
   receiveProducts,
@@ -15,5 +15,5 @@ function* productsFlow(action) {
 }
 
 export default function* watchRequsetProducts() {
-  yield takeEvery('GET_PRODUCTS_REQUEST', productsFlow);
+  yield takeLatest('GET_PRODUCTS_REQUEST', productsFlow);
 }

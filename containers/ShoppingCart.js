@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeShoppingCardItem } from '../action';
+import PushButton from '../components/PushButton';
 
 const CartItem = ({ order, dispatch }) => (
   <div className="cart_item">
@@ -29,9 +30,11 @@ const CartContent = ({ shoppingCart, dispatch }) => (
     shoppingCart.map(order => <CartItem order={order} dispatch={dispatch} key={order.product.id} />)
     }
     <div className="goCheckout">
-      <Link to="/checkout" className="font-weight-bold btn btn-success">
-        立刻結帳
-      </Link>
+      <PushButton
+        className="font-weight-bold btn btn-success"
+        path="/checkout"
+        text="立刻結帳"
+      />
     </div>
   </React.Fragment>
 );

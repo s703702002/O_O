@@ -1,0 +1,65 @@
+.login_box {
+  display: block;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  &.show{
+    z-index: 1;
+    opacity: 1;
+    .modal-content{
+      opacity: 1;
+      margin-top: 0;
+    }
+    .mask {
+      display: block;
+    }
+  }
+  &.loading{
+    .form-group{
+      display: none;
+    }
+    .btn{
+      display: none;
+    }
+    .abort-login{
+      display: block;
+    }
+  }
+  .modal-dialog{
+    z-index: 2;
+  }
+  .modal-content{
+    transition: opacity 0.5s, margin-top 0.5s;
+    opacity: 0;
+    margin-top: -10em;
+  }
+  .abort-login{
+    display: none;
+  }
+}
+
+.loader-outer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top-color: #3498db;
+  width: 80px;
+  height: 80px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

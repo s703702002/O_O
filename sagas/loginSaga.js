@@ -1,4 +1,4 @@
-import { takeEvery, call, put, fork, cancel, take } from 'redux-saga/effects';
+import { takeEvery, call, put, fork, cancel, cancelled, take } from 'redux-saga/effects';
 import { delay } from '../utilis';
 import { loginAPI } from '../api';
 import {
@@ -21,6 +21,12 @@ function* authorize({ username, password }) {
   } catch (error) {
     const errorMessage = error.toString();
     yield put(loginError(errorMessage));
+  } finally {
+    // if (yield cancelled()) {
+    //   console.log('登入被取消');
+    // } else {
+    //   console.log('登入成功了!');
+    // }
   }
 }
 
