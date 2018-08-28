@@ -9,11 +9,18 @@ import rootSaga from './sagas';
 
 
 const sagaMiddleware = createSagaMiddleware();
+let middlewares;
 
-const middlewares = [
-  createLogger(),
-  sagaMiddleware,
-];
+if (process.env.NODE_ENV !== 'production') {
+  middlewares = [
+    createLogger(),
+    sagaMiddleware,
+  ];
+} else {
+  middlewares = [
+    sagaMiddleware,
+  ];
+}
 
 const preloadedState = () => {
   const loginStatus = JSON.parse(localStorage.getItem('loginStatus'));

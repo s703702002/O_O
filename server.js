@@ -1,3 +1,4 @@
+const path = require('path');
 const cors = require('cors');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
@@ -11,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.resolve(__dirname, './build')));
 
 // 加密算法
 function passwordEncode(password) {
@@ -32,7 +34,6 @@ function verification(username, password) {
   return memberId;
 }
 
-
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const memberId = verification(username, password);
@@ -45,5 +46,8 @@ app.use('/graphql/', graphqlHTTP({
   graphiql: true,
 }));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './build/index.html'));
+});
 
 app.listen(3000);
