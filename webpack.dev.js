@@ -6,7 +6,7 @@ const common = require('./webpack.basic');
 module.exports = merge(common, {
   mode: 'development',
   entry: {
-    app: './index.js',
+    app: './client.js',
   },
   output: {
     filename: '[name].bundle.js',

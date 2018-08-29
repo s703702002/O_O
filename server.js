@@ -11,7 +11,7 @@ const graphqlHTTP = require('express-graphql');
 const members = require('./api/member.json');
 const { schema, rootValue } = require('./api/GraphQLSchema');
 const rootReducer = require('./reducers');
-const Root = require('./components/Root');
+// const Root = require('./components/Root');
 
 const app = express();
 
