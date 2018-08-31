@@ -1,7 +1,9 @@
 import { delay } from '../utilis';
 
 
-const domain = `${window.location.protocol}//${window.location.hostname}:3000`;
+// const domain = `${window.location.protocol}//${window.location.hostname}:3000`;
+// for heroku
+const domain = `${window.location.protocol}//${window.location.hostname}`;
 const graphqlUri = `${domain}/graphql/`;
 const loginUri = `${domain}/login`;
 const productInfoFragment = `fragment productInfo on Product{
