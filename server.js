@@ -1,4 +1,8 @@
 const path = require('path');
+const React = require('react');
+const { createStore } = require('redux');
+const { Provider } = require('react-redux');
+const { renderToString } = require('react-dom/server');
 const cors = require('cors');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
@@ -6,6 +10,8 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const members = require('./api/member.json');
 const { schema, rootValue } = require('./api/GraphQLSchema');
+// const rootReducer = require('./reducers');
+// const Root = require('./components/Root');
 
 const app = express();
 
@@ -34,6 +40,13 @@ function verification(username, password) {
   return memberId;
 }
 
+function handleRender(req, res) {
+  console.log(req.params[0]);
+}
+function renderFullPage(html, preloadedState) {
+
+}
+
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const memberId = verification(username, password);
@@ -47,6 +60,7 @@ app.use('/graphql/', graphqlHTTP({
 }));
 
 app.get('*', (req, res) => {
+  handleRender(req, res);
   res.sendFile(path.resolve(__dirname, './build/index.html'));
 });
 

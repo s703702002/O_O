@@ -1,18 +1,25 @@
 # O_O
 目標
-1.做一個簡單的購物車
+-----------------
+做一個簡單的購物車
 
 功能
-1.登入
-2.加入購物車(未實作)
-3.產品篩選&排序功能(未完成)
-4.結帳頁(未做)
+------------------
++ 登入
++ 加入購物車
++ 產品篩選&排序功能
++ 結帳頁
++ 簡易表單驗證
++ 邏輯測試(jest)
 
-
-目前使用技術
-1.React
-2.Redux
-3.Redux-saga
-4.GraphQL
-5.React-router
-6.express
+使用技術
+------------------
++ React
++ Redux
++ Redux-saga
++ webpack
++ GraphQL
++ React-router
++ express
++ jest
++ eslint

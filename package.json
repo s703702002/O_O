@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "webpack-dev-server --process --colors --config webpack.dev.js",
     "production": "webpack --process --config webpack.prod.js",
-    "api:server": "nodemon server.js"
+    "server": "babel-node server.js"
   },
   "repository": {
     "type": "git",
@@ -58,6 +58,8 @@
     "webpack-merge": "^4.1.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.7.0",
