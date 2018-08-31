@@ -10,7 +10,7 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const members = require('./api/member.json');
 const { schema, rootValue } = require('./api/GraphQLSchema');
-const rootReducer = require('./reducers');
+// const rootReducer = require('./reducers');
 // const Root = require('./components/Root');
 
 const app = express();
@@ -41,7 +41,7 @@ function verification(username, password) {
 }
 
 function handleRender(req, res) {
-  console.log('handleRender');
+  console.log(req.params[0]);
 }
 function renderFullPage(html, preloadedState) {
 
@@ -60,7 +60,7 @@ app.use('/graphql/', graphqlHTTP({
 }));
 
 app.get('*', (req, res) => {
-  handleRender();
+  handleRender(req, res);
   res.sendFile(path.resolve(__dirname, './build/index.html'));
 });
 
