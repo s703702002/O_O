@@ -13,7 +13,16 @@ const Card = ({ item, col }) => (
     <Link to={item.id} className="card">
       <img className="card-img-top" src={imgUrl} alt={item.title} />
       <div className="card-body">
-        <h5 className="card-title">{item.title}</h5>
+        <h5 className="card-title">
+          {item.title}
+          <span className="float-right">
+            {
+              (item.gender === 1) ?
+                '男裝' :
+                '女裝'
+            }
+          </span>
+        </h5>
         <p className="card-text">{`售價: ${item.price} 元`}</p>
         <p className="card-text">
           <small className="text-muted">

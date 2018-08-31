@@ -1,7 +1,9 @@
 import { delay } from '../utilis';
 
-const graphqlUri = 'http://localhost:3000/graphql/';
-const loginUri = 'http://localhost:3000/login';
+
+const domain = `${window.location.protocol}//${window.location.hostname}:3000`;
+const graphqlUri = `${domain}/graphql/`;
+const loginUri = `${domain}/login`;
 const productInfoFragment = `fragment productInfo on Product{
   id
   title
