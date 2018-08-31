@@ -16,7 +16,7 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, './'),
     compress: true,
     port: 9000,
-    host: ip.address(),
+    // host: ip.address(),
     historyApiFallback: true,
     open: true,
   },
