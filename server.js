@@ -13,6 +13,8 @@ const { schema, rootValue } = require('./api/GraphQLSchema');
 // const rootReducer = require('./reducers');
 // const Root = require('./components/Root');
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 const whitelist = ['http://10.30.3.75:3000', 'http://10.30.3.75:9000'];
@@ -75,4 +77,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './build/index.html'));
 });
 
-app.listen(3000);
+app.listen(PORT);
