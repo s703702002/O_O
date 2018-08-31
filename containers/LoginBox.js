@@ -44,6 +44,7 @@ const LoginForm = props => (
         />
       </div>
     </div>
+    <p>測試帳號:stanley 密碼:0000</p>
   </React.Fragment>
 );
 
