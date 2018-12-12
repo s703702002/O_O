@@ -1,6 +1,7 @@
 import { delay } from '../utilis';
 
-const port = window.location.port.length > 0 ? `:${window.location.port}` : '';
+// const port = window.location.port.length > 0 ? `:${window.location.port}` : '';
+const port = ':9000';
 const domain = `${window.location.protocol}//${window.location.hostname}${port}`;
 const graphqlUri = `${domain}/graphql/`;
 const loginUri = `${domain}/login`;
