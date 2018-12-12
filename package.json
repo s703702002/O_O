@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start:dev": "webpack-dev-server --process --colors --config webpack.dev.js",
-    "start": "node server.js",
+    "start": "nodemon",
     "production": "webpack --process --config webpack.prod.js",
     "server": "babel-node server.js"
   },
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/s703702002/O_O#readme",
   "dependencies": {
     "autoprefixer": "^8.6.4",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",

@@ -18,7 +18,7 @@ const Person = ({ username }) => (
 const SimpleHeader = ({ children }) => (
   <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom top_header">
     <Link to="/" className="mr-md-auto logo">
-      <h3 className="my-0">Happy Shop</h3>
+      <h3 className="my-0">Happy Shop!</h3>
     </Link>
     {children}
   </div>
