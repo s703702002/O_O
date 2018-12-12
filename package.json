@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "dev": "nodemon",
     "start:dev": "webpack-dev-server --process --colors --config webpack.dev.js",
-    "start": "nodemon",
+    "start": "node server.js",
     "production": "webpack --process --config webpack.prod.js",
     "server": "babel-node server.js"
   },
