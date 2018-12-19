@@ -1,4 +1,4 @@
-# O_O
+# O_O [![Build Status](https://travis-ci.org/s703702002/O_O.svg?branch=master)](https://travis-ci.org/s703702002/O_O)
 目標
 -----------------
 做一個簡單的購物車
