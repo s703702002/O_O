@@ -7,7 +7,7 @@ import {
   closeLoginBox,
 } from '../action';
 
-function* authorize({ username, password }) {
+export function* authorize({ username, password }) {
   try {
     const response = yield call(loginAPI, {
       username,
@@ -30,7 +30,7 @@ function* authorize({ username, password }) {
   }
 }
 
-function* loginFlow(action) {
+export function* loginFlow(action) {
   const task = yield fork(authorize, { username: action.username, password: action.password });
   yield take('LOGIN_CANCEL');
   yield cancel(task);

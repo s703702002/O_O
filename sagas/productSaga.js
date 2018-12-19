@@ -4,7 +4,7 @@ import {
   receiveProduct,
 } from '../action';
 
-function* productFlow(action) {
+export function* productFlow(action) {
   try {
     const response = yield call(getProductAPI, {
       productId: action.productId,

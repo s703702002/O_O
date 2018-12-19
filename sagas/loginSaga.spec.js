@@ -7,62 +7,60 @@ import {
   loginCancel,
   closeLoginBox,
 } from '../action';
+import {
+  loginFlow,
+  authorize,
+} from './loginSaga';
 
-function* loginFlow(action) {
-  try {
-    const response = yield call(loginAPI, {
-      username: action.username,
-      password: action.password,
-    });
-    yield put(loginSuccess(response.user));
-    yield call(delay, 1000);
-    yield put(closeLoginBox);
-  } catch (error) {
-    const errorMessage = error.toString();
-    yield put(loginError(errorMessage));
-  }
-}
+const user = {
+  username: 'stanley',
+  password: '0000',
+};
 
-test('login saga測試', () => {
-  const user = {
-    username: 'stanley',
-    password: '0000',
-  };
+test('login flow測試', () => {
+  const gen = loginFlow({
+    type: 'LOGIN_REQUEST',
+    ...user,
+  });
+
+  const task = gen.next().value;
+  expect(fork(authorize, user)).toEqual(task);
+  expect(take('LOGIN_CANCEL')).toEqual(gen.next().value);
+});
+
+test('authorize測試', () => {
   const res = {
     user: {
       id: '1',
       name: 'stanley',
       shoppings: [
         {
-          id: '8',
-          price: 500,
-          title: '長褲-男',
-          gender: 1,
-          inventory: 200,
+          product: {
+            id: '8',
+            title: '商品8',
+            price: 519,
+            gender: 1,
+            inventory: 92,
+          },
+          count: 2,
         },
         {
-          id: '11',
-          price: 2299,
-          title: '長T-男',
-          gender: 1,
-          inventory: 0,
-        },
-        {
-          id: '5',
-          price: 299,
-          title: '涼鞋-女',
-          gender: 0,
-          inventory: 0,
+          product: {
+            id: '6',
+            title: '商品6',
+            price: 5013,
+            gender: 0,
+            inventory: 85,
+          },
+          count: 1,
         },
       ],
     },
   };
-  const gen = loginFlow({
-    type: 'LOGIN_REQUEST',
-    ...user,
-  });
+  const gen = authorize(user);
   expect(call(loginAPI, user)).toEqual(gen.next().value);
   expect(put(loginSuccess(res.user))).toEqual(gen.next(res).value);
   expect(call(delay, 1000)).toEqual(gen.next().value);
   expect(put(closeLoginBox)).toEqual(gen.next().value);
+  expect(true).toEqual(gen.next().done);
 });
