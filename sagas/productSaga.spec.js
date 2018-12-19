@@ -23,5 +23,5 @@ test('product saga測試', () => {
   });
   expect(call(getProductAPI, { productId })).toEqual(gen.next().value);
   expect(put(receiveProduct(res.product))).toEqual(gen.next(res).value);
-  expect(gen.next().done).toBeFalsy();
+  expect(gen.next().done).toBeTruthy();
 });
