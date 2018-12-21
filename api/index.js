@@ -41,8 +41,8 @@ function getUserInfo(memberId) {
     .then(({ data }) => data);
 }
 
-export const loginAPI = ({ username, password }) => delay(1000).then(() => {
-  return fetch(loginUri, {
+export const loginAPI = ({ username, password }) => delay(1000).then(() =>
+  fetch(loginUri, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -56,8 +56,7 @@ export const loginAPI = ({ username, password }) => delay(1000).then(() => {
       if (!memberId) throw new Error('登入失敗, 請確認帳號或密碼');
       return memberId;
     })
-    .then(getUserInfo);
-});
+    .then(getUserInfo));
 
 export const getAllProductsAPI = () => {
   const query = `

@@ -1,4 +1,4 @@
-import { takeEvery, call, put, fork, cancel, cancelled, take } from 'redux-saga/effects';
+import { takeEvery, call, put, fork, cancel, take } from 'redux-saga/effects';
 import { delay } from '../utilis';
 import { loginAPI } from '../api';
 import {

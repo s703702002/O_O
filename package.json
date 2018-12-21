@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "lint": "eslint **/*.js",
     "dev": "nodemon",
     "start:dev": "webpack-dev-server --process --colors --config webpack.dev.js",
     "start": "node server.js",

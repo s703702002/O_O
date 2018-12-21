@@ -1,2 +1,8 @@
 **/*.spec.js
 **/*.test.js
+createJson.js
+/node_modules
+/build
+/utilis
+
+Form.js

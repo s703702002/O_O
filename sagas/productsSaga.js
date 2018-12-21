@@ -5,7 +5,7 @@ import {
   getProductsError,
 } from '../action';
 
-function* productsFlow(action) {
+function* productsFlow() {
   try {
     const response = yield call(getAllProductsAPI);
     yield put(receiveProducts(response.products));

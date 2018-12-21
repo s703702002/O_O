@@ -27,7 +27,7 @@ function* addToCartFlow(action) {
       yield put(hiddenAddFinished);
     }
   } catch (err) {
-    // do something
+    // do some
   } finally {
     // always do
   }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { SimpleHeader } from '../containers/Header';
 import { Link } from 'react-router-dom';
+import { SimpleHeader } from '../containers/Header';
 
 const CheckoutFinishPage = () => (
   <React.Fragment>

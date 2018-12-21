@@ -42,9 +42,9 @@ function renderFullPage(html, preloadedState) {
 
 }
 
-// app.get('*', (req, res) => {
-//   handleRender(req, res);
-//   res.sendFile(path.resolve(__dirname, './build/index.html'));
-// });
+app.get('*', (req, res) => {
+  handleRender(req, res);
+  res.sendFile(path.resolve(__dirname, './build/index.html'));
+});
 
 app.listen(PORT);

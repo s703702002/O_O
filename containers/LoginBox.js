@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { loginRequest, closeLoginBox, loginCancel } from '../action';
 
-const Loading = props => (
+const Loading = () => (
   <div className="loader-outer">
     <div className="loader" />
   </div>
@@ -13,7 +13,7 @@ const LoginError = props => (
   <p>{props.message}</p>
 );
 
-const LoginSuccess = props => (
+const LoginSuccess = () => (
   <p>登入成功，歡迎回來</p>
 );
 
