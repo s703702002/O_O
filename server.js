@@ -43,7 +43,7 @@ app.use('/graphql', gqlRouter());
 function handleRender(req, res) {
   const store = createStore(rootReducer);
   // Render the component to a string
-  const html = renderToString(<Root store={store} />);
+  // const html = renderToString(<Root store={store} />);
 }
 function renderFullPage(html, preloadedState) {
   const htmlStr = `
