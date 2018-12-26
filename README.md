@@ -23,7 +23,11 @@
 + express
 + jest
 + eslint
++ travis-ci
 
 成品
 -----------------
++ AWS - EC2
+http://ec2-13-115-59-15.ap-northeast-1.compute.amazonaws.com/
++ Heroku
 https://happpyshop.herokuapp.com/
