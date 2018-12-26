@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-  // BrowserRouter as Router,
   Router,
   Route,
   Switch,
