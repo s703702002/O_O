@@ -1,12 +1,11 @@
 const path = require('path');
-const ip = require('ip');
 const merge = require('webpack-merge');
 const common = require('./webpack.basic');
 
 module.exports = merge(common, {
   mode: 'development',
   entry: {
-    app: './client.js',
+    app: './src/client.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -16,7 +15,6 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, './'),
     compress: true,
     port: 8888,
-    // host: ip.address(),
     historyApiFallback: true,
     open: true,
   },
