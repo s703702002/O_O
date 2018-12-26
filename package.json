@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/s703702002/O_O#readme",
   "jest": {
-    "setupFiles": ["jest-localstorage-mock"]
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   },
   "dependencies": {
     "autoprefixer": "^8.6.4",

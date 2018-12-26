@@ -10,9 +10,14 @@ const gqlRouter = require('./routers/graphql');
 // const rootReducer = require('./reducers').default;
 // const Root = require('./components/root').default;
 
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 80;
 const app = express();
-const whitelist = ['http://localhost:9000', 'https://happpyshop.herokuapp.com', 'http://localhost:8888'];
+const whitelist = [
+  'http://localhost',
+  'https://happpyshop.herokuapp.com',
+  'http://localhost:8888',
+  'http://ec2-13-115-59-15.ap-northeast-1.compute.amazonaws.com'
+];
 const corsOptions = {
   origin(origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
