@@ -15,7 +15,7 @@ import CheckoutFinishPage from './components/CheckoutFinishPage';
 import Addfinished from './containers/AddFinish';
 import LightBoxWithConnect from './containers/LightBoxContainer';
 // import './css/main.scss';
-// import { history } from './utilis';
+import { history } from './utilis';
 
 
 const Root = ({ store }) => (
