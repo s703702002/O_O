@@ -41,7 +41,7 @@ app.use('/login', loginRouter);
 app.use('/graphql', gqlRouter());
 
 function handleRender(req, res) {
-  const store = createStore(rootReducer);
+  // const store = createStore(rootReducer);
   // Render the component to a string
   // const html = renderToString(<Root store={store} />);
 }
