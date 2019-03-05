@@ -1,9 +1,9 @@
 const products = require('./products.json');
 const users = require('./member.json');
 const { buildSchema } = require('graphql');
-require('babel-core').transform('code', {
-  plugins: ['transform-object-rest-spread'],
-});
+// require('babel-core').transform('code', {
+//   plugins: ['transform-object-rest-spread'],
+// });
 
 
 let nextId = users.length + 1;

@@ -1,17 +1,16 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/env", {
         "targets": {
           "browsers": ["last 2 versions", "not ie < 11"]
         }
     }],
-    "react"
+    "@babel/react"
   ],
   "plugins": [
-    ["transform-class-properties", { "spec": true }],
-    "transform-object-rest-spread",
-    ["transform-runtime", {
-        "polyfill": false,
+    ["@babel/plugin-proposal-class-properties", { "spec": true }],
+    "@babel/plugin-proposal-object-rest-spread",
+    ["@babel/plugin-transform-runtime", {
         "regenerator": true
     }]
   ]
