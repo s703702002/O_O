@@ -4,5 +4,6 @@ createJson.js
 /node_modules
 /build
 /utilis
+Dockerfile
 
 Form.js
