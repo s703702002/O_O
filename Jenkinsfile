@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:10.15.3-alpine' 
-            args '-p 8888:8888' 
+            args '-p 8888:80' 
         }
     }
     environment {
@@ -22,7 +22,7 @@ pipeline {
         stage('Deliver') { 
             steps {
                 sh 'npm run production'
-                sh '(npm start &) && echo $! > .pidfile'
+                sh './deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh 'echo $(cat .pidfile) && kill $(cat .pidfile)'
             }
