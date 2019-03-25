@@ -19,10 +19,9 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Deliver') { 
+        stage('Deliver') {
             steps {
-                sh 'npm run production'
-                sh 'npm start'
+                sh 'echo Deliver'
             }
         }
     }
