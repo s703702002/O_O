@@ -22,7 +22,7 @@ pipeline {
         stage('Deliver') { 
             steps {
                 sh 'npm run production'
-                sh 'npm start && echo $! > .pidfile'
+                sh '(npm start &) && echo $! > .pidfile'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh 'echo $(cat .pidfile) && kill $(cat .pidfile)'
             }
