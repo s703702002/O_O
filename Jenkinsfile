@@ -19,10 +19,5 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Deliver') {
-            steps {
-                sh 'echo Deliver'
-            }
-        }
     }
 }
