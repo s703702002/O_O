@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:10.15.3-alpine' 
-            args '-p 3000:3000' 
+            args '-p 80:80' 
         }
     }
     environment {
@@ -17,6 +17,12 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'npm test'
+            }
+        }
+        stage('Deliver') { 
+            steps {
+                sh 'npm run production'
+                sh 'npm start'
             }
         }
     }
