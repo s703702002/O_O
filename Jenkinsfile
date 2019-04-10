@@ -26,10 +26,10 @@ pipeline {
                 sh 'echo "Deliver success!"'
             }
         }
-        stage('delete files from workspace') {
+        stage('rm app from workspace') {
             steps {
                 sh 'ls -l'
-                // sh 'sudo rm -rf ./*'
+                sh 'sudo rm -rf ./*'
             }
         }
     }
