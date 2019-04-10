@@ -25,6 +25,7 @@
 + eslint
 + travis-ci
 + jenkins
++ Docker
 
 成品
 -----------------
