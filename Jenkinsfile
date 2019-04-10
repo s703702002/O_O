@@ -1,7 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'node:10.15.3-alpine'
+            image 'node:10.15.3-alpine' 
+            args '-u ec2-user' 
         }
     }
     environment {
