@@ -1,8 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:10.15.3-alpine' 
-            args '-p 8888:80 -u root:root' 
+            image 'node:10.15.3-alpine'
         }
     }
     environment {
@@ -29,7 +28,7 @@ pipeline {
         stage('delete files from workspace') {
             steps {
                 sh 'ls -l'
-                sh 'sudo rm -rf ./*'
+                // sh 'sudo rm -rf ./*'
             }
         }
     }
