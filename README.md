@@ -24,6 +24,7 @@
 + jest
 + eslint
 + travis-ci
++ jenkins
 
 成品
 -----------------
