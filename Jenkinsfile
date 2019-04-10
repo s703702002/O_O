@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:10.15.3-alpine' 
-            args '-u root --rm' 
+            args '--rm' 
         }
     }
     environment {
@@ -24,12 +24,6 @@ pipeline {
                 sh 'npm run production'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh 'echo "Deliver success!"'
-            }
-        }
-        stage('rm app from workspace') {
-            steps {
-                sh 'ls -l'
-                sh 'sudo rm -rf ./*'
             }
         }
     }
