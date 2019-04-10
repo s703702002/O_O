@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:10.15.3-alpine' 
-            args '--rm' 
+            args '-u root --rm' 
         }
     }
     environment {
