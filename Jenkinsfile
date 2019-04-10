@@ -26,5 +26,11 @@ pipeline {
                 sh 'echo "Deliver success!"'
             }
         }
+        stage('rm app from workspace') {
+            steps {
+                sh 'ls -l'
+                sh 'rm -rf ./*'
+            }
+        }
     }
 }
