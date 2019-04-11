@@ -15,6 +15,7 @@ pipeline {
                 sh 'npm --version'
                 sh 'node -v'
                 sh 'npm ci'
+                sh 'npm run production'
             }
         }
         stage('Test') {
