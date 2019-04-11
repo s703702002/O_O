@@ -25,10 +25,11 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Deliver') {
-            steps {
-                sh 'docker images'
-            }
+    }
+    post { 
+        always {
+            echo 'I will always say Hello again!'
+            sh 'docker images'
         }
     }
 }
