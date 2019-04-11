@@ -1,35 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:10.15.3-alpine' 
-            args '-u root --rm' 
-        }
-    }
-    environment {
-        CI = 'true' 
-    }
+    agent { docker { image 'node:6.3' } }
     stages {
-        stage('Build') { 
+        stage('build') {
             steps {
-                sh 'npm install' 
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'npm test'
-            }
-        }
-        stage('Deliver') { 
-            steps {
-                sh 'npm run production'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'echo "Deliver success!"'
-            }
-        }
-        stage('rm app from workspace') {
-            steps {
-                sh 'ls -l'
-                sh 'rm -rf ./*'
+                sh 'npm --version'
+                sh 'node -v'
             }
         }
     }
