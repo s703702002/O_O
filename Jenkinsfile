@@ -2,7 +2,7 @@ pipeline {
     agent { 
         docker { 
             image 'node:10.15.3'
-            args '-v jenkins-data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home'
+            args '-u root -v jenkins-data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home'
         }
     }
     environment {
@@ -14,7 +14,7 @@ pipeline {
                 sh 'echo $HOME'
                 sh 'npm --version'
                 sh 'node -v'
-                sh 'npm install'
+                sh 'npm ci'
             }
         }
         stage('Test') {
