@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh 'npm --version'
                 sh 'node -v'
-                sh 'npm ci'
+                sh 'npm install'
             }
         }
         stage('Test') {
