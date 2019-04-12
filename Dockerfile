@@ -1,6 +1,6 @@
 FROM node:10.15.3
 
-ADD . /app
+COPY . /app
 WORKDIR /app
 
 EXPOSE 80 8888
