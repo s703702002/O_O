@@ -49,8 +49,8 @@ const Header = ({
       >
         {
           (status === 'logined') ?
-            'login' :
-            'logout'
+            '登出' :
+            '登入'
         }
       </button>
     </SimpleHeader>
