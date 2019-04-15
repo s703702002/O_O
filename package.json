@@ -7,9 +7,11 @@
     "test": "jest",
     "lint": "eslint **/*.js",
     "dev": "nodemon",
-    "start:dev": "webpack-dev-server --process --colors --config webpack.dev.js",
-    "start": "node server.js",
-    "production": "webpack --process --config webpack.prod.js",
+    "build:server": "babel src/ --out-dir build",
+    "dev-server": "webpack-dev-server --process --colors --config webpack.dev.js",
+    "start": "NODE_ENV=production node ./build/server.js",
+    "production": "npm run build:server && webpack --process --config webpack.prod.js && npm run copy:static",
+    "copy:static": "cp src/api/*.json build/api/",
     "server": "babel-node server.js"
   },
   "repository": {
@@ -25,6 +27,10 @@
   "jest": {
     "setupFiles": [
       "jest-localstorage-mock"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/node_modules/"
     ]
   },
   "dependencies": {

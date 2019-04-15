@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "exec": "babel-node server.js",
+  "exec": "babel-node src/server.js",
   "watch": [
     ".babelrc"
   ]

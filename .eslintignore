@@ -2,8 +2,9 @@
 **/*.test.js
 createJson.js
 /node_modules
-/build
+/build/
 /utilis
+/src/server.js
 Dockerfile
 
 Form.js

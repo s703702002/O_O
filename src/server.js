@@ -6,8 +6,8 @@ const cors = require('cors');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
-const loginRouter = require('./src/routers/login');
-const gqlRouter = require('./src/routers/graphql');
+const loginRouter = require('./routers/login');
+const gqlRouter = require('./routers/graphql');
 // const rootReducer = require('./src/reducers').default;
 // const Root = require('./src/serverRoot').default;
 
@@ -34,7 +34,6 @@ app.use(cors(corsOptions));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.resolve(__dirname, './build')));
 
 // routers
 app.use('/login', loginRouter);
@@ -76,10 +75,18 @@ function renderFullPage(html, preloadedState) {
   return htmlStr;
 }
 
-app.get('*', (req, res) => {
-  handleRender(req, res);
-  res.sendFile(path.resolve(__dirname, './build/index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+  app.get('/app.css', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './app.css'));
+  });
+  app.get('/app.bundle.js', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './app.bundle.js'));
+  });
+  app.get('/', (req, res) => {
+    handleRender(req, res);
+    res.sendFile(path.resolve(__dirname, './index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`server is start on port: ${PORT}`);

@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.basic');
 
 module.exports = merge(common, {
-  mode: 'production',
+  mode: 'development',
   entry: {
     app: './src/client.js',
   },
