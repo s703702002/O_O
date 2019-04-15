@@ -84,19 +84,25 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/app.bundle.js', (req, res) => {
     res.sendFile(path.resolve(__dirname, './app.bundle.js'));
   });
-  app.get('/', (req, res) => {
-    handleRender(req, res);
-    res.sendFile(path.resolve(__dirname, './index.html'));
-  });
 } else {
   const webpackConfig = require('../webpack.dev.js')
   const compiler = webpack(webpackConfig);
   app.use(
     middleware(compiler, {
-      publicPath: '/'
+      publicPath: '/',
+      index: false,
     })
   )
 }
+
+app.get('/', (req, res) => {
+  handleRender(req, res);
+  res.sendFile(path.resolve(__dirname, './index.html'));
+});
+
+app.get('*', (req, res) => {
+  res.send('sorry, your page not found');
+})
 
 app.listen(PORT, () => {
   console.log(`server is start on port: ${PORT}`);
