@@ -11,11 +11,4 @@ module.exports = merge(common, {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist'),
   },
-  devServer: {
-    contentBase: path.join(__dirname, './'),
-    compress: true,
-    port: 8888,
-    historyApiFallback: true,
-    open: true,
-  },
 });

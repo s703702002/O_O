@@ -2,6 +2,8 @@ const path = require('path');
 const React = require('react');
 const { createStore } = require('redux');
 const { renderToString } = require('react-dom/server');
+const webpack = require('webpack');
+const middleware = require('webpack-dev-middleware');
 const cors = require('cors');
 const compression = require('compression');
 const bodyParser = require('body-parser');
@@ -86,6 +88,14 @@ if (process.env.NODE_ENV === 'production') {
     handleRender(req, res);
     res.sendFile(path.resolve(__dirname, './index.html'));
   });
+} else {
+  const webpackConfig = require('../webpack.dev.js')
+  const compiler = webpack(webpackConfig);
+  app.use(
+    middleware(compiler, {
+      publicPath: '/'
+    })
+  )
 }
 
 app.listen(PORT, () => {
