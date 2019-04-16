@@ -9,9 +9,9 @@ const express = require('express');
 const fetch = require('isomorphic-fetch');
 const loginRouter = require('./routers/login');
 const gqlRouter = require('./routers/graphql');
-const rootReducer = require('./reducers').default;
-const ServeRoot = require('./serverRoot').default;
-const { receiveProducts } = require('./action/index');
+// const rootReducer = require('./reducers').default;
+// const ServeRoot = require('./serverRoot').default;
+// const { receiveProducts } = require('./action/index');
 
 const PORT = process.env.PORT || 80;
 const app = express();
@@ -69,35 +69,37 @@ const getAllProductsAPI = () => {
 };
 
 function handleRender(req, res) {
-  const store = createStore(rootReducer);
-  const { dispatch } = store;
+  // const store = createStore(rootReducer);
+  // const { dispatch } = store;
   console.log('req url', req.url);
-  getAllProductsAPI()
-    .then(response => {
-      dispatch(receiveProducts(response.products));
 
-      const context = {};
-      // Render the component to a string
-      const html = renderToString(
-        <ServeRoot
-          store={store}
-          location={req.url}
-          context={context}
-        />
-      );
+  return res.sendFile(path.resolve(__dirname, './index.html'));
 
-      const preloadedState = store.getState();
+  // getAllProductsAPI()
+  //   .then(response => {
+  //     dispatch(receiveProducts(response.products));
 
-      if (context.url) {
-        return res.redirect(301, context.url);
-      }
+  //     const context = {};
+  //     // Render the component to a string
+  //     const html = renderToString(
+  //       <ServeRoot
+  //         store={store}
+  //         location={req.url}
+  //         context={context}
+  //       />
+  //     );
 
-      res.send(renderFullPage(html, preloadedState));
-      // res.sendFile(path.resolve(__dirname, './index.html'));
-    })
-    .catch(error => {
-      res.send('some Error in [handleRender]', error)
-    })
+  //     const preloadedState = store.getState();
+
+  //     if (context.url) {
+  //       return res.redirect(301, context.url);
+  //     }
+
+  //     res.send(renderFullPage(html, preloadedState));
+  //   })
+  //   .catch(error => {
+  //     res.send('some Error in [handleRender]', error)
+  //   })
 }
 function renderFullPage(html, preloadedState) {
   const htmlStr = `
