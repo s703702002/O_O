@@ -1,10 +1,4 @@
-import createBrowserHistory from 'history/createBrowserHistory';
-
 const clone = target => JSON.parse(JSON.stringify(target));
-
-const history = createBrowserHistory();
-
-const { push } = history;
 
 function serialize(obj) {
   const str = Object.entries(obj).map(item => `${encodeURIComponent(item[0])}=${encodeURIComponent(item[1])}`);
@@ -12,7 +6,8 @@ function serialize(obj) {
 }
 
 function queryToObj(queryString) {
-  return JSON.parse('{"' + decodeURI(queryString.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+  const handleQs = decodeURI(queryString.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"');
+  return JSON.parse(`{"${handleQs}"}`);
 }
 
 function getRandomItem(arr, amount) {
@@ -29,7 +24,7 @@ function getRandomItem(arr, amount) {
   return result;
 }
 
-function pushHistory(queryObj) {
+function pushHistory(queryObj, history) {
   let { search } = history.location;
   const { page } = queryObj;
   if (!search.length) {
@@ -61,6 +56,4 @@ export {
   clone,
   getRandomItem,
   pushHistory,
-  history,
-  push,
 };

@@ -1,29 +1,18 @@
-import React, { Component } from 'react';
-import {
-  push,
-} from '../utilis';
-
-// 可以pushHistory的按鈕
+import React from 'react';
+import { withRouter } from 'react-router';
 
 const PushButton = ({
   className,
   path,
   text,
+  history,
 }) => (
   <button
     className={className}
-    onClick={() => { push(path); }}
+    onClick={() => { history.push(path); }}
   >
     {text}
   </button>
 );
 
-export function withPush(WrappedComponent) {
-  return class extends Component {
-    render() {
-      return <WrappedComponent push={push} {...this.props} />;
-    }
-  };
-}
-
-export default PushButton;
+export default withRouter(PushButton);

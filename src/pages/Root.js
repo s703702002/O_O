@@ -1,24 +1,24 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-  StaticRouter,
+  BrowserRouter,
   Route,
   Switch,
   Redirect,
 } from 'react-router-dom';
-import Home from './pages/Home';
-import ProductPage from './pages/ProductPage';
-import CheckoutPage from './pages/CheckoutPage';
-import NotFound from './pages/404';
-import CustomerInfoPage from './pages/CustomerInfoPage';
-import CheckoutFinishPage from './pages/CheckoutFinishPage';
-import Addfinished from './containers/AddFinish';
-import LightBoxWithConnect from './containers/LightBoxContainer';
-// import './css/main.scss';
+import Home from './Home';
+import ProductPage from './ProductPage';
+import CheckoutPage from './CheckoutPage';
+import NotFound from './404';
+import CustomerInfoPage from './CustomerInfoPage';
+import CheckoutFinishPage from './CheckoutFinishPage';
+import Addfinished from '../containers/AddFinish';
+import LightBoxWithConnect from '../containers/LightBoxContainer';
+import '../css/main.scss';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <StaticRouter location="http://localhost" context={{}}>
+    <BrowserRouter>
       <div className="mb-5">
         <Switch>
           <Route exact path="/" component={Home} />
@@ -43,7 +43,7 @@ const Root = ({ store }) => (
         <Addfinished />
         <LightBoxWithConnect />
       </div>
-    </StaticRouter>
+    </BrowserRouter>
   </Provider>
 );
 

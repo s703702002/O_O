@@ -4,14 +4,13 @@ import { withRouter } from 'react-router';
 import PushButton from '../components/PushButton';
 import Form from '../components/Form';
 import OrderInfo from './OrderInfo';
-import { push } from '../utilis';
 
 class CustomerInfoContainer extends Component {
   customerForm = null;
   confirmHandler = () => {
     const { customerForm } = this;
     if (!customerForm.getValid()) return;
-    push('/checkoutfinish');
+    this.props.history.push('/checkoutfinish');
   }
   render() {
     return (
