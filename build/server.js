@@ -10,10 +10,6 @@ var _require = require('redux'),
 var _require2 = require('react-dom/server'),
     renderToString = _require2.renderToString;
 
-var webpack = require('webpack');
-
-var middleware = require('webpack-dev-middleware');
-
 var cors = require('cors');
 
 var compression = require('compression');
@@ -116,6 +112,10 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, './app.bundle.js'));
   });
 } else {
+  var webpack = require('webpack');
+
+  var middleware = require('webpack-dev-middleware');
+
   var webpackConfig = require('../webpack.dev.js');
 
   var compiler = webpack(webpackConfig);
