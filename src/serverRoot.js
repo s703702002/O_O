@@ -21,7 +21,7 @@ import LightBoxWithConnect from './containers/LightBoxContainer';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <StaticRouter location={'http://localhost'} context={{}}>
+    <StaticRouter location="http://localhost" context={{}}>
       <div className="mb-5">
         <Switch>
           <Route exact path="/" component={Home} />
