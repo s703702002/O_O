@@ -8,10 +8,12 @@ const cors = require('cors');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
+const fetch = require('isomorphic-fetch');
 const loginRouter = require('./routers/login');
 const gqlRouter = require('./routers/graphql');
 const rootReducer = require('./reducers').default;
 const ServeRoot = require('./serverRoot').default;
+const { receiveProducts } = require('./action/index');
 
 const PORT = process.env.PORT || 80;
 const app = express();
@@ -41,26 +43,63 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/login', loginRouter);
 app.use('/graphql', gqlRouter());
 
+const getAllProductsAPI = () => {
+  const productInfoFragment = `fragment productInfo on Product{
+    id
+    title
+    price
+    gender
+    inventory
+  }`;
+  const query = `
+    query {
+      products{
+        ...productInfo
+      }
+    }
+    ${productInfoFragment}
+  `;
+  return fetch('http://localhost/graphql/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: "same-origin",
+    body: JSON.stringify({ query }),
+  }).then(r => r.json())
+    .then(({ data }) => data);
+};
+
 function handleRender(req, res) {
   const store = createStore(rootReducer);
-  const context = {};
-  // Render the component to a string
-  const html = renderToString(
-    <ServeRoot
-      store={store}
-      location={req.url}
-      context={context}
-    />
-  );
+  const { dispatch } = store;
+  console.log('req url', req.url);
+  getAllProductsAPI()
+    .then(response => {
+      dispatch(receiveProducts(response.products));
 
-  const preloadedState = store.getState()
+      const context = {};
+      // Render the component to a string
+      const html = renderToString(
+        <ServeRoot
+          store={store}
+          location={req.url}
+          context={context}
+        />
+      );
 
-  if (context.url) {
-    return res.redirect(301, context.url);
-  }
+      const preloadedState = store.getState();
 
-  res.send(renderFullPage(html, preloadedState));
-   // res.sendFile(path.resolve(__dirname, './index.html'));
+      if (context.url) {
+        return res.redirect(301, context.url);
+      }
+
+      res.send(renderFullPage(html, preloadedState));
+      // res.sendFile(path.resolve(__dirname, './index.html'));
+    })
+    .catch(error => {
+      res.send('some Error in [handleRender]', error)
+    })
 }
 function renderFullPage(html, preloadedState) {
   const htmlStr = `

@@ -10,7 +10,7 @@
     "build:server": "babel src/ --out-dir build",
     "start": "NODE_ENV=production node ./build/server.js",
     "production": "npm run build:server && webpack --process --config webpack.prod.js && npm run copy:static",
-    "copy:static": "cp src/api/*.json build/api/"
+    "copy:static": "cp src/api/*.json build/api/ && mkdir -p build/static && cp -R src/static/* build/static"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "graphql": "^0.13.2",
     "history": "^4.7.2",
     "html-webpack-plugin": "^3.2.0",
+    "isomorphic-fetch": "^2.2.1",
     "mini-css-extract-plugin": "^0.4.1",
     "postcss-loader": "^2.1.5",
     "prop-types": "^15.6.2",

@@ -33,6 +33,7 @@ function getUserInfo(memberId) {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'same-origin',
     body: JSON.stringify({
       query,
     }),
@@ -46,6 +47,7 @@ export const loginAPI = ({ username, password }) => delay(1000).then(() =>
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'same-origin',
     body: JSON.stringify({
       username,
       password,
@@ -71,6 +73,7 @@ export const getAllProductsAPI = () => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'same-origin',
     body: JSON.stringify({ query }),
   }).then(r => r.json())
     .then(({ data }) => data);
@@ -90,6 +93,7 @@ export const getProductAPI = ({ productId }) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'same-origin',
     body: JSON.stringify({ query }),
   }).then(r => r.json())
     .then(({ data }) => data);

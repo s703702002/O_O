@@ -27,6 +27,10 @@
 + jenkins
 + Docker
 
+To Do
+-----------------
++ SSR的DOM與Client的DOM不match，因為array.sort implement 差異
+
 成品
 -----------------
 + AWS - EC2
