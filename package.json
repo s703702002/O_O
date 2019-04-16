@@ -9,6 +9,7 @@
     "dev": "nodemon",
     "build:server": "babel src/ --out-dir build",
     "start": "NODE_ENV=production node ./build/server.js",
+    "preproduction": "rm -rf build/",
     "production": "npm run build:server && webpack --process --config webpack.prod.js && npm run copy:static",
     "copy:static": "cp src/api/*.json build/api/ && mkdir -p build/static && cp -R src/static/* build/static"
   },
