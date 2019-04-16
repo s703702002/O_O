@@ -6,7 +6,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import Home from './Home';
+import Home from '../components/Home';
 import ProductPage from './ProductPage';
 import CheckoutPage from './CheckoutPage';
 import NotFound from './404';

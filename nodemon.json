@@ -3,7 +3,7 @@
   "exec": "babel-node src/server.js",
   "watch": [
     ".babelrc",
-    "src/server.js"
+    "src/*.js"
   ],
   "env": {
     "NODE_ENV": "development"

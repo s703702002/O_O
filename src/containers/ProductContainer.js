@@ -12,7 +12,7 @@ import {
 import ProductInfo from '../components/ProductInfo';
 import Card from '../components/Card';
 import Counter from '../components/Counter';
-import NotFound from '../components/404';
+import NotFound from '../pages/404';
 import PushButton from '../components/PushButton';
 
 const LoadProduct = () => (

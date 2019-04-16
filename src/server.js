@@ -10,8 +10,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const loginRouter = require('./routers/login');
 const gqlRouter = require('./routers/graphql');
-// const rootReducer = require('./src/reducers').default;
-// const Root = require('./src/serverRoot').default;
+const rootReducer = require('./reducers').default;
+// const Root = require('./serverRoot').default;
 
 const PORT = process.env.PORT || 80;
 const app = express();
@@ -42,9 +42,13 @@ app.use('/login', loginRouter);
 app.use('/graphql', gqlRouter());
 
 function handleRender(req, res) {
-  // const store = createStore(rootReducer);
+  const store = createStore(rootReducer);
   // Render the component to a string
-  // const html = renderToString(<Root store={store} />);
+  const html = renderToString(<Root store={store} />);
+
+  const preloadedState = store.getState()
+
+  res.send(renderFullPage(html, preloadedState))
 }
 function renderFullPage(html, preloadedState) {
   const htmlStr = `
@@ -95,14 +99,10 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-app.get('/', (req, res) => {
-  handleRender(req, res);
+app.get('/*', (req, res) => {
+  // handleRender(req, res);
   res.sendFile(path.resolve(__dirname, './index.html'));
 });
-
-app.get('*', (req, res) => {
-  res.send('sorry, your page not found');
-})
 
 app.listen(PORT, () => {
   console.log(`server is start on port: ${PORT}`);

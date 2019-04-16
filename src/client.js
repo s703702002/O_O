@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './components/root';
+import Root from './pages/Home';
 import configureStore from './configureStore';
 
 const preloadedState = () => {
