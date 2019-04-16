@@ -11,7 +11,7 @@ const express = require('express');
 const loginRouter = require('./routers/login');
 const gqlRouter = require('./routers/graphql');
 const rootReducer = require('./reducers').default;
-// const Root = require('./serverRoot').default;
+const ServeRoot = require('./serverRoot').default;
 
 const PORT = process.env.PORT || 80;
 const app = express();
@@ -43,12 +43,24 @@ app.use('/graphql', gqlRouter());
 
 function handleRender(req, res) {
   const store = createStore(rootReducer);
+  const context = {};
   // Render the component to a string
-  const html = renderToString(<Root store={store} />);
+  const html = renderToString(
+    <ServeRoot
+      store={store}
+      location={req.url}
+      context={context}
+    />
+  );
 
   const preloadedState = store.getState()
 
-  res.send(renderFullPage(html, preloadedState))
+  if (context.url) {
+    return res.redirect(301, context.url);
+  }
+
+  res.send(renderFullPage(html, preloadedState));
+   // res.sendFile(path.resolve(__dirname, './index.html'));
 }
 function renderFullPage(html, preloadedState) {
   const htmlStr = `
@@ -65,7 +77,7 @@ function renderFullPage(html, preloadedState) {
         <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
         <title>Happy Shop</title>
-        <link href="app.css" rel="stylesheet"></head>
+        <link href="app.css" rel="stylesheet">
       </head>
       <body>
         <div id="root">${html}</div>
@@ -99,10 +111,7 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-app.get('/*', (req, res) => {
-  // handleRender(req, res);
-  res.sendFile(path.resolve(__dirname, './index.html'));
-});
+app.get('/*', handleRender);
 
 app.listen(PORT, () => {
   console.log(`server is start on port: ${PORT}`);

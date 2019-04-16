@@ -16,9 +16,9 @@ import Addfinished from './containers/AddFinish';
 import LightBoxWithConnect from './containers/LightBoxContainer';
 // import './css/main.scss';
 
-const Root = ({ store }) => (
+const Root = ({ store, location, context }) => (
   <Provider store={store}>
-    <StaticRouter location="http://localhost" context={{}}>
+    <StaticRouter location={location} context={context}>
       <div className="mb-5">
         <Switch>
           <Route exact path="/" component={Home} />

@@ -17,7 +17,8 @@
           "components": [ "Link" ],
           "specialLink": [ "to" ]
         }],
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-underscore-dangle": "off"
     },
     "env": {
         "browser": true,
