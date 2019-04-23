@@ -2,7 +2,7 @@
   "name": "o_o",
   "version": "1.0.0",
   "description": "funny",
-  "main": "index.js",
+  "main": "./build/server.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint **/*.js",
