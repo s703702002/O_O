@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter add work! 1`] = `
+<div>
+  <div
+    class="counter"
+  >
+    <button
+      class="btn btn-light material-icons"
+    >
+      remove
+    </button>
+    <span
+      class="count"
+    >
+      10
+    </span>
+    <button
+      class="btn btn-light material-icons"
+    >
+      add
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Counter minus work! 1`] = `
+<div>
+  <div
+    class="counter"
+  >
+    <button
+      class="btn btn-light material-icons"
+    >
+      remove
+    </button>
+    <span
+      class="count"
+    >
+      4
+    </span>
+    <button
+      class="btn btn-light material-icons"
+    >
+      add
+    </button>
+  </div>
+</div>
+`;
