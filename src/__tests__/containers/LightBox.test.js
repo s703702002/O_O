@@ -8,7 +8,11 @@ import LightBoxContainer from '../../containers/LightBoxContainer'
 afterEach(cleanup);
 
 const mockInitState = {
-  lightBoxMessage: "hello world"
+  lightBoxMessage: 'hello world'
+};
+
+const mockEmptyMessage = {
+  lightBoxMessage: ''
 };
 
 function renderWithRedux(
@@ -28,7 +32,15 @@ function renderWithRedux(
 test('<LightBoxContainer /> render', () => {
   const { asFragment } = renderWithRedux(<LightBoxContainer/>, {
     initialState: mockInitState
-  })
+  });
 
-  expect(asFragment()).toMatchSnapshot()
+  expect(asFragment()).toMatchSnapshot();
+});
+
+test('<LightBoxContainer /> will render null', () => {
+  const { container } = renderWithRedux(<LightBoxContainer/>, {
+    initialState: mockEmptyMessage
+  });
+
+  expect(container.childElementCount).toBe(0);
 });
