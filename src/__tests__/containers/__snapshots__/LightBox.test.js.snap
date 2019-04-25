@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LightBoxContainer /> render 1`] = `
+<DocumentFragment>
+  <div
+    class="modal light_box"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered"
+      role="document"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-body"
+        >
+          <i
+            class="material-icons text-warning"
+          >
+            error_outline
+          </i>
+          <p
+            class="text-warning font-weight-bold message"
+          >
+            hello world
+          </p>
+          <button
+            class="btn btn-outline-info"
+          >
+            知道了
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mask"
+      role="document"
+    />
+  </div>
+</DocumentFragment>
+`;

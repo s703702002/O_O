@@ -49,5 +49,5 @@ const AppStore = combineReducers({
   lightBoxMessage,
 });
 
-export { login, loginBoxOpen, products, productPage, shoppingCart };
+export { login, loginBoxOpen, products, productPage, shoppingCart, lightBoxMessage };
 export default AppStore;
