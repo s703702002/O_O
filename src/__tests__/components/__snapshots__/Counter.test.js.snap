@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Counter add work! 1`] = `
-<div>
+exports[`Counter add 1`] = `
+<DocumentFragment>
   <div
     class="counter"
   >
@@ -13,7 +13,7 @@ exports[`Counter add work! 1`] = `
     <span
       class="count"
     >
-      10
+      7
     </span>
     <button
       class="btn btn-light material-icons"
@@ -21,11 +21,11 @@ exports[`Counter add work! 1`] = `
       add
     </button>
   </div>
-</div>
+</DocumentFragment>
 `;
 
-exports[`Counter minus work! 1`] = `
-<div>
+exports[`Counter minus 1`] = `
+<DocumentFragment>
   <div
     class="counter"
   >
@@ -45,5 +45,5 @@ exports[`Counter minus work! 1`] = `
       add
     </button>
   </div>
-</div>
+</DocumentFragment>
 `;

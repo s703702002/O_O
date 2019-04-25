@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Render 1`] = `
+<DocumentFragment>
+  <div
+    class="col-5 product_card"
+    role="document"
+  >
+    <a
+      class="card"
+      href="/124"
+    >
+      <img
+        alt="mock title"
+        class="card-img-top"
+        src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16576763d66%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16576763d66%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.8359375%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+      />
+      <div
+        class="card-body"
+      >
+        <h5
+          class="card-title"
+        >
+          mock title
+          <span
+            class="float-right"
+          >
+            女裝
+          </span>
+        </h5>
+        <p
+          class="card-text"
+        >
+          售價: 2100 元
+        </p>
+        <p
+          class="card-text"
+        >
+          <small
+            class="text-muted"
+          >
+            庫存: 199
+          </small>
+        </p>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Card Render mock2 1`] = `
+<DocumentFragment>
+  <div
+    class="col-4 product_card"
+    role="document"
+  >
+    <a
+      class="card"
+      href="/332"
+    >
+      <img
+        alt="mock 2"
+        class="card-img-top"
+        src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16576763d66%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16576763d66%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.8359375%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+      />
+      <div
+        class="card-body"
+      >
+        <h5
+          class="card-title"
+        >
+          mock 2
+          <span
+            class="float-right"
+          >
+            男裝
+          </span>
+        </h5>
+        <p
+          class="card-text"
+        >
+          售價: 300 元
+        </p>
+        <p
+          class="card-text"
+        >
+          <small
+            class="text-muted"
+          >
+            庫存: 99
+          </small>
+        </p>
+      </div>
+    </a>
+  </div>
+</DocumentFragment>
+`;

@@ -1,16 +1,16 @@
 import { takeEvery, call, put, fork, cancel, take } from 'redux-saga/effects';
-import { delay } from '../utilis';
-import { loginAPI } from '../api';
+import { delay } from '../../utilis';
+import { loginAPI } from '../../api';
 import {
   loginSuccess,
   loginError,
   loginCancel,
   closeLoginBox,
-} from '../action';
+} from '../../action';
 import {
   loginFlow,
   authorize,
-} from './loginSaga';
+} from '../../sagas/loginSaga';
 
 const user = {
   username: 'stanley',
