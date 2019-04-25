@@ -13,5 +13,9 @@
     ["@babel/plugin-transform-runtime", {
         "regenerator": true
     }]
+  ],
+  "ignore": [
+    "src/**/*.spec.js",
+    "src/**/*.test.js"
   ]
 }
