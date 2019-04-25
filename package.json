@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "eslint **/*.js",
     "dev": "nodemon",
-    "build:server": "babel src/ --out-dir build",
+    "build:server": "babel src/ --out-dir build --ignore src/**/*.spec.js,src/**/*.test.js",
     "start": "NODE_ENV=production node ./build/server.js",
     "preproduction": "rm -rf build/",
     "production": "npm run build:server && webpack --process --config webpack.prod.js && npm run copy:static",
