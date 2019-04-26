@@ -29,7 +29,7 @@ Object.defineProperty(exports, "shoppingCart", {
     return _shopping_cart.default;
   }
 });
-exports.default = exports.loginBoxOpen = void 0;
+exports.default = exports.lightBoxMessage = exports.loginBoxOpen = void 0;
 
 var _redux = require("redux");
 
@@ -93,6 +93,7 @@ var lightBoxMessage = function lightBoxMessage() {
   }
 };
 
+exports.lightBoxMessage = lightBoxMessage;
 var AppStore = (0, _redux.combineReducers)({
   login: _login.default,
   loginBoxOpen: loginBoxOpen,
