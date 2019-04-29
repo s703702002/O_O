@@ -1,9 +1,8 @@
 import { delay } from '../utilis';
 
-// const port = window.location.port.length > 0 ? `:${window.location.port}` : '';
-const domain = `${window.location.protocol}//${window.location.hostname}`;
-const graphqlUri = `${domain}/graphql/`;
-const loginUri = `${domain}/login`;
+const graphqlUri = `${window.location.href}graphql/`;
+const loginUri = `${window.location.href}login`;
+
 const productInfoFragment = `fragment productInfo on Product{
   id
   title

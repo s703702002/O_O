@@ -7,10 +7,8 @@ exports.getProductAPI = exports.getAllProductsAPI = exports.loginAPI = void 0;
 
 var _utilis = require("../utilis");
 
-// const port = window.location.port.length > 0 ? `:${window.location.port}` : '';
-var domain = "".concat(window.location.protocol, "//").concat(window.location.hostname);
-var graphqlUri = "".concat(domain, "/graphql/");
-var loginUri = "".concat(domain, "/login");
+var graphqlUri = "".concat(window.location.href, "graphql/");
+var loginUri = "".concat(window.location.href, "login");
 var productInfoFragment = "fragment productInfo on Product{\n  id\n  title\n  price\n  gender\n  inventory\n}";
 
 function getUserInfo(memberId) {
