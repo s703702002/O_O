@@ -5,7 +5,7 @@ import {
   cleanup,
 } from 'react-testing-library';
 import 'jest-dom/extend-expect';
-import Counter from '../../components/Counter';
+import Counter from '../../src/components/Counter';
 
 afterEach(cleanup);
 

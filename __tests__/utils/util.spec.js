@@ -1,7 +1,7 @@
 import {
   getRandomItem,
   queryToObj,
-} from '../../utilis/index'
+} from '../../src/utilis'
 
 test('getRandomItem test', () => {
   const arr = [1, 2, 3, 4, 5, 6, 7];

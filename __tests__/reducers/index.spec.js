@@ -4,14 +4,14 @@ import {
   products,
   productPage,
   shoppingCart,
-} from '../../reducers';
+} from '../../src/reducers';
 import {
   openLoginBox,
   closeLoginBox,
   loginSuccess,
   addToCart,
   reduceCartItem,
-} from '../../action';
+} from '../../src/action';
 
 test('登入reducer測試', () => {
   // 假設登入成功發的action

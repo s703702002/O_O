@@ -5,7 +5,7 @@ import {
 } from 'react-testing-library';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import Card from '../../components/Card';
+import Card from '../../src/components/Card';
 
 afterEach(cleanup);
 

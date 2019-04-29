@@ -8,14 +8,14 @@ import {
   MemoryRouter,
 } from 'react-router-dom';
 import 'jest-dom/extend-expect';
-import { loginSuccess } from '../../action';
-import rootReducer from '../../reducers';
-import Home from '../../pages/Home';
-import ProductPage from '../../pages/ProductPage';
-import CheckoutPage from '../../pages/CheckoutPage';
-import NotFound from '../../pages/404';
-import CustomerInfoPage from '../../pages/CustomerInfoPage';
-import CheckoutFinishPage from '../../pages/CheckoutFinishPage';
+import { loginSuccess } from '../../src/action';
+import rootReducer from '../../src/reducers';
+import Home from '../../src/pages/Home';
+import ProductPage from '../../src/pages/ProductPage';
+import CheckoutPage from '../../src/pages/CheckoutPage';
+import NotFound from '../../src/pages/404';
+import CustomerInfoPage from '../../src/pages/CustomerInfoPage';
+import CheckoutFinishPage from '../../src/pages/CheckoutFinishPage';
 
 const Root = ({ store }) => (
   <div>

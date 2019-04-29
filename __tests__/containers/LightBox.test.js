@@ -2,8 +2,8 @@ import React from 'react'
 import { createStore } from 'redux'
 import { render, cleanup } from 'react-testing-library'
 import { Provider } from 'react-redux'
-import { lightBoxMessage } from '../../reducers'
-import LightBoxContainer from '../../containers/LightBoxContainer'
+import { lightBoxMessage } from '../../src/reducers'
+import LightBoxContainer from '../../src/containers/LightBoxContainer'
 
 afterEach(cleanup);
 

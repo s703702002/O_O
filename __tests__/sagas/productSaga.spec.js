@@ -1,10 +1,10 @@
 import { call, put } from 'redux-saga/effects';
-import { getProductAPI } from '../../api';
+import { getProductAPI } from '../../src/api';
 import {
   receiveProduct,
   getProductsError,
-} from '../../action';
-import { productFlow } from '../../sagas/productSaga';
+} from '../../src/action';
+import { productFlow } from '../../src/sagas/productSaga';
 
 test('product saga測試', () => {
   const res = {
