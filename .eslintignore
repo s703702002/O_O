@@ -5,6 +5,7 @@ createJson.js
 /build/
 /utilis
 /src/server.js
+/codecept
 Dockerfile
 
 Form.js
