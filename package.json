@@ -4,8 +4,8 @@
   "description": "funny",
   "main": "./build/server.js",
   "scripts": {
-    "test": "jest --coverage --verbose",
-    "lint": "eslint **/*.js",
+    "test": "jest",
+    "lint": "if eslint src/**/*.js; then echo '💯 Lint perfect'; else echo '⁉️ Lint get error please run `npm run lint` check again';exit 1; fi",
     "dev": "nodemon",
     "build:server": "babel src/ --out-dir build --ignore src/**/*.spec.js,src/**/*.test.js",
     "start": "NODE_ENV=production node ./build/server.js",
@@ -14,7 +14,8 @@
     "copy:static": "cp src/api/*.json build/api/ && mkdir -p build/static && cp -R src/static/* build/static",
     "functional:local": "codeceptjs run --verbose --steps --config=./codecept/codecept.conf.js",
     "install:selenium": "selenium-standalone install",
-    "start:selenium": "selenium-standalone start"
+    "start:selenium": "selenium-standalone start > /dev/null 2>&1 &",
+    "kill:selenium": "lsof -t -i :4444 | xargs kill"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,8 @@
   },
   "homepage": "https://github.com/s703702002/O_O#readme",
   "jest": {
+    "collectCoverage": true,
+    "verbose": true,
     "setupFilesAfterEnv": [
       "react-testing-library/cleanup-after-each"
     ],
