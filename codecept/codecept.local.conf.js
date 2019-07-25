@@ -7,7 +7,7 @@ exports.config = {
       browser: 'chrome',
       desiredCapabilities: {
         chromeOptions: {
-          // args: [ "--headless", '--disable-extensions', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage']
+          args: [ "--headless", '--disable-extensions', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage']
         }
       },
       windowSize: '1440x1200',
@@ -23,5 +23,11 @@ exports.config = {
   bootstrap: null,
   mocha: {},
   name: 'O_O',
-  translation: 'zh-TW', 
+  translation: 'zh-TW',
+  plugins: {
+    wdio: {
+      enabled: true,
+      services: ['selenium-standalone']
+    }
+  }
 };
