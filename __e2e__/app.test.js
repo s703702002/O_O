@@ -1,9 +1,13 @@
 // Doc: https://codecept.io/helpers/WebDriverIO/#waitforelement
+
+const { I } = inject();
+
 Feature('My App Test');
 
-Scenario('測試 App 首頁', (I) => {
+Scenario('測試 App 首頁', async () => {
   I.say('Hello World');
   I.amOnPage('http://localhost:8888/');
+  await I.eyesCheck('HomePage!')
   I.see('商品366');
   I.see('Happy');
   I.see('pleas Login');
@@ -21,6 +25,7 @@ Scenario('測試 App 首頁', (I) => {
 
   I.click('登入');
   I.see('0000');
+  await I.eyesCheck('登入');
   
   I.appendField('#account', 'stanley');
   I.appendField('#password', '0000');
@@ -34,4 +39,5 @@ Scenario('測試 App 首頁', (I) => {
   // login status still valid after refreshPage
   I.refreshPage();
   I.see('2');
+  await I.eyesCheck('afterRefresh');
 });
