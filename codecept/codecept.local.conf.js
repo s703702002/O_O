@@ -2,16 +2,12 @@ exports.config = {
   tests: '../__e2e__/**/**.test.js',
   output: '../report',
   helpers: {
-    ApplitoolsHelper: {
-      require: './helper/applitoolsHelper.js',
-      applitoolsKey: 'VFWhfzpAuAn108oIRqFkr0qOmD9MBXfgixpQKZPMQruYg110'
-    },
     WebDriver: {
-      url: 'http://localhost:4444',
+      url: 'http://localhost:8888',
       browser: 'chrome',
       desiredCapabilities: {
         chromeOptions: {
-          args: [ "--headless", '--disable-extensions', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage']
+          // args: [ "--headless", '--disable-extensions', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage']
         }
       },
       windowSize: '1440x1200',

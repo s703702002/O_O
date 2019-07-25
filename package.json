@@ -12,7 +12,7 @@
     "preproduction": "rm -rf build/",
     "production": "npm run build:server && webpack --process --config webpack.prod.js && npm run copy:static",
     "copy:static": "cp src/api/*.json build/api/ && mkdir -p build/static && cp -R src/static/* build/static",
-    "functional:local": "codeceptjs run --verbose --steps --config=./codecept/codecept.conf.js",
+    "functional:local": "codeceptjs run --verbose --steps --config=./codecept/codecept.local.conf.js",
     "install:selenium": "selenium-standalone install",
     "start:selenium": "selenium-standalone start > /dev/null 2>&1 &",
     "kill:selenium": "lsof -t -i :4444 | xargs kill"

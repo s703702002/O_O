@@ -3,14 +3,12 @@ let eyes = new Eyes();
 let Helper = codecept_helper;
 let windowsSize;
 let appName;
-
 class ApplitoolsHelper extends Helper {
   constructor(config) {
     super(config);
     this.config = config;
     eyes.setApiKey(config.applitoolsKey);
     appName = config.appName || 'Application Under Test';
-    this.browser = null;
   }
 
   async _beforeSuite(suite) {
@@ -24,16 +22,8 @@ class ApplitoolsHelper extends Helper {
       windowsSize = { width: 800, height: 600 };
     }
 
-    this.browser = await this.helpers['WebDriver']._startBrowser();
-    await eyes.open(this.browser, appName, suite.title, windowsSize);
-  }
-
-  async _afterSuite() {
-    try {
-      await eyes.close()
-    } finally {
-      await eyes.abortIfNotClosed()
-    }
+    let client = await this.helpers['WebDriver']._startBrowser();
+    await eyes.open(client, appName, suite.title, windowsSize);
   }
 
   _getWindowsSize(config) {
@@ -42,6 +32,7 @@ class ApplitoolsHelper extends Helper {
 
   async eyesCheck(pageName) {
     await eyes.check(pageName, Target.window());
+    await eyes.close();
   }
 
 }
