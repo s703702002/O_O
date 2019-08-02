@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   openLoginBox,
@@ -24,52 +24,46 @@ const SimpleHeader = ({ children }) => (
   </div>
 );
 
-const Header = ({
-  username,
-  status,
-  clickLogin,
-  clickLogout,
-}) => (
-  <React.Fragment>
-    <SimpleHeader>
-      <span className="mr-2 ">
-        {
-          (username) ?
-            <Person username={username} /> :
-            'pleas Login'
-        }
-      </span>
-      <SoppingCart />
-      <button
-        className="btn btn-outline-primary"
-        onClick={() => {
-          if (username) clickLogout();
-          else clickLogin();
-        }}
-      >
-        {
-          (status === 'logined') ?
-            '登出' :
-            '登入'
-        }
-      </button>
-    </SimpleHeader>
-    <LoginBox />
-  </React.Fragment>
-);
-
-const mapStateToProps = (state) => {
-  const { login: { username, status } } = state;
-  return {
-    username,
-    status,
-  };
+const Header = () => {
+  const login = useSelector(state => state.login);
+  const dispatch = useDispatch();
+  const clickLogin = useCallback(
+    () => dispatch(openLoginBox),
+    [dispatch],
+  );
+  const clickLogOut = useCallback(
+    () => dispatch(logOut),
+    [dispatch],
+  );
+  return (
+    <React.Fragment>
+      <SimpleHeader>
+        <span className="mr-2 ">
+          {
+            (login.username) ?
+              <Person username={login.username} /> :
+              'pleas Login'
+          }
+        </span>
+        <SoppingCart />
+        <button
+          className="btn btn-outline-primary"
+          onClick={() => {
+            if (login.status === 'logined') clickLogOut();
+            else clickLogin();
+          }}
+        >
+          {
+            (login.status === 'logined') ?
+              '登出' :
+              '登入'
+          }
+        </button>
+      </SimpleHeader>
+      <LoginBox />
+    </React.Fragment>
+  );
 };
 
-const mapDispatchToProps = dispatch => ({
-  clickLogin: () => { dispatch(openLoginBox); },
-  clickLogout: () => { dispatch(logOut); },
-});
-
 export { SimpleHeader };
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default React.memo(Header);

@@ -40,7 +40,7 @@ class ProductContainer extends Component {
     const { count } = this.counter.state;
     // 若選購數量為0
     if (count === 0) return showLightBox('請選擇選購數量');
-    return addToCart(product, product);
+    return addToCart(product, count);
   }
   renderAside(product) {
     const {

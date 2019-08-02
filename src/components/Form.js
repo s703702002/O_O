@@ -29,6 +29,7 @@ const FormControl = ({
   onBlur = null,
   isInvalid = '',
   defaultValue = null,
+  pattern = null
 }) => (
   <React.Fragment>
     <label htmlFor={id}>{label}</label>
@@ -42,6 +43,7 @@ const FormControl = ({
       onChange={onChange}
       onBlur={onBlur}
       defaultValue={defaultValue}
+      pattern={pattern}
     />
     {
       (isInvalid.length > 0) ?
@@ -210,10 +212,12 @@ class Form extends Component {
               id="cellphone"
               label="手機"
               placeholder="0912345678"
+              type="tel"
               value={cellphone.value}
               isInvalid={cellphone.error}
               onChange={this.formChange}
               onBlur={this.valueCheck}
+              pattern="09[0-9]{8}"
             />
           </Form.Group>
         </Form.Row>
