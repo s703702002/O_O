@@ -71,7 +71,6 @@ const getAllProductsAPI = () => {
 function handleRender(req, res) {
   // const store = createStore(rootReducer);
   // const { dispatch } = store;
-  console.log('req url', req.url);
 
   return res.sendFile(path.resolve(__dirname, './index.html'));
 
@@ -142,14 +141,20 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   const webpack = require('webpack');
   const middleware = require('webpack-dev-middleware');
-  const webpackConfig = require('../webpack.dev.js')
+  const webpackConfig = require('../webpack.dev.js');
   const compiler = webpack(webpackConfig);
+
   app.use(
     middleware(compiler, {
-      publicPath: '/',
+      publicPath: webpackConfig.output.publicPath,
       index: false,
     })
-  )
+  );
+
+  app.use(require("webpack-hot-middleware")(compiler, {
+    path: '/__webpack_hmr',
+    heartbeat: 5000
+  }));
 }
 
 app.get('/*', handleRender);

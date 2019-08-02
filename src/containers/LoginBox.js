@@ -73,8 +73,8 @@ class LoginBox extends Component {
       status,
       message,
     } = this.props;
-    const { accountInput } = this;
-    if (loginBoxOpen) accountInput.focus();
+
+    if (loginBoxOpen) this.accountInput.focus();
 
     return (
       <div

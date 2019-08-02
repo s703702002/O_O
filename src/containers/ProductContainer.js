@@ -26,22 +26,25 @@ class ProductContainer extends Component {
   }
   componentDidMount() {
     const {
-      dispatch,
+      getProducts,
       products,
     } = this.props;
-    if (!products.length) dispatch(getProductsRequest());
+    if (!products.length) getProducts();
   }
   // 加入購物車
   addToCart = (product) => {
-    const { dispatch } = this.props;
+    const {
+      showLightBox,
+      addToCart,
+    } = this.props;
     const { count } = this.counter.state;
     // 若選購數量為0
-    if (count === 0) return dispatch(addLightBoxMessage('請選擇選購數量'));
-    return dispatch(addToCartRequest(product, count));
+    if (count === 0) return showLightBox('請選擇選購數量');
+    return addToCart(product, product);
   }
   renderAside(product) {
     const {
-      dispatch,
+      showLightBox,
     } = this.props;
     const {
       price,
@@ -52,7 +55,7 @@ class ProductContainer extends Component {
       <Counter
         max={inventory}
         ref={innerRef}
-        maxClick={() => { dispatch(addLightBoxMessage('此商品庫存不足')); }}
+        maxClick={() => { showLightBox('此商品庫存不足'); }}
       />
     );
 
@@ -127,7 +130,7 @@ class ProductContainer extends Component {
       products,
       match: { params: { productId } },
     } = this.props;
-    const product = products.filter(item => item.id === productId)[0];
+    const product = products.find(item => item.id === productId);
     return (
       <div className="container">
         <div className="row">
@@ -149,4 +152,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(ProductContainer));
+const mapDispatchToProps = dispatch => ({
+  showLightBox: msg => dispatch(addLightBoxMessage(msg)),
+  getProducts: () => dispatch(getProductsRequest()),
+  addToCart: (product, count) => dispatch(addToCartRequest(product, count)),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProductContainer));
