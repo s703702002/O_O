@@ -2,7 +2,8 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
         "linebreak-style": "off",
@@ -18,7 +19,9 @@
           "specialLink": [ "to" ]
         }],
         "no-plusplus": "off",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     },
     "env": {
         "browser": true,
