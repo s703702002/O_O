@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import cityData from '../static/taiwan.json';
@@ -28,8 +28,8 @@ const FormControl = ({
   onChange = null,
   onBlur = null,
   isInvalid = '',
-  defaultValue = null,
-  pattern = null
+  pattern = null,
+  value
 }) => (
   <React.Fragment>
     <label htmlFor={id}>{label}</label>
@@ -42,8 +42,8 @@ const FormControl = ({
       placeholder={placeholder}
       onChange={onChange}
       onBlur={onBlur}
-      defaultValue={defaultValue}
       pattern={pattern}
+      value={value}
     />
     {
       (isInvalid.length > 0) ?
@@ -139,8 +139,7 @@ class Form extends Component {
       value,
     } = e.target;
 
-    this.setState(prevState => ({
-      ...prevState,
+    this.setState(() => ({
       [id]: {
         value,
         error: '',
@@ -156,8 +155,7 @@ class Form extends Component {
     const error = formCheck(id, value);
 
     if (error.length) {
-      this.setState(prevState => ({
-        ...prevState,
+      this.setState(() => ({
         [id]: {
           value,
           error,
@@ -171,8 +169,7 @@ class Form extends Component {
       id,
       value,
     } = e.target;
-    this.setState(prevState => ({
-      ...prevState,
+    this.setState(() => ({
       regionValue: 0,
       [id]: value,
     }));
@@ -254,18 +251,21 @@ class Form extends Component {
             isInvalid={address.error}
             onChange={this.formChange}
             onBlur={this.valueCheck}
+            value={address.value}
           />
         </Form.Group>
-        <Form.Group>
-          <label htmlFor="remark">備註</label>
-          <textarea
-            className="form-control"
-            id="remark"
-            rows="3"
-            value={remark.value}
-            onChange={this.formChange}
-          />
-        </Form.Group>
+        <Form.Row>
+          <Form.Group md={12}>
+            <label htmlFor="remark">備註</label>
+            <textarea
+              className="form-control"
+              id="remark"
+              rows="3"
+              value={remark.value}
+              onChange={this.formChange}
+            />
+          </Form.Group>
+        </Form.Row>
       </form>
     );
   }
