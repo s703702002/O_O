@@ -6,12 +6,12 @@ import Form from '../components/Form';
 import OrderInfo from './OrderInfo';
 
 const CustomerInfoContainer = (props) => {
-  const FromRef = useRef(null);
+  // const FromRef = useRef(null);
+  const validateForm = useRef();
   const confirmHandler = () => {
-    if (!FromRef.current.getValid()) return;
+    if (!validateForm.current()) return;
     props.history.push('/checkoutfinish');
   };
-
   return (
     <div className="container">
       <div className="row">
@@ -19,8 +19,7 @@ const CustomerInfoContainer = (props) => {
           <section>
             <h4>收件人資訊</h4>
             <Form
-              className="customer_info_form"
-              ref={FromRef}
+              ref={validateForm}
             />
           </section>
         </div>
