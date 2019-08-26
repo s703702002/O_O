@@ -8,13 +8,21 @@ import OrderInfo from './OrderInfo';
 const CustomerInfoContainer = (props) => {
   const {
     validateForm,
-    state,
+    state: orderFormState,
     formChange,
     valueCheck,
     selectChange,
   } = useFormState();
+  const {
+    validateForm: receiveFormValidate,
+    state: receiveFormState,
+    formChange: receiveFormChange,
+    valueCheck: receiveFormCheck,
+    selectChange: receiveFormSelectChange,
+  } = useFormState();
   const confirmHandler = () => {
-    if (!validateForm()) return;
+    const valid = validateForm() && receiveFormValidate();
+    if (!valid) return;
     props.history.push('/checkoutfinish');
   };
 
@@ -26,7 +34,7 @@ const CustomerInfoContainer = (props) => {
             <h4>訂購人</h4>
             <hr />
             <Form
-              state={state}
+              state={orderFormState}
               formChange={formChange}
               onBlurCallBack={valueCheck}
               selectChange={selectChange}
@@ -42,10 +50,10 @@ const CustomerInfoContainer = (props) => {
             </div>
             <hr />
             <Form
-              state={state}
-              formChange={formChange}
-              onBlurCallBack={valueCheck}
-              selectChange={selectChange}
+              state={receiveFormState}
+              formChange={receiveFormChange}
+              onBlurCallBack={receiveFormCheck}
+              selectChange={receiveFormSelectChange}
             />
           </section>
         </div>
