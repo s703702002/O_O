@@ -1,25 +1,51 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PushButton from '../components/PushButton';
-import Form from '../components/Form';
+import Form, { useFormState } from '../components/Form';
 import OrderInfo from './OrderInfo';
 
 const CustomerInfoContainer = (props) => {
-  // const FromRef = useRef(null);
-  const validateForm = useRef();
+  const {
+    validateForm,
+    state,
+    formChange,
+    valueCheck,
+    selectChange,
+  } = useFormState();
   const confirmHandler = () => {
-    if (!validateForm.current()) return;
+    if (!validateForm()) return;
     props.history.push('/checkoutfinish');
   };
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-9">
           <section>
-            <h4>收件人資訊</h4>
+            <h4>訂購人</h4>
+            <hr />
             <Form
-              ref={validateForm}
+              state={state}
+              formChange={formChange}
+              onBlurCallBack={valueCheck}
+              selectChange={selectChange}
+            />
+          </section>
+          <section>
+            <h4>收件人</h4>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+              <label className="form-check-label" htmlFor="defaultCheck1">
+                同訂購人
+              </label>
+            </div>
+            <hr />
+            <Form
+              state={state}
+              formChange={formChange}
+              onBlurCallBack={valueCheck}
+              selectChange={selectChange}
             />
           </section>
         </div>

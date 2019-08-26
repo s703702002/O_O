@@ -106,7 +106,7 @@ function reducer(state, action) {
       return {
         ...state,
         cityValue: action.value,
-        regionValue: 0
+        regionValue: '0'
       }
     case 'SET_REGION':
       return {
@@ -123,7 +123,7 @@ function reducer(state, action) {
   }
 };
 
-function useFormState(initialState) {
+export function useFormState(initialState) {
   initialState = Object.assign({
     name: {
       value: '',
@@ -138,8 +138,8 @@ function useFormState(initialState) {
       error: ''
     },
     remark: '',
-    cityValue: 0,
-    regionValue: 0,
+    cityValue: '0',
+    regionValue: '0',
   }, initialState)
   
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -233,9 +233,9 @@ function useFormState(initialState) {
   }
 }
 
-const Form =  React.forwardRef((props, ref) => {
-  const { className } = props
+const Form = (props) => {
   const {
+    className,
     state: {
       name,
       cellphone,
@@ -245,13 +245,11 @@ const Form =  React.forwardRef((props, ref) => {
       regionValue,
     },
     formChange,
-    valueCheck,
+    onBlurCallBack,
     selectChange,
-    validateForm
-  } = useFormState()
+  } = props
 
   const region = cityData.region[cityValue]; // 鄉鎮地區
-  ref.current = validateForm
 
   return (
     <form className={className}>
@@ -264,7 +262,7 @@ const Form =  React.forwardRef((props, ref) => {
             value={name.value}
             isInvalid={name.error}
             onChange={formChange}
-            onBlur={valueCheck}
+            onBlur={onBlurCallBack}
           />
         </FormGroup>
         <FormGroup md={6}>
@@ -276,7 +274,7 @@ const Form =  React.forwardRef((props, ref) => {
             value={cellphone.value}
             isInvalid={cellphone.error}
             onChange={formChange}
-            onBlur={valueCheck}
+            onBlur={onBlurCallBack}
             pattern="09[0-9]{8}"
           />
         </FormGroup>
@@ -314,7 +312,7 @@ const Form =  React.forwardRef((props, ref) => {
             value={address.value}
             isInvalid={address.error}
             onChange={formChange}
-            onBlur={valueCheck}
+            onBlur={onBlurCallBack}
             value={address.value}
           />
         </FormGroup>
@@ -333,10 +331,26 @@ const Form =  React.forwardRef((props, ref) => {
       </FormRow>
     </form>
   );
+}
+
+const inputPropType = PropTypes.shape({
+  value: PropTypes.string,
+  error: PropTypes.string,
 })
 
 Form.propTypes = {
+  state: PropTypes.shape({
+    name: inputPropType,
+    cellphone: inputPropType,
+    address: inputPropType,
+    remark: PropTypes.string,
+    cityValue: PropTypes.string,
+    regionValue: PropTypes.string,
+  }),
   className: PropTypes.string,
+  onBlurCallBack: PropTypes.func,
+  formChange: PropTypes.func.isRequired,
+  selectChange: PropTypes.func.isRequired,
 }
 Form.defaultProps = {
   className: 'customer_info_form'
