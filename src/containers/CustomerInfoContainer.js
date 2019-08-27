@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PushButton from '../components/PushButton';
@@ -13,6 +13,7 @@ const CustomerInfoContainer = (props) => {
     valueCheck,
     selectChange,
   } = useFormState();
+
   const {
     validateForm: receiveFormValidate,
     state: receiveFormState,
@@ -20,9 +21,14 @@ const CustomerInfoContainer = (props) => {
     valueCheck: receiveFormCheck,
     selectChange: receiveFormSelectChange,
   } = useFormState();
+
+  const [sameWithOrder, setSameWithOrder] = useState(false);
+
   const confirmHandler = () => {
-    const valid = validateForm() && receiveFormValidate();
+    const valid = validateForm() && (sameWithOrder || receiveFormValidate());
     if (!valid) return;
+    console.log('orderFormState', orderFormState);
+    console.log('receiveFormState', receiveFormState);
     props.history.push('/checkoutfinish');
   };
 
@@ -30,7 +36,7 @@ const CustomerInfoContainer = (props) => {
     <div className="container">
       <div className="row">
         <div className="col-9">
-          <section>
+          <section className="mb-3">
             <h4>訂購人</h4>
             <hr />
             <Form
@@ -41,12 +47,20 @@ const CustomerInfoContainer = (props) => {
             />
           </section>
           <section>
-            <h4>收件人</h4>
-            <div className="form-check">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label" htmlFor="defaultCheck1">
-                同訂購人
-              </label>
+            <div className="d-flex align-items-center">
+              <h4 className="mb-0 mr-2">收件人</h4>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  checked={sameWithOrder}
+                  id="receiveCheck"
+                  onChange={() => setSameWithOrder(!sameWithOrder)}
+                />
+                <label className="form-check-label" htmlFor="receiveCheck">
+                  同訂購人
+                </label>
+              </div>
             </div>
             <hr />
             <Form
