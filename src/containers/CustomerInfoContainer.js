@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PushButton from '../components/PushButton';
 import Form, { useFormState } from '../components/Form';
 import OrderInfo from './OrderInfo';
 
-const CustomerInfoContainer = (props) => {
+export const CustomerInfoContainer = (props) => {
   const {
     validateForm,
     state: orderFormState,
@@ -27,8 +26,6 @@ const CustomerInfoContainer = (props) => {
   const confirmHandler = () => {
     const valid = validateForm() && (sameWithOrder || receiveFormValidate());
     if (!valid) return;
-    console.log('orderFormState', orderFormState);
-    console.log('receiveFormState', receiveFormState);
     props.history.push('/checkoutfinish');
   };
 
@@ -64,6 +61,7 @@ const CustomerInfoContainer = (props) => {
             </div>
             <hr />
             <Form
+              id="receive"
               state={receiveFormState}
               formChange={receiveFormChange}
               onBlurCallBack={receiveFormCheck}
@@ -90,11 +88,4 @@ const CustomerInfoContainer = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { shoppingCart } = state;
-  return {
-    shoppingCart,
-  };
-};
-
-export default withRouter(connect(mapStateToProps)(CustomerInfoContainer));
+export default withRouter(CustomerInfoContainer);

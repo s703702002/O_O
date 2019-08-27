@@ -1,11 +1,11 @@
 import React from 'react';
 import { SimpleHeader } from '../containers/Header';
-import CustomerInfoContainer from '../containers/CustomerInfoContainer';
+import CustomerInfo from '../containers/CustomerInfoContainer';
 
 const CustomerInfoPage = () => (
   <React.Fragment>
     <SimpleHeader />
-    <CustomerInfoContainer />
+    <CustomerInfo />
   </React.Fragment>
 );
 

@@ -247,17 +247,18 @@ const Form = (props) => {
     formChange,
     onBlurCallBack,
     selectChange,
+    id
   } = props
 
   const region = cityData.region[cityValue]; // 鄉鎮地區
 
   return (
-    <form className={className}>
+    <form id={id} className={className}>
       <FormRow>
         <FormGroup md={6}>
           <FormControl
             label="姓名"
-            id="name"
+            id={`${id}name`}
             placeholder="陳阿三"
             value={name.value}
             isInvalid={name.error}
@@ -267,7 +268,7 @@ const Form = (props) => {
         </FormGroup>
         <FormGroup md={6}>
           <FormControl
-            id="cellphone"
+            id={`${id}cellphone`}
             label="手機"
             placeholder="0912345678"
             type="tel"
@@ -281,16 +282,16 @@ const Form = (props) => {
       </FormRow>
       <FormRow>
         <FormGroup md={6}>
-          <label htmlFor="cityValue">縣市</label>
-          <select id="cityValue" className="form-control" value={cityValue} onChange={selectChange}>
+          <label htmlFor={`${id}cityValue`}>縣市</label>
+          <select id={`${id}cityValue`} className="form-control" value={cityValue} onChange={selectChange}>
             {
               cityData.city.map((c, i) => <option value={i} key={c}>{c}</option>)
             }
           </select>
         </FormGroup>
         <FormGroup md={4}>
-          <label htmlFor="regionValue">鄉鎮地區</label>
-          <select id="regionValue" className="form-control" value={regionValue} onChange={selectChange}>
+          <label htmlFor={`${id}regionValue`}>鄉鎮地區</label>
+          <select id={`${id}regionValue`} className="form-control" value={regionValue} onChange={selectChange}>
             {
               region.map((r, i) => <option value={i} key={r}>{r}</option>)
             }
@@ -298,7 +299,7 @@ const Form = (props) => {
         </FormGroup>
         <FormGroup md={2}>
           <FormControl
-            id="inputZip"
+            id={`${id}inputZip`}
             label="郵遞區號"
             defaultValue="114"
           />
@@ -307,7 +308,7 @@ const Form = (props) => {
       <FormRow>
         <FormGroup md={12}>
           <FormControl
-            id="address"
+            id={`${id}address`}
             label="地址"
             value={address.value}
             isInvalid={address.error}
@@ -319,10 +320,10 @@ const Form = (props) => {
       </FormRow>
       <FormRow>
         <FormGroup md={12}>
-          <label htmlFor="remark">備註</label>
+          <label htmlFor={`${id}remark`}>備註</label>
           <textarea
             className="form-control"
-            id="remark"
+            id={`${id}remark`}
             rows="3"
             value={remark}
             onChange={formChange}
@@ -347,13 +348,15 @@ Form.propTypes = {
     cityValue: PropTypes.string,
     regionValue: PropTypes.string,
   }),
+  id: PropTypes.string,
   className: PropTypes.string,
   onBlurCallBack: PropTypes.func,
   formChange: PropTypes.func.isRequired,
   selectChange: PropTypes.func.isRequired,
 }
 Form.defaultProps = {
-  className: 'customer_info_form'
+  className: 'customer_info_form',
+  id: ''
 }
 
 // class Form extends Component {
