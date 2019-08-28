@@ -3,8 +3,8 @@ import {
   render,
   fireEvent,
   cleanup,
-} from 'react-testing-library';
-import 'jest-dom/extend-expect';
+} from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import Counter from '../../src/components/Counter';
 
 afterEach(cleanup);

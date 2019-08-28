@@ -2,7 +2,7 @@ import React from 'react';
 import {
   render,
   cleanup,
-} from 'react-testing-library';
+} from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Card from '../../src/components/Card';

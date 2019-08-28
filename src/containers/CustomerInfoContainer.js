@@ -1,14 +1,31 @@
-import React, { useRef } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import PushButton from '../components/PushButton';
-import Form from '../components/Form';
+import Form, { useFormState } from '../components/Form';
 import OrderInfo from './OrderInfo';
 
-const CustomerInfoContainer = (props) => {
-  const FromRef = useRef(null);
+export const CustomerInfoContainer = (props) => {
+  const {
+    validateForm,
+    state: orderFormState,
+    formChange,
+    valueCheck,
+    selectChange,
+  } = useFormState();
+
+  const {
+    validateForm: receiveFormValidate,
+    state: receiveFormState,
+    formChange: receiveFormChange,
+    valueCheck: receiveFormCheck,
+    selectChange: receiveFormSelectChange,
+  } = useFormState();
+
+  const [sameWithOrder, setSameWithOrder] = useState(false);
+
   const confirmHandler = () => {
-    if (!FromRef.current.getValid()) return;
+    const valid = validateForm() && (sameWithOrder || receiveFormValidate());
+    if (!valid) return;
     props.history.push('/checkoutfinish');
   };
 
@@ -16,11 +33,39 @@ const CustomerInfoContainer = (props) => {
     <div className="container">
       <div className="row">
         <div className="col-9">
-          <section>
-            <h4>收件人資訊</h4>
+          <section className="mb-3">
+            <h4>訂購人</h4>
+            <hr />
             <Form
-              className="customer_info_form"
-              ref={FromRef}
+              state={orderFormState}
+              formChange={formChange}
+              onBlurCallBack={valueCheck}
+              selectChange={selectChange}
+            />
+          </section>
+          <section>
+            <div className="d-flex align-items-center">
+              <h4 className="mb-0 mr-2">收件人</h4>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  checked={sameWithOrder}
+                  id="receiveCheck"
+                  onChange={() => setSameWithOrder(!sameWithOrder)}
+                />
+                <label className="form-check-label" htmlFor="receiveCheck">
+                  同訂購人
+                </label>
+              </div>
+            </div>
+            <hr />
+            <Form
+              id="receive"
+              state={receiveFormState}
+              formChange={receiveFormChange}
+              onBlurCallBack={receiveFormCheck}
+              selectChange={receiveFormSelectChange}
             />
           </section>
         </div>
@@ -43,11 +88,4 @@ const CustomerInfoContainer = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { shoppingCart } = state;
-  return {
-    shoppingCart,
-  };
-};
-
-export default withRouter(connect(mapStateToProps)(CustomerInfoContainer));
+export default withRouter(CustomerInfoContainer);

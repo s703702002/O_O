@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStore } from 'redux'
-import { render, cleanup } from 'react-testing-library'
+import { render, cleanup } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { lightBoxMessage } from '../../src/reducers'
 import LightBoxContainer from '../../src/containers/LightBoxContainer'
