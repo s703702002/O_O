@@ -54,4 +54,7 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };

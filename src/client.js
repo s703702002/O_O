@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './pages/Root';
+import App from './components/App';
 import configureStore from './configureStore';
 
 const preloadedState = () => {
@@ -27,6 +27,6 @@ const store = configureStore(preloadedState());
 // delete window.__PRELOADED_STATE__;
 
 ReactDOM.render(
-  <Root store={store} />,
+  <App store={store} />,
   document.getElementById('root'),
 );
