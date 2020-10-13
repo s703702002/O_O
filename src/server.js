@@ -157,7 +157,7 @@ if (process.env.NODE_ENV === 'production') {
   }));
 }
 
-app.get('/*', handleRender);
+app.get('*', handleRender);
 
 app.listen(PORT, () => {
   console.log(`server is start on port: ${PORT}`);
